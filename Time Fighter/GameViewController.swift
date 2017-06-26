@@ -2,7 +2,7 @@
 //  GameViewController.swift
 //  Time Fighter
 //
-//  Created by Wilson Martins on 23/06/17.
+//  Created by Wilson Martins on 26/06/17.
 //  Copyright © 2017 Fera. All rights reserved.
 //
 

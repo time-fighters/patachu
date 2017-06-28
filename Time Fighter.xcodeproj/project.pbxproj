@@ -15,6 +15,7 @@
 		C820FCA51F01361500D52F8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C820FCA31F01361500D52F8A /* Main.storyboard */; };
 		C820FCA71F01361500D52F8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C820FCA61F01361500D52F8A /* Assets.xcassets */; };
 		C820FCAA1F01361500D52F8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C820FCA81F01361500D52F8A /* LaunchScreen.storyboard */; };
+		C8B501961F02849E003F9E18 /* JoyStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B501951F02849E003F9E18 /* JoyStick.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		C820FCA61F01361500D52F8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C820FCA91F01361500D52F8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C820FCAB1F01361500D52F8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C8B501951F02849E003F9E18 /* JoyStick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoyStick.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				C820FCA61F01361500D52F8A /* Assets.xcassets */,
 				C820FCA81F01361500D52F8A /* LaunchScreen.storyboard */,
 				C820FCAB1F01361500D52F8A /* Info.plist */,
+				C8B501951F02849E003F9E18 /* JoyStick.swift */,
 			);
 			path = "Time Fighter";
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8B501961F02849E003F9E18 /* JoyStick.swift in Sources */,
 				C820FCA01F01361500D52F8A /* GameScene.swift in Sources */,
 				C820FCA21F01361500D52F8A /* GameViewController.swift in Sources */,
 				C820FC9A1F01361500D52F8A /* AppDelegate.swift in Sources */,
@@ -314,6 +318,7 @@
 				C820FCB01F01361500D52F8A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

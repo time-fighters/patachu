@@ -9,27 +9,32 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
-    
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
-    private var movementJoyStick: Joystick = Joystick()
-    private var shootingJoyStick: Joystick = Joystick()
+class GameScene: ControllableScene {
+
+    private var movementJoystick: Joystick?
+    private var shootingJoystick: Joystick?
 
     private let MAIN_SCREEN_BOUNDS = UIScreen.main.bounds
     private let JOYSTICK_WIDTH_POSITION: CGFloat = 0.6
     private let JOYSTICK_HEIGHT_POSITION: CGFloat = -0.4
 
+    private var mainCharacter: SKNode = MainCharacter()
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
+        // Main Character
+        self.mainCharacter = self.childNode(withName: "mainCharacter")!
+
         // Movement JoyStick
-        self.movementJoyStick.position = CGPoint(x: self.MAIN_SCREEN_BOUNDS.width * self.JOYSTICK_WIDTH_POSITION, y: self.MAIN_SCREEN_BOUNDS.height * self.JOYSTICK_HEIGHT_POSITION)
-        self.addChild(self.movementJoyStick)
+        self.movementJoystick = Joystick(movableObject: mainCharacter, isLeftSidePositioned: true)
+        self.movementJoystick?.position = CGPoint(x: -self.MAIN_SCREEN_BOUNDS.width * self.JOYSTICK_WIDTH_POSITION, y: self.MAIN_SCREEN_BOUNDS.height * self.JOYSTICK_HEIGHT_POSITION)
+        self.addChild(self.movementJoystick!)
 
         // Shooting JoyStick
-        self.shootingJoyStick.position = CGPoint(x: self.MAIN_SCREEN_BOUNDS.width * self.JOYSTICK_WIDTH_POSITION, y: self.MAIN_SCREEN_BOUNDS.height * self.JOYSTICK_HEIGHT_POSITION)
-        self.addChild(self.shootingJoyStick)
+        self.shootingJoystick = Joystick(movableObject: mainCharacter, isLeftSidePositioned: false)
+        self.shootingJoystick?.position = CGPoint(x: self.MAIN_SCREEN_BOUNDS.width * self.JOYSTICK_WIDTH_POSITION, y: self.MAIN_SCREEN_BOUNDS.height * self.JOYSTICK_HEIGHT_POSITION)
+        self.addChild(self.shootingJoystick!)
     }
 
     override func sceneDidLoad() {
@@ -41,5 +46,14 @@ class GameScene: SKScene {
 
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+    }
+
+    override func controllerFor(touch: UITouch) -> UIResponder? {
+        let touchPoint: CGPoint = touch.location(in: self)
+        if (touchPoint.x < 0) {
+            return movementJoystick
+        } else {
+           return shootingJoystick
+        }
     }
 }

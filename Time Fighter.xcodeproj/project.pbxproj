@@ -16,6 +16,8 @@
 		C820FCA71F01361500D52F8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C820FCA61F01361500D52F8A /* Assets.xcassets */; };
 		C820FCAA1F01361500D52F8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C820FCA81F01361500D52F8A /* LaunchScreen.storyboard */; };
 		C8B501961F02849E003F9E18 /* JoyStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B501951F02849E003F9E18 /* JoyStick.swift */; };
+		C8E786DB1F03E42600027984 /* MainCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786DA1F03E42600027984 /* MainCharacter.swift */; };
+		C8E786DE1F05331500027984 /* ControllableScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786DD1F05331500027984 /* ControllableScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		C820FCA91F01361500D52F8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C820FCAB1F01361500D52F8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8B501951F02849E003F9E18 /* JoyStick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoyStick.swift; sourceTree = "<group>"; };
+		C8E786DA1F03E42600027984 /* MainCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCharacter.swift; sourceTree = "<group>"; };
+		C8E786DD1F05331500027984 /* ControllableScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllableScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,18 +66,28 @@
 		C820FC981F01361500D52F8A /* Time Fighter */ = {
 			isa = PBXGroup;
 			children = (
+				C8E786DC1F03E43300027984 /* Game Elements */,
 				C820FC991F01361500D52F8A /* AppDelegate.swift */,
+				C820FC9F1F01361500D52F8A /* GameScene.swift */,
 				C820FC9B1F01361500D52F8A /* GameScene.sks */,
 				C820FC9D1F01361500D52F8A /* Actions.sks */,
-				C820FC9F1F01361500D52F8A /* GameScene.swift */,
 				C820FCA11F01361500D52F8A /* GameViewController.swift */,
+				C8E786DD1F05331500027984 /* ControllableScene.swift */,
 				C820FCA31F01361500D52F8A /* Main.storyboard */,
 				C820FCA61F01361500D52F8A /* Assets.xcassets */,
 				C820FCA81F01361500D52F8A /* LaunchScreen.storyboard */,
 				C820FCAB1F01361500D52F8A /* Info.plist */,
-				C8B501951F02849E003F9E18 /* JoyStick.swift */,
 			);
 			path = "Time Fighter";
+			sourceTree = "<group>";
+		};
+		C8E786DC1F03E43300027984 /* Game Elements */ = {
+			isa = PBXGroup;
+			children = (
+				C8E786DA1F03E42600027984 /* MainCharacter.swift */,
+				C8B501951F02849E003F9E18 /* JoyStick.swift */,
+			);
+			name = "Game Elements";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,7 +166,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8B501961F02849E003F9E18 /* JoyStick.swift in Sources */,
+				C8E786DE1F05331500027984 /* ControllableScene.swift in Sources */,
 				C820FCA01F01361500D52F8A /* GameScene.swift in Sources */,
+				C8E786DB1F03E42600027984 /* MainCharacter.swift in Sources */,
 				C820FCA21F01361500D52F8A /* GameViewController.swift in Sources */,
 				C820FC9A1F01361500D52F8A /* AppDelegate.swift in Sources */,
 			);

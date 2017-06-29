@@ -1,9 +1,9 @@
 //
-//  Joystick.swift
-//  Swift-SpriteKit-Joystick
+//  MainCharacter.swift
+//  Time Fighter
 //
-//  Created by Derrick Liu on 12/14/14.
-//  Copyright (c) 2014 TheSneakyNarwhal. All rights reserved.
+//  Created by Wilson Martins on 28/06/17.
+//  Copyright © 2017 Fera. All rights reserved.
 //
 
 import Foundation
@@ -17,33 +17,38 @@ class Joystick : SKNode {
     var travelLimit: CGPoint = CGPoint(x: 0, y: 0)
     var angularVelocity: CGFloat = 0.0
     var size: Float = 0.0
+    var movableNode: SKNode
+    var isLeftSidePositioned: Bool = true
+
+    let MAX_VELOCITY: CGFloat = 150.0
 
     func anchorPointInPoints() -> CGPoint {
         return CGPoint(x: 0, y: 0)
     }
 
-    init(thumbNode: SKSpriteNode = SKSpriteNode(imageNamed: "JoyStickHandle"), backdropNode: SKSpriteNode = SKSpriteNode(imageNamed: "JoyStickBase")) {
+    init(movableObject movableNode: SKNode, isLeftSidePositioned: Bool, thumbNode: SKSpriteNode = SKSpriteNode(imageNamed: "JoyStickHandle"), backdropNode: SKSpriteNode = SKSpriteNode(imageNamed: "JoyStickBase")) {
         self.thumbNode = thumbNode
         self.backdropNode = backdropNode
+        self.movableNode = movableNode
+        self.isLeftSidePositioned = isLeftSidePositioned
 
         super.init()
 
         self.addChild(self.backdropNode)
         self.addChild(self.thumbNode)
-
-        super.isUserInteractionEnabled = true
     }
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+
+    /// Movement functions
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
-            let touchPoint: CGPoint = touch.location(in: self)
-            if self.isTracking == false && self.thumbNode.frame.contains(touchPoint) {
-                self.isTracking = true
-            }
+            let parentTouchPoint: CGPoint = touch.location(in: self.parent!)
+            self.position = parentTouchPoint
+            self.isTracking = true
         }
     }
 
@@ -51,21 +56,22 @@ class Joystick : SKNode {
         for touch in touches {
             let touchPoint: CGPoint = touch.location(in: self)
 
-            if self.isTracking == true && sqrtf(powf((Float(touchPoint.x) - Float(self.thumbNode.position.x)), 2) + powf((Float(touchPoint.y) - Float(self.thumbNode.position.y)), 2)) < Float(self.thumbNode.size.width) {
-                if sqrtf(powf((Float(touchPoint.x) - Float(self.anchorPointInPoints().x)), 2) + powf((Float(touchPoint.y) - Float(self.anchorPointInPoints().y)), 2)) <= Float(self.thumbNode.size.width) {
-                    let moveDifference: CGPoint = CGPoint(x: touchPoint.x - self.anchorPointInPoints().x, y: touchPoint.y - self.anchorPointInPoints().y)
-                    self.thumbNode.position = CGPoint(x: self.anchorPointInPoints().x + moveDifference.x, y: self.anchorPointInPoints().y + moveDifference.y)
-                } else {
-                    let vX: Double = Double(touchPoint.x) - Double(self.anchorPointInPoints().x)
-                    let vY: Double = Double(touchPoint.y) - Double(self.anchorPointInPoints().y)
-                    let magV: Double = sqrt(vX*vX + vY*vY)
-                    let aX: Double = Double(self.anchorPointInPoints().x) + vX / magV * Double(self.thumbNode.size.width)
-                    let aY: Double = Double(self.anchorPointInPoints().y) + vY / magV * Double(self.thumbNode.size.width)
-                    self.thumbNode.position = CGPoint(x: CGFloat(aX), y: CGFloat(aY))
-                }
-            }
-            self.velocity = CGPoint(x: ((self.thumbNode.position.x - self.anchorPointInPoints().x)), y: ((self.thumbNode.position.y - self.anchorPointInPoints().y)))
+            let moveDifference: CGPoint = CGPoint(x: touchPoint.x - self.anchorPointInPoints().x, y: touchPoint.y - self.anchorPointInPoints().y)
+            self.thumbNode.position = CGPoint(x: self.anchorPointInPoints().x + moveDifference.x, y: self.anchorPointInPoints().y + moveDifference.y)
+
+            let xVelocity = self.thumbNode.position.x - self.anchorPointInPoints().x
+            let yVelocity = self.thumbNode.position.y - self.anchorPointInPoints().y
+
+            self.velocity = CGPoint(x: copysign(CGFloat.minimumMagnitude(self.MAX_VELOCITY, abs(xVelocity)), xVelocity), y: copysign(CGFloat.minimumMagnitude(self.MAX_VELOCITY, abs(yVelocity)), yVelocity))
+
             self.angularVelocity = -atan2(self.thumbNode.position.x - self.anchorPointInPoints().x, self.thumbNode.position.y - self.anchorPointInPoints().y)
+            print(velocity)
+
+            if (self.isLeftSidePositioned) {
+                self.movableNode.position = CGPoint(x: self.movableNode.position.x + self.velocity.x * 0.1, y:self.movableNode.position.y + self.velocity.y * 0.1)
+            } else {
+
+            }
         }
     }
 

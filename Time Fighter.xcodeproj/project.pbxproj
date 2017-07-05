@@ -18,6 +18,9 @@
 		C8B501961F02849E003F9E18 /* JoyStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B501951F02849E003F9E18 /* JoyStick.swift */; };
 		C8E786DB1F03E42600027984 /* MainCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786DA1F03E42600027984 /* MainCharacter.swift */; };
 		C8E786DE1F05331500027984 /* ControllableScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786DD1F05331500027984 /* ControllableScene.swift */; };
+		C8E786E01F054B2000027984 /* Shooting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786DF1F054B2000027984 /* Shooting.swift */; };
+		C8E786E31F0BDD3C00027984 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786E21F0BDD3C00027984 /* Animation.swift */; };
+		C8E786E51F0D01E600027984 /* Updatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786E41F0D01E600027984 /* Updatable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		C8B501951F02849E003F9E18 /* JoyStick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoyStick.swift; sourceTree = "<group>"; };
 		C8E786DA1F03E42600027984 /* MainCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCharacter.swift; sourceTree = "<group>"; };
 		C8E786DD1F05331500027984 /* ControllableScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllableScene.swift; sourceTree = "<group>"; };
+		C8E786DF1F054B2000027984 /* Shooting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shooting.swift; sourceTree = "<group>"; };
+		C8E786E21F0BDD3C00027984 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
+		C8E786E41F0D01E600027984 /* Updatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Updatable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +72,7 @@
 		C820FC981F01361500D52F8A /* Time Fighter */ = {
 			isa = PBXGroup;
 			children = (
+				C8E786E11F0BDD0D00027984 /* Components */,
 				C8E786DC1F03E43300027984 /* Game Elements */,
 				C820FC991F01361500D52F8A /* AppDelegate.swift */,
 				C820FC9F1F01361500D52F8A /* GameScene.swift */,
@@ -88,6 +95,16 @@
 				C8B501951F02849E003F9E18 /* JoyStick.swift */,
 			);
 			name = "Game Elements";
+			sourceTree = "<group>";
+		};
+		C8E786E11F0BDD0D00027984 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C8E786DF1F054B2000027984 /* Shooting.swift */,
+				C8E786E21F0BDD3C00027984 /* Animation.swift */,
+				C8E786E41F0D01E600027984 /* Updatable.swift */,
+			);
+			name = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,7 +184,10 @@
 			files = (
 				C8B501961F02849E003F9E18 /* JoyStick.swift in Sources */,
 				C8E786DE1F05331500027984 /* ControllableScene.swift in Sources */,
+				C8E786E31F0BDD3C00027984 /* Animation.swift in Sources */,
+				C8E786E51F0D01E600027984 /* Updatable.swift in Sources */,
 				C820FCA01F01361500D52F8A /* GameScene.swift in Sources */,
+				C8E786E01F054B2000027984 /* Shooting.swift in Sources */,
 				C8E786DB1F03E42600027984 /* MainCharacter.swift in Sources */,
 				C820FCA21F01361500D52F8A /* GameViewController.swift in Sources */,
 				C820FC9A1F01361500D52F8A /* AppDelegate.swift in Sources */,

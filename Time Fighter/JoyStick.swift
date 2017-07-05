@@ -9,28 +9,28 @@
 import Foundation
 import SpriteKit
 
+protocol JoystickDirection {
+    func joystickInteraction(velocity: CGVector, angularVelocity: CGFloat)
+}
+
 class Joystick : SKNode {
     let kThumbSpringBackDuration: Double =  0.3
     let backdropNode, thumbNode: SKSpriteNode
     var isTracking: Bool = true
-    var velocity: CGPoint = CGPoint(x: 0, y: 0)
+    var velocity: CGVector = CGVector(dx: 0, dy: 0)
     var travelLimit: CGPoint = CGPoint(x: 0, y: 0)
     var angularVelocity: CGFloat = 0.0
     var size: Float = 0.0
-    var movableNode: SKNode
-    var isLeftSidePositioned: Bool = true
-
-    let MAX_VELOCITY: CGFloat = 150.0
+    var movableNode: MainCharacter
 
     func anchorPointInPoints() -> CGPoint {
         return CGPoint(x: 0, y: 0)
     }
 
-    init(movableObject movableNode: SKNode, isLeftSidePositioned: Bool, thumbNode: SKSpriteNode = SKSpriteNode(imageNamed: "JoyStickHandle"), backdropNode: SKSpriteNode = SKSpriteNode(imageNamed: "JoyStickBase")) {
+    init(movableObject movableNode: JoystickDirection, thumbNode: SKSpriteNode = SKSpriteNode(imageNamed: "JoyStickHandle"), backdropNode: SKSpriteNode = SKSpriteNode(imageNamed: "JoyStickBase")) {
         self.thumbNode = thumbNode
         self.backdropNode = backdropNode
-        self.movableNode = movableNode
-        self.isLeftSidePositioned = isLeftSidePositioned
+        self.movableNode = movableNode as! MainCharacter
 
         super.init()
 
@@ -49,6 +49,7 @@ class Joystick : SKNode {
             let parentTouchPoint: CGPoint = touch.location(in: self.parent!)
             self.position = parentTouchPoint
             self.isTracking = true
+            print("Touches began!")
         }
     }
 
@@ -62,30 +63,28 @@ class Joystick : SKNode {
             let xVelocity = self.thumbNode.position.x - self.anchorPointInPoints().x
             let yVelocity = self.thumbNode.position.y - self.anchorPointInPoints().y
 
-            self.velocity = CGPoint(x: copysign(CGFloat.minimumMagnitude(self.MAX_VELOCITY, abs(xVelocity)), xVelocity), y: copysign(CGFloat.minimumMagnitude(self.MAX_VELOCITY, abs(yVelocity)), yVelocity))
+            self.velocity = CGVector(dx: xVelocity, dy: yVelocity)
 
             self.angularVelocity = -atan2(self.thumbNode.position.x - self.anchorPointInPoints().x, self.thumbNode.position.y - self.anchorPointInPoints().y)
+            print("Touches moved!")
             print(velocity)
-
-            if (self.isLeftSidePositioned) {
-                self.movableNode.position = CGPoint(x: self.movableNode.position.x + self.velocity.x * 0.1, y:self.movableNode.position.y + self.velocity.y * 0.1)
-            } else {
-
-            }
+            self.movableNode.joystickInteraction(velocity: velocity, angularVelocity: angularVelocity)
         }
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("Touches ended!")
         self.resetVelocity()
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("Touches cancelled!")
         self.resetVelocity()
     }
 
     func resetVelocity() {
         self.isTracking = false
-        self.velocity = CGPoint.zero
+        self.velocity = CGVector.zero
         let easeOut: SKAction = SKAction.move(to: self.anchorPointInPoints(), duration: kThumbSpringBackDuration)
         easeOut.timingMode = SKActionTimingMode.easeOut
         self.thumbNode.run(easeOut)

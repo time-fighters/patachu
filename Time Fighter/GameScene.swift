@@ -19,6 +19,7 @@ class GameScene: ControllableScene {
     private let JOYSTICK_HEIGHT_POSITION: CGFloat = -0.4
 
     private var mainCharacter: SKNode = MainCharacter()
+    private var shootingController: SKNode = MainCharacter()
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -27,12 +28,12 @@ class GameScene: ControllableScene {
         self.mainCharacter = self.childNode(withName: "mainCharacter")!
 
         // Movement JoyStick
-        self.movementJoystick = Joystick(movableObject: mainCharacter, isLeftSidePositioned: true)
+        self.movementJoystick = Joystick(movableObject: mainCharacter as! JoystickDirection)
         self.movementJoystick?.position = CGPoint(x: -self.MAIN_SCREEN_BOUNDS.width * self.JOYSTICK_WIDTH_POSITION, y: self.MAIN_SCREEN_BOUNDS.height * self.JOYSTICK_HEIGHT_POSITION)
         self.addChild(self.movementJoystick!)
 
         // Shooting JoyStick
-        self.shootingJoystick = Joystick(movableObject: mainCharacter, isLeftSidePositioned: false)
+        self.shootingJoystick = Joystick(movableObject: shootingController as! JoystickDirection)
         self.shootingJoystick?.position = CGPoint(x: self.MAIN_SCREEN_BOUNDS.width * self.JOYSTICK_WIDTH_POSITION, y: self.MAIN_SCREEN_BOUNDS.height * self.JOYSTICK_HEIGHT_POSITION)
         self.addChild(self.shootingJoystick!)
     }
@@ -50,10 +51,11 @@ class GameScene: ControllableScene {
 
     override func controllerFor(touch: UITouch) -> UIResponder? {
         let touchPoint: CGPoint = touch.location(in: self)
+
         if (touchPoint.x < 0) {
-            return movementJoystick
+            return self.movementJoystick
         } else {
-           return shootingJoystick
+            return self.shootingJoystick
         }
     }
 }

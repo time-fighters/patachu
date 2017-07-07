@@ -2,17 +2,17 @@
 //  Animation.swift
 //  Time Fighter
 //
-//  Created by Wilson Martins on 04/07/17.
+//  Created by Paulo Henrique Favero Pereira on 7/6/17.
 //  Copyright © 2017 Fera. All rights reserved.
-//
 
-import Foundation
+
+import UIKit
 import SpriteKit
 
 protocol Animate {
-    func animate()
+    func animate(scene: SKScene, state: UInt32 )
 }
 
-class Animation: NSObject {
-
+class animatioon: SKAction {
+    
 }

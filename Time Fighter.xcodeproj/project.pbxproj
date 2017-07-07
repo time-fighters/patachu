@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A1078DA1F07686B00BDA07B /* BackgroundParallax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1078D91F07686B00BDA07B /* BackgroundParallax.swift */; };
+		3A409ADD1F0D55CA0054B1B8 /* BodyCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A409ADC1F0D55CA0054B1B8 /* BodyCharacter.swift */; };
+		3A409ADF1F0D55DE0054B1B8 /* ArmCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A409ADE1F0D55DE0054B1B8 /* ArmCharacter.swift */; };
+		3ACB6C8D1F0EFBEF00A89154 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */; };
+		3ACB6C911F0F1EFC00A89154 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACB6C901F0F1EFC00A89154 /* Animation.swift */; };
 		C820FC9A1F01361500D52F8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C820FC991F01361500D52F8A /* AppDelegate.swift */; };
 		C820FC9C1F01361500D52F8A /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C820FC9B1F01361500D52F8A /* GameScene.sks */; };
-		C820FC9E1F01361500D52F8A /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = C820FC9D1F01361500D52F8A /* Actions.sks */; };
 		C820FCA01F01361500D52F8A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C820FC9F1F01361500D52F8A /* GameScene.swift */; };
 		C820FCA21F01361500D52F8A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C820FCA11F01361500D52F8A /* GameViewController.swift */; };
 		C820FCA51F01361500D52F8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C820FCA31F01361500D52F8A /* Main.storyboard */; };
@@ -18,16 +22,18 @@
 		C8B501961F02849E003F9E18 /* JoyStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B501951F02849E003F9E18 /* JoyStick.swift */; };
 		C8E786DB1F03E42600027984 /* MainCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786DA1F03E42600027984 /* MainCharacter.swift */; };
 		C8E786DE1F05331500027984 /* ControllableScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786DD1F05331500027984 /* ControllableScene.swift */; };
-		C8E786E01F054B2000027984 /* Shooting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786DF1F054B2000027984 /* Shooting.swift */; };
-		C8E786E31F0BDD3C00027984 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786E21F0BDD3C00027984 /* Animation.swift */; };
 		C8E786E51F0D01E600027984 /* Updatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786E41F0D01E600027984 /* Updatable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A1078D91F07686B00BDA07B /* BackgroundParallax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundParallax.swift; sourceTree = "<group>"; };
+		3A409ADC1F0D55CA0054B1B8 /* BodyCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyCharacter.swift; sourceTree = "<group>"; };
+		3A409ADE1F0D55DE0054B1B8 /* ArmCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmCharacter.swift; sourceTree = "<group>"; };
+		3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
+		3ACB6C901F0F1EFC00A89154 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		C820FC961F01361500D52F8A /* Time Fighter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Fighter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C820FC991F01361500D52F8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C820FC9B1F01361500D52F8A /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		C820FC9D1F01361500D52F8A /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		C820FC9F1F01361500D52F8A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		C820FCA11F01361500D52F8A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		C820FCA41F01361500D52F8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -37,8 +43,6 @@
 		C8B501951F02849E003F9E18 /* JoyStick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoyStick.swift; sourceTree = "<group>"; };
 		C8E786DA1F03E42600027984 /* MainCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCharacter.swift; sourceTree = "<group>"; };
 		C8E786DD1F05331500027984 /* ControllableScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllableScene.swift; sourceTree = "<group>"; };
-		C8E786DF1F054B2000027984 /* Shooting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shooting.swift; sourceTree = "<group>"; };
-		C8E786E21F0BDD3C00027984 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		C8E786E41F0D01E600027984 /* Updatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Updatable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,7 +81,6 @@
 				C820FC991F01361500D52F8A /* AppDelegate.swift */,
 				C820FC9F1F01361500D52F8A /* GameScene.swift */,
 				C820FC9B1F01361500D52F8A /* GameScene.sks */,
-				C820FC9D1F01361500D52F8A /* Actions.sks */,
 				C820FCA11F01361500D52F8A /* GameViewController.swift */,
 				C8E786DD1F05331500027984 /* ControllableScene.swift */,
 				C820FCA31F01361500D52F8A /* Main.storyboard */,
@@ -92,7 +95,10 @@
 			isa = PBXGroup;
 			children = (
 				C8E786DA1F03E42600027984 /* MainCharacter.swift */,
+				3A409ADC1F0D55CA0054B1B8 /* BodyCharacter.swift */,
+				3A409ADE1F0D55DE0054B1B8 /* ArmCharacter.swift */,
 				C8B501951F02849E003F9E18 /* JoyStick.swift */,
+				3A1078D91F07686B00BDA07B /* BackgroundParallax.swift */,
 			);
 			name = "Game Elements";
 			sourceTree = "<group>";
@@ -100,9 +106,9 @@
 		C8E786E11F0BDD0D00027984 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				C8E786DF1F054B2000027984 /* Shooting.swift */,
-				C8E786E21F0BDD3C00027984 /* Animation.swift */,
 				C8E786E41F0D01E600027984 /* Updatable.swift */,
+				3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */,
+				3ACB6C901F0F1EFC00A89154 /* Animation.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -139,7 +145,7 @@
 				TargetAttributes = {
 					C820FC951F01361500D52F8A = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 5T5R275US3;
+						DevelopmentTeam = 6HCFLY24V4;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -171,7 +177,6 @@
 				C820FC9C1F01361500D52F8A /* GameScene.sks in Resources */,
 				C820FCA71F01361500D52F8A /* Assets.xcassets in Resources */,
 				C820FCAA1F01361500D52F8A /* LaunchScreen.storyboard in Resources */,
-				C820FC9E1F01361500D52F8A /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,13 +188,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8B501961F02849E003F9E18 /* JoyStick.swift in Sources */,
+				3A1078DA1F07686B00BDA07B /* BackgroundParallax.swift in Sources */,
+				3A409ADF1F0D55DE0054B1B8 /* ArmCharacter.swift in Sources */,
 				C8E786DE1F05331500027984 /* ControllableScene.swift in Sources */,
-				C8E786E31F0BDD3C00027984 /* Animation.swift in Sources */,
 				C8E786E51F0D01E600027984 /* Updatable.swift in Sources */,
 				C820FCA01F01361500D52F8A /* GameScene.swift in Sources */,
-				C8E786E01F054B2000027984 /* Shooting.swift in Sources */,
+				3ACB6C8D1F0EFBEF00A89154 /* StateMachine.swift in Sources */,
+				3A409ADD1F0D55CA0054B1B8 /* BodyCharacter.swift in Sources */,
 				C8E786DB1F03E42600027984 /* MainCharacter.swift in Sources */,
 				C820FCA21F01361500D52F8A /* GameViewController.swift in Sources */,
+				3ACB6C911F0F1EFC00A89154 /* Animation.swift in Sources */,
 				C820FC9A1F01361500D52F8A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,7 +321,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5T5R275US3;
+				DEVELOPMENT_TEAM = 6HCFLY24V4;
 				INFOPLIST_FILE = "Time Fighter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.Time-Fighter";
@@ -326,7 +334,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5T5R275US3;
+				DEVELOPMENT_TEAM = 6HCFLY24V4;
 				INFOPLIST_FILE = "Time Fighter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.Time-Fighter";

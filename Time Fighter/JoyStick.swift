@@ -9,8 +9,13 @@
 import Foundation
 import SpriteKit
 
-protocol JoystickDirection {
+enum JoystickStatusEnum: Int {
+    case started = 0, running, finished
+}
+
+protocol JoystickController {
     func joystickInteraction(velocity: CGVector, angularVelocity: CGFloat)
+    func status(status: JoystickStatusEnum)
 }
 
 class Joystick : SKNode {
@@ -21,16 +26,16 @@ class Joystick : SKNode {
     var travelLimit: CGPoint = CGPoint(x: 0, y: 0)
     var angularVelocity: CGFloat = 0.0
     var size: Float = 0.0
-    var movableNode: MainCharacter
+    var movableNode: JoystickController
 
     func anchorPointInPoints() -> CGPoint {
         return CGPoint(x: 0, y: 0)
     }
 
-    init(movableObject movableNode: JoystickDirection, thumbNode: SKSpriteNode = SKSpriteNode(imageNamed: "JoyStickHandle"), backdropNode: SKSpriteNode = SKSpriteNode(imageNamed: "JoyStickBase")) {
+    init(movableObject movableNode: JoystickController, thumbNode: SKSpriteNode = SKSpriteNode(imageNamed: "JoyStickHandle"), backdropNode: SKSpriteNode = SKSpriteNode(imageNamed: "JoyStickBase")) {
         self.thumbNode = thumbNode
         self.backdropNode = backdropNode
-        self.movableNode = movableNode as! MainCharacter
+        self.movableNode = movableNode
 
         super.init()
 
@@ -45,15 +50,16 @@ class Joystick : SKNode {
 
     /// Movement functions
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.movableNode.status(status: .started)
         for touch in touches {
             let parentTouchPoint: CGPoint = touch.location(in: self.parent!)
             self.position = parentTouchPoint
             self.isTracking = true
-            print("Touches began!")
         }
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.movableNode.status(status: .running)
         for touch in touches {
             let touchPoint: CGPoint = touch.location(in: self)
 
@@ -65,20 +71,18 @@ class Joystick : SKNode {
 
             self.velocity = CGVector(dx: xVelocity, dy: yVelocity)
 
-            self.angularVelocity = -atan2(self.thumbNode.position.x - self.anchorPointInPoints().x, self.thumbNode.position.y - self.anchorPointInPoints().y)
-            print("Touches moved!")
-            print(velocity)
+            self.angularVelocity = atan2(yVelocity, xVelocity)
             self.movableNode.joystickInteraction(velocity: velocity, angularVelocity: angularVelocity)
         }
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Touches ended!")
+        self.movableNode.status(status: .finished)
         self.resetVelocity()
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Touches cancelled!")
+        self.movableNode.status(status: .finished)
         self.resetVelocity()
     }
 

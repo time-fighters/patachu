@@ -26,7 +26,6 @@ class ArmCharacter: SKSpriteNode, Animate {
     
     override var texture: SKTexture? {
         didSet {
-            print(" Aqui!! \(self.texture) \(self) \(self.parent)")
         }
     }
 
@@ -58,15 +57,12 @@ class ArmCharacter: SKSpriteNode, Animate {
             switch atlasType {
                 
             case .idleArmAtlas:
-                
                 for j in 0 ..< atlas.textureNames.count{
-                    
                     idleTextures.append(SKTexture(imageNamed: atlas.textureNames[j]))
                 }
                 
             default:
                 break
-                
             }
         }
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -78,27 +74,19 @@ class ArmCharacter: SKSpriteNode, Animate {
         
     }
     
-    
     func animate(scene: SKScene, state: UInt32) {
         
         switch  state {
+
         case StateMachine.idle:
-            
             //self.texture = SKTexture(imageNamed: "Arm")
             self.run(SKAction.animate(with: idleTextures, timePerFrame: 0.1))
 
-
         case StateMachine.walk:
-            
             print("x")
             
-            
-            
         default:
-            
             print("x")
         }
     }
-    
-    
 }

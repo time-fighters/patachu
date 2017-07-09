@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A1078DA1F07686B00BDA07B /* BackgroundParallax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1078D91F07686B00BDA07B /* BackgroundParallax.swift */; };
 		3A409ADD1F0D55CA0054B1B8 /* BodyCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A409ADC1F0D55CA0054B1B8 /* BodyCharacter.swift */; };
 		3A409ADF1F0D55DE0054B1B8 /* ArmCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A409ADE1F0D55DE0054B1B8 /* ArmCharacter.swift */; };
 		3ACB6C8D1F0EFBEF00A89154 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */; };
@@ -20,13 +19,14 @@
 		C820FCA71F01361500D52F8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C820FCA61F01361500D52F8A /* Assets.xcassets */; };
 		C820FCAA1F01361500D52F8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C820FCA81F01361500D52F8A /* LaunchScreen.storyboard */; };
 		C8B501961F02849E003F9E18 /* JoyStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B501951F02849E003F9E18 /* JoyStick.swift */; };
+		C8C9D9131F127BF20015F03F /* Shooting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C9D9121F127BF20015F03F /* Shooting.swift */; };
 		C8E786DB1F03E42600027984 /* MainCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786DA1F03E42600027984 /* MainCharacter.swift */; };
 		C8E786DE1F05331500027984 /* ControllableScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786DD1F05331500027984 /* ControllableScene.swift */; };
 		C8E786E51F0D01E600027984 /* Updatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786E41F0D01E600027984 /* Updatable.swift */; };
+		C8E786E71F0D3B4F00027984 /* BackgroundParallax.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786E61F0D3B4F00027984 /* BackgroundParallax.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3A1078D91F07686B00BDA07B /* BackgroundParallax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundParallax.swift; sourceTree = "<group>"; };
 		3A409ADC1F0D55CA0054B1B8 /* BodyCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyCharacter.swift; sourceTree = "<group>"; };
 		3A409ADE1F0D55DE0054B1B8 /* ArmCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmCharacter.swift; sourceTree = "<group>"; };
 		3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
@@ -41,9 +41,11 @@
 		C820FCA91F01361500D52F8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C820FCAB1F01361500D52F8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8B501951F02849E003F9E18 /* JoyStick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoyStick.swift; sourceTree = "<group>"; };
+		C8C9D9121F127BF20015F03F /* Shooting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shooting.swift; sourceTree = "<group>"; };
 		C8E786DA1F03E42600027984 /* MainCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCharacter.swift; sourceTree = "<group>"; };
 		C8E786DD1F05331500027984 /* ControllableScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllableScene.swift; sourceTree = "<group>"; };
 		C8E786E41F0D01E600027984 /* Updatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Updatable.swift; sourceTree = "<group>"; };
+		C8E786E61F0D3B4F00027984 /* BackgroundParallax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundParallax.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +100,7 @@
 				3A409ADC1F0D55CA0054B1B8 /* BodyCharacter.swift */,
 				3A409ADE1F0D55DE0054B1B8 /* ArmCharacter.swift */,
 				C8B501951F02849E003F9E18 /* JoyStick.swift */,
-				3A1078D91F07686B00BDA07B /* BackgroundParallax.swift */,
+				C8C9D9121F127BF20015F03F /* Shooting.swift */,
 			);
 			name = "Game Elements";
 			sourceTree = "<group>";
@@ -109,6 +111,7 @@
 				C8E786E41F0D01E600027984 /* Updatable.swift */,
 				3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */,
 				3ACB6C901F0F1EFC00A89154 /* Animation.swift */,
+				C8E786E61F0D3B4F00027984 /* BackgroundParallax.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -145,7 +148,7 @@
 				TargetAttributes = {
 					C820FC951F01361500D52F8A = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 6HCFLY24V4;
+						DevelopmentTeam = 5T5R275US3;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -187,8 +190,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8C9D9131F127BF20015F03F /* Shooting.swift in Sources */,
+				C8E786E71F0D3B4F00027984 /* BackgroundParallax.swift in Sources */,
 				C8B501961F02849E003F9E18 /* JoyStick.swift in Sources */,
-				3A1078DA1F07686B00BDA07B /* BackgroundParallax.swift in Sources */,
 				3A409ADF1F0D55DE0054B1B8 /* ArmCharacter.swift in Sources */,
 				C8E786DE1F05331500027984 /* ControllableScene.swift in Sources */,
 				C8E786E51F0D01E600027984 /* Updatable.swift in Sources */,
@@ -321,7 +325,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6HCFLY24V4;
+				DEVELOPMENT_TEAM = 5T5R275US3;
 				INFOPLIST_FILE = "Time Fighter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.Time-Fighter";
@@ -334,7 +338,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6HCFLY24V4;
+				DEVELOPMENT_TEAM = 5T5R275US3;
 				INFOPLIST_FILE = "Time Fighter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.Time-Fighter";

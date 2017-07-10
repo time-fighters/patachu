@@ -16,9 +16,21 @@ class StateMachine {
     public static let idle:  UInt32 = 0b0100
     public static let shoot: UInt32 = 0b1000
   
-    func idleShoot() -> UInt32 {
+    public static func idleShoot() -> UInt32 {
         
         return (StateMachine.idle | StateMachine.shoot)
     }
+    
+    
+    public static func walkShoot() -> UInt32 {
+        
+        return (StateMachine.walk | StateMachine.shoot)
+    }
+    //State for arm
+    public static func walkIdle() -> UInt32 {
+        
+        return (StateMachine.walk | StateMachine.idle)
+    }
+
     
 }

@@ -12,17 +12,15 @@ import SpriteKit
 class ArmCharacter: SKSpriteNode, Animate {
     
     enum texturesAtlasTypes: String {
-        case shootArmAtlas
-        case idleArmAtlas
-        case walkArmAtlas
+        case ShootArmAtlas
+        case idleOrWalkArmAtlas
     }
     
     var armAtlasArray = [SKTextureAtlas]()
-    //    var walkTextures:[SKTexture]
-    var idleTextures = [SKTexture]()
-    //    var jumpTextures:[SKTexture]
+    var idleOrWalkTextures = [SKTexture]()
+    var shootTextures = [SKTexture]()
     
-    let atlasNamesArray: [texturesAtlasTypes] = [.idleArmAtlas, .walkArmAtlas, .shootArmAtlas]
+    let atlasNamesArray: [texturesAtlasTypes] = [.ShootArmAtlas, .idleOrWalkArmAtlas]
     
     override var texture: SKTexture? {
         didSet {
@@ -46,44 +44,59 @@ class ArmCharacter: SKSpriteNode, Animate {
     
     func setup()
     {
-        self.scale(to: CGSize(width: 100 , height: 50))
+        //self.scale(to: CGSize(width: 300 , height: 150))
         
         var atlasMap = [texturesAtlasTypes:SKTextureAtlas]()
         
-        atlasMap[.idleArmAtlas] = SKTextureAtlas(named: "idleArmAtlas")
+        atlasMap[.idleOrWalkArmAtlas] = SKTextureAtlas(named: "idleOrWalkArmAtlas")
+        atlasMap[.ShootArmAtlas] = SKTextureAtlas(named: "ShootArmAtlas")
         for atlasType in atlasMap.keys
         {
             let atlas = atlasMap[atlasType]!
+            
             switch atlasType {
                 
-            case .idleArmAtlas:
-                for j in 0 ..< atlas.textureNames.count{
-                    idleTextures.append(SKTexture(imageNamed: atlas.textureNames[j]))
+            case .idleOrWalkArmAtlas:
+                for i in 1 ... atlas.textureNames.count{
+                    let idleOrWalkTextureName = "ArmIdle\(i)"
+                    idleOrWalkTextures.append(atlas.textureNamed(idleOrWalkTextureName))
+
+                }
+                
+            case .ShootArmAtlas:
+                
+                for j in 1 ... atlas.textureNames.count{
+                    let shootTextureName = "ArmShootingF\(j)"
+                    shootTextures.append(atlas.textureNamed(shootTextureName))
                 }
                 
             default:
                 break
             }
         }
-        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        self.position = CGPoint(x: 0, y: 0)
+
         self.zPosition = 6
-        //self.texture = SKTexture(imageNamed: "Arm")
-        self.texture = SKTexture(imageNamed: "\(idleTextures[0])")
-        //self.size = (self.texture?.size())!
-        
+        self.anchorPoint = CGPoint(x: 0.59, y: 0.5)
     }
+    
+
     
     func animate(scene: SKScene, state: UInt32) {
         
         switch  state {
 
-        case StateMachine.idle:
-            //self.texture = SKTexture(imageNamed: "Arm")
-            self.run(SKAction.animate(with: idleTextures, timePerFrame: 0.1))
-
         case StateMachine.walk:
-            print("x")
+            self.run(SKAction.animate(with: idleOrWalkTextures, timePerFrame: 0.5))
+
+        case StateMachine.idle:
+            self.run(SKAction.animate(with: idleOrWalkTextures, timePerFrame: 0.5))
+
+        case StateMachine.idleShoot():
+            self.run(SKAction.repeatForever(SKAction.animate(with: shootTextures, timePerFrame: 0.1)))
+
+        case StateMachine.walkShoot():
+            self.run(SKAction.repeatForever(SKAction.animate(with: shootTextures, timePerFrame: 0.1)))
+
             
         default:
             print("x")

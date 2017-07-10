@@ -71,8 +71,10 @@ class MainCharacter: SKSpriteNode, JoystickController, Animate, Update, NodeDire
             self.status = .jump
         } else if (status == .started || status == .running) {
             self.status = .walk
+            self.state = StateMachine.walkShoot()
         } else if (status == .finished) {
             self.status = .idle
+            self.state = StateMachine.idle
         }
     }
 

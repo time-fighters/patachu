@@ -63,24 +63,6 @@ class GameScene: ControllableScene {
         shootController = Shooting(mainCharacterArm!, bullet!, CGPoint(x: 0, y: 0), self.mainCharacter!)
         self.updatable?.addToUpdate(node: self.shootController!)
 
-
-//        let texture = mainCharacter?.texture
-//        var animationTextures = [SKTexture]()
-//
-//        //Break texture into frames
-//        for pos in stride(from: 0.0, to: 1.0, by: 0.5) {
-//            let cutter = CGRect(x: pos, y: 0, width: 0.5, height: 1.0)
-//            let frame = SKTexture(rect: cutter, in: texture!)
-//            animationTextures.append(frame)
-//        }
-
-//        mainCharacter?.texture = animationTextures[0]
-        // Create frame animation
-//        let animateTexture = SKAction.repeatForever(SKAction.animate(with: animationTextures, timePerFrame: 0.19))
-
-        //Run, Forrest, run!
-//        mainCharacter?.run(animateTexture)
-
         
         // Movement JoyStick
         self.movementJoystick = Joystick(movableObject: mainCharacter!)
@@ -98,6 +80,7 @@ class GameScene: ControllableScene {
         moutains.createBackgroundNode(zpostion: zPositionMountains, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: mountainsSize, scene: self)
         city.createBackgroundNode(zpostion: zPositionCity, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: citySize, scene: self)
 
+       // let ground:Ground = Ground(scene: self, initialPosition: leftCornerPosition)
     }
 
     override func update(_ currentTime: TimeInterval) {
@@ -134,6 +117,7 @@ class GameScene: ControllableScene {
         let touchPoint: CGPoint = touch.location(in: self)
         if (touchPoint.x < 0) {
             return self.movementJoystick
+            
         } else {
             return self.shootingJoystick
         }

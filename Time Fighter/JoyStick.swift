@@ -9,8 +9,10 @@
 import Foundation
 import SpriteKit
 
-enum JoystickStatusEnum: Int {
-    case started = 0, running, finished
+enum JoystickStatusEnum {
+    case started
+    case running
+    case finished
 }
 
 protocol JoystickController {

@@ -13,15 +13,16 @@ class BodyCharacter: SKSpriteNode, Animate {
     
     
     enum texturesAtlasTypes: String {
-        case walkAtlas
-        case idleAtlas
-        case jumpAtlas
+        case walkBodyAtlas
+        case idleBodyAtlas
+        case jumpBodyAtlas
     }
     
-    let atlasNamesArray: [texturesAtlasTypes] = [.idleAtlas, .walkAtlas, .jumpAtlas]
+    let atlasNamesArray: [texturesAtlasTypes] = [.idleBodyAtlas, .walkBodyAtlas, .jumpBodyAtlas]
     var AtlasArray = [SKTextureAtlas]()
     var idleTextures = [SKTexture]()
-
+    var walkTextures = [SKTexture]()
+    var jumpTextures = [SKTexture]()
 
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -40,19 +41,28 @@ class BodyCharacter: SKSpriteNode, Animate {
     
     func setup()
     {
+        //key:value
         var atlasMap = [texturesAtlasTypes:SKTextureAtlas]()
         
-        atlasMap[.idleAtlas] = SKTextureAtlas(named: "idleAtlas")
+        atlasMap[.idleBodyAtlas] = SKTextureAtlas(named: "idleBodyAtlas")
+        atlasMap[.walkBodyAtlas] = SKTextureAtlas(named: "walkBodyAtlas")
         for atlasType in atlasMap.keys
         {
             let atlas = atlasMap[atlasType]!
             switch atlasType {
                 
-            case .idleAtlas:
+            case .idleBodyAtlas:
                 
-                for j in 0 ..< atlas.textureNames.count{
-                    
-                    idleTextures.append(SKTexture(imageNamed: atlas.textureNames[j]))
+                for i in 1 ... atlas.textureNames.count{
+                    let idleTextureName = "MercIdle\(i)"
+                    idleTextures.append(atlas.textureNamed(idleTextureName))
+                }
+            
+            case .walkBodyAtlas:
+                
+                for j in 1 ... atlas.textureNames.count{
+                    let walkTextureName = "MercWalk\(j)"
+                    walkTextures.append(atlas.textureNamed(walkTextureName))
                 }
      
             default:
@@ -60,10 +70,7 @@ class BodyCharacter: SKSpriteNode, Animate {
                 
             }
         }
-        self.texture = SKTexture(imageNamed: "\(idleTextures[0])")
-        self.zPosition = 5
-        self.position = CGPoint.zero
-        self.size = (self.texture?.size())!
+
     }
     
     func animate(scene: SKScene, state:UInt32) {
@@ -71,13 +78,20 @@ class BodyCharacter: SKSpriteNode, Animate {
         switch  state {
         case StateMachine.idle:
             
-           self.run(SKAction.repeatForever(SKAction.animate(with: idleTextures, timePerFrame: 0.1)))
+           self.run(SKAction.repeatForever(SKAction.animate(with: idleTextures, timePerFrame: 0.5)))
             
-            break
         case StateMachine.walk:
             
-            break
-         
+            self.run(SKAction.repeatForever(SKAction.animate(with: walkTextures, timePerFrame: 0.1)))
+            
+        case StateMachine.idleShoot():
+            
+                self.run(SKAction.animate(with: [idleTextures[0]], timePerFrame: 0.1))
+            
+            
+        case StateMachine.walkShoot():
+            self.run(SKAction.repeatForever(SKAction.animate(with: walkTextures, timePerFrame: 0.1)))
+            
         default:
             
             

@@ -9,13 +9,22 @@
 import Foundation
 import SpriteKit
 
-enum CharacterMovementEnum: String {
+enum CharacterMovementEnum {
     case walk
     case jump
     case idle
 }
 
-class MainCharacter: SKSpriteNode, JoystickController, Animate, Update {
+enum DirectionEnum {
+    case left
+    case right
+
+}
+protocol NodeDirection {
+    func setDirection(_ direction: DirectionEnum)
+}
+
+class MainCharacter: SKSpriteNode, JoystickController, Animate, Update, NodeDirection {
 
     let VELOCITY: CGFloat = 7
     var xVelocity: Double = 0
@@ -50,7 +59,6 @@ class MainCharacter: SKSpriteNode, JoystickController, Animate, Update {
     func joystickInteraction(velocity: CGVector, angularVelocity: CGFloat) {
         self.xVelocity = Double(self.VELOCITY * cos(angularVelocity))
         self.yVelocity = Double(self.VELOCITY * sin(angularVelocity))
-
     }
     
      func runAnimations(scene: SKScene,  state: UInt32  ) {
@@ -59,7 +67,9 @@ class MainCharacter: SKSpriteNode, JoystickController, Animate, Update {
     }
 
     func status(status: JoystickStatusEnum) {
-        if (status == .started) {
+        if ((status == .started || status == .running) && self.yVelocity >= 3) {
+            self.status = .jump
+        } else if (status == .started || status == .running) {
             self.status = .walk
         } else if (status == .finished) {
             self.status = .idle
@@ -69,11 +79,23 @@ class MainCharacter: SKSpriteNode, JoystickController, Animate, Update {
     func animate(scene: SKScene, state: UInt32 ) {}
 
     func update(_ currentTime: TimeInterval) {
-        if (self.status == .walk) {
+        if (self.status == .walk || self.status == .jump) {
             self.run(SKAction.move(by: CGVector(dx: self.xVelocity, dy: 0), duration: 1))
         }
 
+        if (self.status == .jump) {
+            self.body.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 50))
+        }
+
         self.arm.position = CGPoint(x: self.body.position.x + 19, y: self.body.position.y)
+    }
+
+    func setDirection(_ direction: DirectionEnum) {
+        if (direction == .left) {
+            self.xScale = -1
+        } else if (direction == .right) {
+            self.xScale = 1
+        }
     }
 }
 

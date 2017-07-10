@@ -60,7 +60,7 @@ class GameScene: ControllableScene {
         self.mainCharacter?.state = StateMachine.idle
         self.updatable?.addToUpdate(node: self.mainCharacter!)
 
-        shootController = Shooting(shootingNode: mainCharacterArm!, bullet: bullet!, parentRelativePosition: CGPoint(x: 0, y: 0))
+        shootController = Shooting(mainCharacterArm!, bullet!, CGPoint(x: 0, y: 0), self.mainCharacter!)
         self.updatable?.addToUpdate(node: self.shootController!)
 
 

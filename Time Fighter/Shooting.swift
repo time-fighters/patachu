@@ -13,7 +13,7 @@ protocol Shoot {
     func shoot()
 }
 
-class Shooting: SKNode, JoystickController, Update {
+class Shooting: SKNode, JoystickController, Update, NodeDirection {
 
     var node: SKNode
     var bullet: SKNode
@@ -24,12 +24,15 @@ class Shooting: SKNode, JoystickController, Update {
     let rateOfFire: Double = 0.3
     var lastShot: TimeInterval
 
-    let TIME_INTERVAL:Double = 1
-    let BULLET_VELOCITY: Double = 500
+    var directionNode: NodeDirection
 
-    init(shootingNode node: SKNode, bullet: SKNode, parentRelativePosition: CGPoint) {
+    let TIME_INTERVAL:Double = 1
+    let BULLET_VELOCITY: Double = 600
+
+    init(_ node: SKNode, _ bullet: SKNode, _ parentRelativePosition: CGPoint, _ directionNode: NodeDirection) {
         self.node = node
         self.parentRelativePosition = parentRelativePosition
+        self.directionNode = directionNode
 
         self.bullet = bullet
         self.direction = CGVector()
@@ -67,6 +70,12 @@ class Shooting: SKNode, JoystickController, Update {
         bullet.physicsBody?.affectedByGravity = false
         bullet.zRotation = CGFloat(self.angle)
 
+        if (self.isShooting && vx < 0) {
+            self.setDirection(.left)
+        } else if (self.isShooting && vx >= 0) {
+            self.setDirection(.right)
+        }
+
     }
 
     func status(status: JoystickStatusEnum) {
@@ -81,11 +90,15 @@ class Shooting: SKNode, JoystickController, Update {
         let bullet = self.bullet.copy() as! SKSpriteNode
         bullet.zPosition = 0
         bullet.removeAllChildren()
-        bullet.position = self.node.convert(CGPoint(x: self.node.position.x + 10, y: self.node.position.y - 10), to: self.bullet)
-        bullet.zPosition = 2
+        bullet.position = self.node.convert(CGPoint(x: self.node.position.x + 20, y: self.node.position.y - 10), to: self.bullet)
+        bullet.zPosition = 0
         self.bullet.addChild(bullet)
         print(bullet.position)
         print(self.bullet.children.count)
         return bullet
+    }
+
+    func setDirection(_ direction: DirectionEnum) {
+        self.directionNode.setDirection(direction)
     }
 }

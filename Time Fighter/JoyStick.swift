@@ -20,7 +20,7 @@ protocol JoystickController {
 
 class Joystick : SKNode {
     let kThumbSpringBackDuration: Double =  0.3
-    let backdropNode, thumbNode: SKSpriteNode
+    var backdropNode, thumbNode: CGPoint
     var isTracking: Bool = true
     var velocity: CGVector = CGVector(dx: 0, dy: 0)
     var travelLimit: CGPoint = CGPoint(x: 0, y: 0)
@@ -32,15 +32,12 @@ class Joystick : SKNode {
         return CGPoint(x: 0, y: 0)
     }
 
-    init(movableObject movableNode: JoystickController, thumbNode: SKSpriteNode = SKSpriteNode(imageNamed: "JoyStickHandle"), backdropNode: SKSpriteNode = SKSpriteNode(imageNamed: "JoyStickBase")) {
-        self.thumbNode = thumbNode
-        self.backdropNode = backdropNode
+    init(movableObject movableNode: JoystickController) {
+        self.thumbNode = CGPoint.zero
+        self.backdropNode = CGPoint.zero
         self.movableNode = movableNode
 
         super.init()
-
-        self.addChild(self.backdropNode)
-        self.addChild(self.thumbNode)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -64,10 +61,10 @@ class Joystick : SKNode {
             let touchPoint: CGPoint = touch.location(in: self)
 
             let moveDifference: CGPoint = CGPoint(x: touchPoint.x - self.anchorPointInPoints().x, y: touchPoint.y - self.anchorPointInPoints().y)
-            self.thumbNode.position = CGPoint(x: self.anchorPointInPoints().x + moveDifference.x, y: self.anchorPointInPoints().y + moveDifference.y)
+            self.thumbNode = CGPoint(x: self.anchorPointInPoints().x + moveDifference.x, y: self.anchorPointInPoints().y + moveDifference.y)
 
-            let xVelocity = self.thumbNode.position.x - self.anchorPointInPoints().x
-            let yVelocity = self.thumbNode.position.y - self.anchorPointInPoints().y
+            let xVelocity = self.thumbNode.x - self.anchorPointInPoints().x
+            let yVelocity = self.thumbNode.y - self.anchorPointInPoints().y
 
             self.velocity = CGVector(dx: xVelocity, dy: yVelocity)
 
@@ -89,8 +86,5 @@ class Joystick : SKNode {
     func resetVelocity() {
         self.isTracking = false
         self.velocity = CGVector.zero
-        let easeOut: SKAction = SKAction.move(to: self.anchorPointInPoints(), duration: kThumbSpringBackDuration)
-        easeOut.timingMode = SKActionTimingMode.easeOut
-        self.thumbNode.run(easeOut)
     }
 }

@@ -56,7 +56,7 @@ class GameScene: ControllableScene {
         // Main Character
         self.mainCharacter = self.childNode(withName: "mainCharacter")! as? MainCharacter
         let mainCharacterArm = mainCharacter?.childNode(withName: "arm")
-        let bullet = mainCharacterArm?.childNode(withName: "bullet")
+        let bullet = self.childNode(withName: "bullet")
         self.mainCharacter?.state = StateMachine.idle
         self.updatable?.addToUpdate(node: self.mainCharacter!)
 

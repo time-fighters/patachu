@@ -72,6 +72,8 @@ class MainCharacter: SKSpriteNode, JoystickController, Animate, Update {
         if (self.status == .walk) {
             self.run(SKAction.move(by: CGVector(dx: self.xVelocity, dy: 0), duration: 1))
         }
+
+        self.arm.position = CGPoint(x: self.body.position.x + 19, y: self.body.position.y)
     }
 }
 

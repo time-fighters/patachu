@@ -93,8 +93,6 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
         bullet.position = self.node.convert(CGPoint(x: self.node.position.x + 20, y: self.node.position.y - 10), to: self.bullet)
         bullet.zPosition = 0
         self.bullet.addChild(bullet)
-        print(bullet.position)
-        print(self.bullet.children.count)
         return bullet
     }
 

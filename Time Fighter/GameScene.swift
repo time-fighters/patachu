@@ -19,6 +19,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
     // Time since last frame
     var deltaTime : TimeInterval = 0
 
+    var lastCharacterPosition: CGPoint?
     
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
@@ -30,6 +31,8 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
     private var mainCharacter: MainCharacter?
     private var shootController: Shooting?
     private var updatable: Updatable?
+
+    private var movableNodes: SKNode?
 
     var sky = BackgroundParallax(spriteName: "Sky")
     var moutains = BackgroundParallax(spriteName: "Mountains")
@@ -54,6 +57,15 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
 
+        // Camera Movement
+        let cameraMovement = self.childNode(withName: "cameraMovement")
+        cameraMovement?.physicsBody?.categoryBitMask = 0
+        cameraMovement?.physicsBody?.collisionBitMask = 0
+        cameraMovement?.physicsBody?.contactTestBitMask = 0
+
+        // Movable Nodes
+        self.movableNodes = self.childNode(withName: "movable")
+
         // Boundaries
         let boundaries = self.childNode(withName: "boundaries")
 
@@ -64,7 +76,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         }
 
         // Ground
-        let background = self.childNode(withName: "background")
+        let background = self.movableNodes?.childNode(withName: "background")
 
         for bg in (background?.children)! {
             bg.physicsBody?.categoryBitMask = GameElements.ground
@@ -83,10 +95,11 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         let mainCharacterArm = mainCharacter?.childNode(withName: "arm")
         self.mainCharacter?.state = StateMachine.idle
         self.updatable?.addToUpdate(node: self.mainCharacter!)
+        self.lastCharacterPosition = self.mainCharacter?.position
 
         self.mainCharacter?.physicsBody?.categoryBitMask = GameElements.mainCharacter
-        self.mainCharacter?.physicsBody?.collisionBitMask = GameElements.ground
-        self.mainCharacter?.physicsBody?.contactTestBitMask = GameElements.enemy | GameElements.ground
+        self.mainCharacter?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.camera
+        self.mainCharacter?.physicsBody?.contactTestBitMask = GameElements.enemy | GameElements.ground | GameElements.camera
 
         // Movement JoyStick
         self.movementJoystick = Joystick(movableObject: mainCharacter!)
@@ -110,6 +123,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         sky.createBackgroundNode(zpostion: zpostionSky, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: skySize, scene: self)
         moutains.createBackgroundNode(zpostion: zPositionMountains, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: mountainsSize, scene: self)
         city.createBackgroundNode(zpostion: zPositionCity, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: citySize, scene: self)
+
 
        // let ground:Ground = Ground(scene: self, initialPosition: leftCornerPosition)
     }
@@ -138,7 +152,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         city.moveSprite(withSpeed: 150, deltaTime: deltaTime, scene: self)
     }
 
-    
+
     /// Identifies the side of screen touched by the user and choose what joystick use
     ///
     /// - Parameter touch: touch type
@@ -177,6 +191,14 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         if (contact.bodyA.categoryBitMask == GameElements.ground && contact.bodyB.categoryBitMask == GameElements.mainCharacter) {
             let mainCharacter = contact.bodyB.node as! MainCharacter
             mainCharacter.isJumping = false
+        }
+
+        //Main Character and Camera
+        if (contact.bodyA.categoryBitMask == GameElements.mainCharacter && contact.bodyB.categoryBitMask == GameElements.camera) {
+            self.movableNodes?.position = CGPoint(x:(self.movableNodes?.position.x)! - 2*max((self.mainCharacter?.position.x)! - (self.lastCharacterPosition?.x)!, 0), y: (self.movableNodes!.position.y))
+            self.lastCharacterPosition = self.mainCharacter?.position
+        }
+        if (contact.bodyA.categoryBitMask == GameElements.camera && contact.bodyB.categoryBitMask == GameElements.mainCharacter) {
         }
     }
 }

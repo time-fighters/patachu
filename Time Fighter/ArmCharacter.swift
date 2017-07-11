@@ -44,7 +44,7 @@ class ArmCharacter: SKSpriteNode, Animate {
     
     func setup()
     {
-        //self.scale(to: CGSize(width: 300 , height: 150))
+        
         
         var atlasMap = [texturesAtlasTypes:SKTextureAtlas]()
         

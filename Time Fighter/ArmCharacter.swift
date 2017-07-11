@@ -69,9 +69,6 @@ class ArmCharacter: SKSpriteNode, Animate {
                     let shootTextureName = "ArmShootingF\(j)"
                     shootTextures.append(atlas.textureNamed(shootTextureName))
                 }
-                
-            default:
-                break
             }
         }
 

@@ -51,6 +51,4 @@ class ControllableScene: SKScene, Controllable {
             }
         }
     }
-    
-    
 }

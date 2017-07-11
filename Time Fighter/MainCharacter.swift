@@ -9,30 +9,27 @@
 import Foundation
 import SpriteKit
 
-enum CharacterMovementEnum {
-    case walk
-    case jump
-    case idle
-}
-
 enum DirectionEnum {
     case left
     case right
-
 }
-protocol NodeDirection {
+
+protocol NodeInformation {
     func setDirection(_ direction: DirectionEnum)
+
+    func isShooting(_ isShooting: Bool)
 }
 
-class MainCharacter: SKSpriteNode, JoystickController, Animate, Update, NodeDirection {
+class MainCharacter: SKSpriteNode, JoystickController, Animate, Update, NodeInformation {
 
     let VELOCITY: CGFloat = 7
     var xVelocity: Double = 0
     var yVelocity: Double = 0
     var body: BodyCharacter!
     var arm: ArmCharacter!
+    var isShooting: Bool = false
+    var isJumping: Bool = false
     let stateMachine:StateMachine = StateMachine()
-    var status: CharacterMovementEnum = .idle
     
        var state: UInt32 = StateMachine.idle  {
         didSet{
@@ -67,26 +64,36 @@ class MainCharacter: SKSpriteNode, JoystickController, Animate, Update, NodeDire
     }
 
     func status(status: JoystickStatusEnum) {
-        if ((status == .started || status == .running) && self.yVelocity >= 3) {
-            self.status = .jump
-        } else if (status == .started || status == .running) {
-            self.status = .walk
-            self.state = StateMachine.walkShoot()
-        } else if (status == .finished) {
-            self.status = .idle
-            self.state = StateMachine.idle
+        if (!self.isShooting) {
+            if ((status == .started || status == .running) && self.yVelocity >= 3 && !self.isJumping) {
+                self.state = StateMachine.jump
+                self.isJumping = true
+            } else if (status == .started || status == .running) {
+                self.state = StateMachine.walk
+            } else if (status == .finished) {
+                self.state = StateMachine.idle
+            }
+        } else {
+            if ((status == .started || status == .running) && self.yVelocity >= 3 && !self.isJumping) {
+                self.state = StateMachine.jump
+                self.isJumping = true
+            } else if (status == .started || status == .running) {
+                self.state = StateMachine.walkShoot()
+            } else if (status == .finished) {
+                self.state = StateMachine.idleShoot()
+            }
         }
     }
 
     func animate(scene: SKScene, state: UInt32 ) {}
 
     func update(_ currentTime: TimeInterval) {
-        if (self.status == .walk || self.status == .jump) {
+        if (self.state == StateMachine.walk || self.state == StateMachine.jump) {
             self.run(SKAction.move(by: CGVector(dx: self.xVelocity, dy: 0), duration: 1))
         }
 
-        if (self.status == .jump) {
-            self.body.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 50))
+        if (self.state == StateMachine.jump) {
+            self.physicsBody?.velocity.dy = 700
         }
 
         self.arm.position = CGPoint(x: self.body.position.x + 19, y: self.body.position.y)
@@ -98,6 +105,10 @@ class MainCharacter: SKSpriteNode, JoystickController, Animate, Update, NodeDire
         } else if (direction == .right) {
             self.xScale = 1
         }
+    }
+
+    func isShooting(_ isShooting: Bool) {
+        self.isShooting = isShooting
     }
 }
 

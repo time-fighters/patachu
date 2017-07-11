@@ -19,6 +19,7 @@
 		C820FCA51F01361500D52F8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C820FCA31F01361500D52F8A /* Main.storyboard */; };
 		C820FCA71F01361500D52F8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C820FCA61F01361500D52F8A /* Assets.xcassets */; };
 		C820FCAA1F01361500D52F8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C820FCA81F01361500D52F8A /* LaunchScreen.storyboard */; };
+		C86BFDA31F13CB4500345606 /* GameElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86BFDA21F13CB4500345606 /* GameElements.swift */; };
 		C8B501961F02849E003F9E18 /* JoyStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B501951F02849E003F9E18 /* JoyStick.swift */; };
 		C8C9D9131F127BF20015F03F /* Shooting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C9D9121F127BF20015F03F /* Shooting.swift */; };
 		C8E786DB1F03E42600027984 /* MainCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E786DA1F03E42600027984 /* MainCharacter.swift */; };
@@ -42,6 +43,7 @@
 		C820FCA61F01361500D52F8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C820FCA91F01361500D52F8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C820FCAB1F01361500D52F8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C86BFDA21F13CB4500345606 /* GameElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameElements.swift; sourceTree = "<group>"; };
 		C8B501951F02849E003F9E18 /* JoyStick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoyStick.swift; sourceTree = "<group>"; };
 		C8C9D9121F127BF20015F03F /* Shooting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shooting.swift; sourceTree = "<group>"; };
 		C8E786DA1F03E42600027984 /* MainCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCharacter.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */,
 				3ACB6C901F0F1EFC00A89154 /* Animation.swift */,
 				C8E786E61F0D3B4F00027984 /* BackgroundParallax.swift */,
+				C86BFDA21F13CB4500345606 /* GameElements.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -151,7 +154,7 @@
 				TargetAttributes = {
 					C820FC951F01361500D52F8A = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 6HCFLY24V4;
+						DevelopmentTeam = 5T5R275US3;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -206,6 +209,7 @@
 				C8E786DB1F03E42600027984 /* MainCharacter.swift in Sources */,
 				C820FCA21F01361500D52F8A /* GameViewController.swift in Sources */,
 				3ACB6C911F0F1EFC00A89154 /* Animation.swift in Sources */,
+				C86BFDA31F13CB4500345606 /* GameElements.swift in Sources */,
 				C820FC9A1F01361500D52F8A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,7 +333,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6HCFLY24V4;
+				DEVELOPMENT_TEAM = 5T5R275US3;
 				INFOPLIST_FILE = "Time Fighter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.Time-Fighter";
@@ -342,7 +346,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6HCFLY24V4;
+				DEVELOPMENT_TEAM = 5T5R275US3;
 				INFOPLIST_FILE = "Time Fighter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.Time-Fighter";

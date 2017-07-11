@@ -13,7 +13,7 @@ protocol Shoot {
     func shoot()
 }
 
-class Shooting: SKNode, JoystickController, Update, NodeDirection {
+class Shooting: SKNode, JoystickController, Update, NodeInformation {
 
     var node: SKNode
     var bullet: SKNode
@@ -24,12 +24,12 @@ class Shooting: SKNode, JoystickController, Update, NodeDirection {
     let rateOfFire: Double = 0.3
     var lastShot: TimeInterval
 
-    var directionNode: NodeDirection
+    var directionNode: NodeInformation
 
     let TIME_INTERVAL:Double = 1
     let BULLET_VELOCITY: Double = 600
 
-    init(_ node: SKNode, _ bullet: SKNode, _ parentRelativePosition: CGPoint, _ directionNode: NodeDirection) {
+    init(_ node: SKNode, _ bullet: SKNode, _ parentRelativePosition: CGPoint, _ directionNode: NodeInformation) {
         self.node = node
         self.parentRelativePosition = parentRelativePosition
         self.directionNode = directionNode
@@ -80,9 +80,9 @@ class Shooting: SKNode, JoystickController, Update, NodeDirection {
 
     func status(status: JoystickStatusEnum) {
         if (status == .started) {
-            self.isShooting = true
+            self.isShooting(true)
         } else if (status == .finished) {
-            self.isShooting = false
+            self.isShooting(false)
         }
     }
 
@@ -100,5 +100,10 @@ class Shooting: SKNode, JoystickController, Update, NodeDirection {
 
     func setDirection(_ direction: DirectionEnum) {
         self.directionNode.setDirection(direction)
+    }
+
+    func isShooting(_ isShooting: Bool) {
+        self.isShooting = isShooting
+        self.directionNode.isShooting(isShooting)
     }
 }

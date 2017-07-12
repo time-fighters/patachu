@@ -31,6 +31,10 @@ class StateMachine {
         
         return (StateMachine.walk | StateMachine.idle)
     }
+    public static func jumpShoot() -> UInt32 {
+        
+        return (StateMachine.shoot | StateMachine.jump)
+    }
 
     
 }

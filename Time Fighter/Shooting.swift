@@ -55,6 +55,7 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
     }
 
     func update(_ currentTime: TimeInterval) {
+        self.isShooting(isShooting)
         let vx: Double = self.BULLET_VELOCITY * cos(self.angle)
         let vy: Double = self.BULLET_VELOCITY * sin(self.angle)
 
@@ -74,6 +75,7 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
 
         guard self.bullets > 0 else {
             if (!isReloading) {
+                self.isShooting = false
                 self.reload()
             }
             return
@@ -92,6 +94,8 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
         bullet.zRotation = CGFloat(self.angle)
 
         self.bullets -= 1
+        
+        
     }
 
     func status(status: JoystickStatusEnum) {

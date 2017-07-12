@@ -84,6 +84,11 @@ class BodyCharacter: SKSpriteNode, Animate {
             
             self.run(SKAction.repeatForever(SKAction.animate(with: walkTextures, timePerFrame: 0.1)))
             
+        case StateMachine.jump:
+            
+            self.run(SKAction.animate(with: [idleTextures[0]], timePerFrame: 0.1))
+
+            
         case StateMachine.idleShoot():
             
                 self.run(SKAction.animate(with: [idleTextures[0]], timePerFrame: 0.1))
@@ -91,6 +96,10 @@ class BodyCharacter: SKSpriteNode, Animate {
             
         case StateMachine.walkShoot():
             self.run(SKAction.repeatForever(SKAction.animate(with: walkTextures, timePerFrame: 0.1)))
+            
+        case StateMachine.jumpShoot():
+            
+            self.run(SKAction.animate(with: [idleTextures[0]], timePerFrame: 0.1))
             
         default:
             

@@ -80,19 +80,26 @@ class ArmCharacter: SKSpriteNode, Animate {
 
     
     func animate(scene: SKScene, state: UInt32) {
-        
+        print("animate arm \(state)")
         switch  state {
 
+            
         case StateMachine.walk:
             self.run(SKAction.animate(with: idleOrWalkTextures, timePerFrame: 0.5))
 
         case StateMachine.idle:
+            self.run(SKAction.animate(with: idleOrWalkTextures, timePerFrame: 0.5))
+            
+        case StateMachine.jump:
             self.run(SKAction.animate(with: idleOrWalkTextures, timePerFrame: 0.5))
 
         case StateMachine.idleShoot():
             self.run(SKAction.repeatForever(SKAction.animate(with: shootTextures, timePerFrame: 0.1)))
 
         case StateMachine.walkShoot():
+            self.run(SKAction.repeatForever(SKAction.animate(with: shootTextures, timePerFrame: 0.1)))
+            
+        case StateMachine.jumpShoot():
             self.run(SKAction.repeatForever(SKAction.animate(with: shootTextures, timePerFrame: 0.1)))
 
             

@@ -150,6 +150,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         
         self.movableNodes?.position = CGPoint(x: (self.movableNodes?.position.x)! - max((self.mainCharacter?.position.x)! - (self.lastCameraPosition?.x)!, 0), y: (self.movableNodes?.position.y)!)
         self.lastCameraPosition = self.mainCharacter?.position
+        print("updateState: \(self.mainCharacter!.state)")
     }
 
 
@@ -187,10 +188,13 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         if (contact.bodyA.categoryBitMask == GameElements.mainCharacter && contact.bodyB.categoryBitMask == GameElements.ground) {
             let mainCharacter = contact.bodyA.node as! MainCharacter
             mainCharacter.isJumping = false
+            
         }
         if (contact.bodyA.categoryBitMask == GameElements.ground && contact.bodyB.categoryBitMask == GameElements.mainCharacter) {
             let mainCharacter = contact.bodyB.node as! MainCharacter
             mainCharacter.isJumping = false
         }
+        print("\(mainCharacter?.isJumping)")
     }
+   
 }

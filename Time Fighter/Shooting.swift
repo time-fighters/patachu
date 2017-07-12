@@ -52,6 +52,20 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
     }
 
     func update(_ currentTime: TimeInterval) {
+        let vx: Double = self.BULLET_VELOCITY * cos(self.angle)
+        let vy: Double = self.BULLET_VELOCITY * sin(self.angle)
+
+        print(self.angle)
+        if (self.isShooting && vx < 0) {
+            self.setDirection(.left)
+            self.node.zRotation = .pi - CGFloat(self.angle)
+        } else if (self.isShooting && vx >= 0) {
+            self.setDirection(.right)
+            self.node.zRotation = CGFloat(self.angle)
+        } else if (!self.isShooting) {
+            self.node.zRotation = 0
+        }
+
         guard self.isShooting else {
             return
         }
@@ -63,19 +77,10 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
         self.lastShot = currentTime
 
         let bullet = self.makeBullet()
-        let vx: Double = self.BULLET_VELOCITY * cos(self.angle)
-        let vy: Double = self.BULLET_VELOCITY * sin(self.angle)
         bullet.physicsBody?.velocity = CGVector(dx: vx, dy: vy)
         bullet.physicsBody?.linearDamping = 0
         bullet.physicsBody?.affectedByGravity = false
         bullet.zRotation = CGFloat(self.angle)
-
-        if (self.isShooting && vx < 0) {
-            self.setDirection(.left)
-        } else if (self.isShooting && vx >= 0) {
-            self.setDirection(.right)
-        }
-
     }
 
     func status(status: JoystickStatusEnum) {

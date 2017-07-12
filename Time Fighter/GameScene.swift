@@ -59,17 +59,6 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
 
-        //Camera
-        self.mainCamera = self.childNode(withName: "camera") as? SKCameraNode
-        self.mainCamera?.position = CGPoint.zero
-        self.mainCamera?.alpha = 0
-
-        self.mainCamera?.physicsBody?.categoryBitMask = 0
-        self.mainCamera?.physicsBody?.collisionBitMask = 0
-        self.mainCamera?.physicsBody?.contactTestBitMask = 0
-
-        self.camera = self.mainCamera
-
         // Camera Movement
         let cameraMovement = self.childNode(withName: "cameraMovement")
         cameraMovement?.physicsBody?.categoryBitMask = GameElements.camera
@@ -84,8 +73,8 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
 
         for boundary in (boundaries?.children)! {
             boundary.physicsBody?.categoryBitMask = GameElements.boundaries
-            boundary.physicsBody?.collisionBitMask = 0
-            boundary.physicsBody?.contactTestBitMask = GameElements.bullet | GameElements.ground
+            boundary.physicsBody?.collisionBitMask = GameElements.mainCharacter
+            boundary.physicsBody?.contactTestBitMask = GameElements.bullet
         }
 
         // Ground
@@ -111,7 +100,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.lastCameraPosition = self.mainCharacter?.position
 
         self.mainCharacter?.physicsBody?.categoryBitMask = GameElements.mainCharacter
-        self.mainCharacter?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.camera
+        self.mainCharacter?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.camera | GameElements.boundaries
         self.mainCharacter?.physicsBody?.contactTestBitMask = GameElements.enemy | GameElements.ground | GameElements.camera
 
         // Movement JoyStick
@@ -163,6 +152,10 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         sky.moveSprite(withSpeed: 25, deltaTime: deltaTime, scene: self)
         moutains.moveSprite(withSpeed: 55, deltaTime: deltaTime, scene: self)
         city.moveSprite(withSpeed: 150, deltaTime: deltaTime, scene: self)
+
+        
+        self.movableNodes?.position = CGPoint(x: (self.movableNodes?.position.x)! - max((self.mainCharacter?.position.x)! - (self.lastCameraPosition?.x)!, 0), y: (self.movableNodes?.position.y)!)
+        self.lastCameraPosition = self.mainCharacter?.position
     }
 
 
@@ -213,7 +206,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
             self.lastCameraPosition = contact.bodyB.node?.position
         }
         if (contact.bodyA.categoryBitMask == GameElements.camera && contact.bodyB.categoryBitMask == GameElements.mainCharacter) {
-            self.mainCamera?.physicsBody?.applyForce( CGVector(dx: (self.camera?.position.x)! + max((contact.bodyA.node?.position.x)! - (self.lastCameraPosition?.x)!, 0), dy: (self.camera?.position.y)!))
+            self.mainCamera?.position = CGPoint(x: (self.camera?.position.x)! + max((contact.bodyA.node?.position.x)! - (self.lastCameraPosition?.x)!, 0), y: (self.camera?.position.y)!)
 
             self.lastCameraPosition = contact.bodyA.node?.position
         }

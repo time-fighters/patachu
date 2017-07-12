@@ -92,6 +92,7 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
         bullet.physicsBody?.linearDamping = 0
         bullet.physicsBody?.affectedByGravity = false
         bullet.zRotation = CGFloat(self.angle)
+        print("shooting2")
 
         self.bullets -= 1
         
@@ -113,6 +114,7 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
         bullet.position = self.node.convert(CGPoint(x: self.node.position.x + 100, y: self.node.position.y - 10), to: self.bullet)
         bullet.zPosition = 0
         self.bullet.addChild(bullet)
+        print("shooting1")
         return bullet
     }
 
@@ -126,7 +128,6 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
     }
 
     func reload() {
-        print("reloading")
         self.isReloading = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.bullets = 6

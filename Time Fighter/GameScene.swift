@@ -21,6 +21,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
 
 
     private var mainCamera: SKCameraNode?
+    private var mainCameraBoundary: SKNode?
     private var lastCameraPosition: CGPoint?
     
     private var label : SKLabelNode?
@@ -59,11 +60,23 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
 
+        // Camera
+        self.mainCamera = self.childNode(withName: "mainCamera") as? SKCameraNode
+        self.mainCamera?.physicsBody?.categoryBitMask = 0
+        self.mainCamera?.physicsBody?.collisionBitMask = 0
+        self.mainCamera?.physicsBody?.contactTestBitMask = 0
+
+        // Camera Boundary
+        self.mainCameraBoundary = self.childNode(withName: "cameraBoundary")
+        self.mainCameraBoundary?.physicsBody?.categoryBitMask = GameElements.camera
+        self.mainCameraBoundary?.physicsBody?.collisionBitMask = GameElements.mainCharacter
+        self.mainCameraBoundary?.physicsBody?.contactTestBitMask = 0
+
         // Movable Nodes
         self.movableNodes = self.childNode(withName: "movable")
 
         // Boundaries
-        let boundaries = self.childNode(withName: "boundaries")
+        let boundaries = self.mainCamera?.childNode(withName: "boundaries")
 
         for boundary in (boundaries?.children)! {
             boundary.physicsBody?.categoryBitMask = GameElements.boundaries
@@ -94,7 +107,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.lastCameraPosition = self.mainCharacter?.position
 
         self.mainCharacter?.physicsBody?.categoryBitMask = GameElements.mainCharacter
-        self.mainCharacter?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.boundaries
+        self.mainCharacter?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.boundaries | GameElements.camera
         self.mainCharacter?.physicsBody?.contactTestBitMask = GameElements.enemy | GameElements.ground
 
         // Movement JoyStick
@@ -116,12 +129,9 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         // Background
         let leftCornerPosition:CGPoint = CGPoint(x: -self.size.width/2, y: -self.size.height/2)
         
-        sky.createBackgroundNode(zpostion: zpostionSky, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: skySize, scene: self)
-        moutains.createBackgroundNode(zpostion: zPositionMountains, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: mountainsSize, scene: self)
-        city.createBackgroundNode(zpostion: zPositionCity, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: citySize, scene: self)
-
-
-       // let ground:Ground = Ground(scene: self, initialPosition: leftCornerPosition)
+        self.sky.createBackgroundNode(zpostion: zpostionSky, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: skySize, scene: self)
+        self.moutains.createBackgroundNode(zpostion: zPositionMountains, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: mountainsSize, scene: self)
+        self.city.createBackgroundNode(zpostion: zPositionCity, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: citySize, scene: self)
     }
 
     override func update(_ currentTime: TimeInterval) {
@@ -140,17 +150,20 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         
         // Set last frame time to current time
         lastFrameTime = currentTime
+
+        let positionDifferencial = max((self.mainCameraBoundary?.position.x)! - (self.lastCameraPosition?.x)!, 0)
         
+        self.mainCamera?.position = CGPoint(x: (self.mainCameraBoundary?.position.x)! + positionDifferencial, y: (self.mainCamera?.position.y)!)
+
+        print(Float(positionDifferencial))
+
         // Next, move each of the four pairs of sprites.
         // Objects that should appear move slower than foreground objects.
-        sky.moveSprite(withSpeed: 25, deltaTime: deltaTime, scene: self)
-        moutains.moveSprite(withSpeed: 55, deltaTime: deltaTime, scene: self)
-        city.moveSprite(withSpeed: 150, deltaTime: deltaTime, scene: self)
+        self.sky.moveSprite(withSpeed: 5 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
+        self.moutains.moveSprite(withSpeed: 15 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
+        self.city.moveSprite(withSpeed: 30 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
 
-        
-        self.movableNodes?.position = CGPoint(x: (self.movableNodes?.position.x)! - max((self.mainCharacter?.position.x)! - (self.lastCameraPosition?.x)!, 0), y: (self.movableNodes?.position.y)!)
-        self.lastCameraPosition = self.mainCharacter?.position
-        print("updateState: \(self.mainCharacter!.state)")
+        self.lastCameraPosition = self.mainCameraBoundary?.position
     }
 
 
@@ -160,7 +173,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
     /// - Returns: return the correct joystick
     override func controllerFor(touch: UITouch) -> UIResponder? {
         let touchPoint: CGPoint = touch.location(in: self)
-        if (touchPoint.x < 0) {
+        if (touchPoint.x < (self.mainCamera?.position.x)!) {
             return self.movementJoystick
         } else {
             return self.shootingJoystick

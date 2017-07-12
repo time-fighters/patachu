@@ -104,7 +104,7 @@ class ArmCharacter: SKSpriteNode, Animate {
 
             
         default:
-            print("x")
+            break
         }
     }
 }

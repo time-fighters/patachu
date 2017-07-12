@@ -106,7 +106,7 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
         let bullet = self.bullet.copy() as! SKSpriteNode
         bullet.zPosition = 0
         bullet.removeAllChildren()
-        bullet.position = self.node.convert(CGPoint(x: self.node.position.x + 20, y: self.node.position.y - 10), to: self.bullet)
+        bullet.position = self.node.convert(CGPoint(x: self.node.position.x + 100, y: self.node.position.y - 10), to: self.bullet)
         bullet.zPosition = 0
         self.bullet.addChild(bullet)
         return bullet
@@ -124,7 +124,7 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
     func reload() {
         print("reloading")
         self.isReloading = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.bullets = 6
             self.isReloading = false
         }

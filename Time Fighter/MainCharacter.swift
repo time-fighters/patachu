@@ -96,7 +96,7 @@ class MainCharacter: SKSpriteNode, JoystickController, Animate, Update, NodeInfo
             self.physicsBody?.velocity.dy = 700
         }
 
-        self.arm.position = CGPoint(x: self.body.position.x + 19, y: self.body.position.y)
+        self.arm.position = CGPoint(x: self.body.position.x, y: self.body.position.y)
     }
 
     func setDirection(_ direction: DirectionEnum) {

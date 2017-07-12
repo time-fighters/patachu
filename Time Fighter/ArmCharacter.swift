@@ -73,7 +73,8 @@ class ArmCharacter: SKSpriteNode, Animate {
         }
 
         self.zPosition = 6
-        self.anchorPoint = CGPoint(x: 0.59, y: 0.5)
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.position = CGPoint(x: self.position.x , y: self.position.y)
     }
     
 

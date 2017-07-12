@@ -59,12 +59,6 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
 
-        // Camera Movement
-        let cameraMovement = self.childNode(withName: "cameraMovement")
-        cameraMovement?.physicsBody?.categoryBitMask = GameElements.camera
-        cameraMovement?.physicsBody?.collisionBitMask = GameElements.mainCharacter
-        cameraMovement?.physicsBody?.contactTestBitMask = GameElements.mainCharacter
-
         // Movable Nodes
         self.movableNodes = self.childNode(withName: "movable")
 
@@ -100,8 +94,8 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.lastCameraPosition = self.mainCharacter?.position
 
         self.mainCharacter?.physicsBody?.categoryBitMask = GameElements.mainCharacter
-        self.mainCharacter?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.camera | GameElements.boundaries
-        self.mainCharacter?.physicsBody?.contactTestBitMask = GameElements.enemy | GameElements.ground | GameElements.camera
+        self.mainCharacter?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.boundaries
+        self.mainCharacter?.physicsBody?.contactTestBitMask = GameElements.enemy | GameElements.ground
 
         // Movement JoyStick
         self.movementJoystick = Joystick(movableObject: mainCharacter!)
@@ -197,18 +191,6 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         if (contact.bodyA.categoryBitMask == GameElements.ground && contact.bodyB.categoryBitMask == GameElements.mainCharacter) {
             let mainCharacter = contact.bodyB.node as! MainCharacter
             mainCharacter.isJumping = false
-        }
-
-        //Main Character and Camera
-        if (contact.bodyA.categoryBitMask == GameElements.mainCharacter && contact.bodyB.categoryBitMask == GameElements.camera) {
-            self.mainCamera?.physicsBody?.applyForce( CGVector(dx: (self.camera?.position.x)! + max((contact.bodyB.node?.position.x)! - (self.lastCameraPosition?.x)!, 0), dy: (self.camera?.position.y)!))
-
-            self.lastCameraPosition = contact.bodyB.node?.position
-        }
-        if (contact.bodyA.categoryBitMask == GameElements.camera && contact.bodyB.categoryBitMask == GameElements.mainCharacter) {
-            self.mainCamera?.position = CGPoint(x: (self.camera?.position.x)! + max((contact.bodyA.node?.position.x)! - (self.lastCameraPosition?.x)!, 0), y: (self.camera?.position.y)!)
-
-            self.lastCameraPosition = contact.bodyA.node?.position
         }
     }
 }

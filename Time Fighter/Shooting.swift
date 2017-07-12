@@ -24,6 +24,9 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
     let rateOfFire: Double = 0.3
     var lastShot: TimeInterval
 
+    var bullets: Double = 6
+    var isReloading: Bool = false
+
     var directionNode: NodeInformation
 
     let TIME_INTERVAL:Double = 1
@@ -55,7 +58,6 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
         let vx: Double = self.BULLET_VELOCITY * cos(self.angle)
         let vy: Double = self.BULLET_VELOCITY * sin(self.angle)
 
-        print(self.angle)
         if (self.isShooting && vx < 0) {
             self.setDirection(.left)
             self.node.zRotation = .pi - CGFloat(self.angle)
@@ -70,6 +72,13 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
             return
         }
 
+        guard self.bullets > 0 else {
+            if (!isReloading) {
+                self.reload()
+            }
+            return
+        }
+
         guard  currentTime - self.lastShot > self.rateOfFire else {
             return
         }
@@ -81,6 +90,8 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
         bullet.physicsBody?.linearDamping = 0
         bullet.physicsBody?.affectedByGravity = false
         bullet.zRotation = CGFloat(self.angle)
+
+        self.bullets -= 1
     }
 
     func status(status: JoystickStatusEnum) {
@@ -108,5 +119,14 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
     func isShooting(_ isShooting: Bool) {
         self.isShooting = isShooting
         self.directionNode.isShooting(isShooting)
+    }
+
+    func reload() {
+        print("reloading")
+        self.isReloading = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
+            self.bullets = 6
+            self.isReloading = false
+        }
     }
 }

@@ -14,5 +14,4 @@ class GameElements {
     public static let enemy: UInt32 = 0b000100
     public static let bullet: UInt32 = 0b001000
     public static let boundaries: UInt32 = 0b010000
-    public static let camera: UInt32 = 0b100000
 }

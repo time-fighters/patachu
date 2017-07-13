@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
 class GameScene: ControllableScene, SKPhysicsContactDelegate {
 
@@ -61,6 +62,8 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
     var enemiesParent: SKNode?
     var originalEnemy: SKNode?
     var enemiesPosition: [CGPoint] = EnemyPosition.aztec
+    
+    var bgMusicPlayer: AVAudioPlayer!
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -180,6 +183,8 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
 //        self.originalEnemy?.physicsBody?.categoryBitMask = GameElements.enemy
 //        self.originalEnemy?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.mainCharacter
 //        self.originalEnemy?.physicsBody?.contactTestBitMask = GameElements.mainCharacter | GameElements.bullet
+        
+        self.playBackgroundMusic()
     }
 
     override func update(_ currentTime: TimeInterval) {
@@ -264,11 +269,13 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         if (contact.bodyA.categoryBitMask == GameElements.mainCharacter && contact.bodyB.categoryBitMask == GameElements.ground) {
             let mainCharacter = contact.bodyA.node as! MainCharacter
             mainCharacter.isJumping = false
+            self.run(SKAction.playSoundFileNamed("JumpEnding", waitForCompletion: false))
             
         }
         if (contact.bodyA.categoryBitMask == GameElements.ground && contact.bodyB.categoryBitMask == GameElements.mainCharacter) {
             let mainCharacter = contact.bodyB.node as! MainCharacter
             mainCharacter.isJumping = false
+            self.run(SKAction.playSoundFileNamed("JumpEnding", waitForCompletion: false))
         }
 
         // Bullets and Enemies
@@ -291,6 +298,25 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
             
         }
         
+    }
+    
+    func playBackgroundMusic()
+    {
+        if self.bgMusicPlayer == nil {
+            
+            let musicPath = Bundle.main.path(forResource: "Background", ofType: "mp3")
+            let musicUrl = URL(fileURLWithPath: musicPath!)
+            
+            self.bgMusicPlayer = try! AVAudioPlayer(contentsOf: musicUrl)
+            
+            self.bgMusicPlayer.numberOfLoops = -1 // tocar para sempre
+            
+            self.bgMusicPlayer.prepareToPlay()
+        }
+        
+        self.bgMusicPlayer.pause()
+        self.bgMusicPlayer.currentTime = 0
+        self.bgMusicPlayer.play()
     }
    
 }

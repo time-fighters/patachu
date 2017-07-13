@@ -139,6 +139,7 @@ class MainCharacter: SKSpriteNode, JoystickController, Update, NodeInformation {
             if !isJumping{
                 isJumping = true
                 self.physicsBody?.velocity.dy = CGFloat(self.yVelocity*100)
+                self.run(SKAction.playSoundFileNamed("JumpBeginning.wav", waitForCompletion: false))
             }
         default:
             break

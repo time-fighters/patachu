@@ -34,12 +34,20 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
     private var mainCharacter: MainCharacter?
     private var shootController: Shooting?
     private var updatable: Updatable?
-
+    
+    var pauseButton: SKSpriteNode?
+    var MusicOnButton: SKSpriteNode?
+    var MusicOffButton: SKSpriteNode?
+    var quitButton: SKSpriteNode?
+    var resumeButton: SKSpriteNode?
+    var configButton: SKSpriteNode?
+    
     private var movableNodes: SKNode?
 
     var sky = BackgroundParallax(spriteName: "Sky")
     var moutains = BackgroundParallax(spriteName: "Mountains")
     var city = BackgroundParallax(spriteName: "City")
+    var door:SKSpriteNode?
 
     let zpostionSky:CGFloat = -5
     let zPositionMountains: CGFloat = -4
@@ -47,6 +55,8 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
     let skySize:CGSize = CGSize(width: 1500, height: 750)
     let mountainsSize:CGSize = CGSize(width: 1500, height: 750)
     let citySize:CGSize = CGSize(width: 2554, height: 750)
+    let buttonsZPositionOn:CGFloat = -1
+    let buttonsZPositionOff:CGFloat = -10
 
     var enemiesParent: SKNode?
     var originalEnemy: SKNode?
@@ -63,6 +73,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
 
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
+
 
         // Camera
         self.mainCamera = self.childNode(withName: "mainCamera") as? SKCameraNode
@@ -90,12 +101,38 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
 
         // Ground
         let background = self.movableNodes?.childNode(withName: "background")
+        
+        //Botoes da settings and config
+        pauseButton = self.mainCamera?.childNode(withName: "PauseButton") as! SKSpriteNode
+        pauseButton?.zPosition = buttonsZPositionOn
+        
+        resumeButton = self.mainCamera?.childNode(withName: "ResumeButton") as! SKSpriteNode
+        resumeButton?.zPosition = buttonsZPositionOff
+        
+        MusicOnButton = self.mainCamera?.childNode(withName: "MusicOnButton") as! SKSpriteNode
+        MusicOnButton?.zPosition  = buttonsZPositionOff
+        MusicOffButton = self.mainCamera?.childNode(withName: "MusicOffButton") as! SKSpriteNode
+        MusicOffButton?.zPosition = buttonsZPositionOff
+        
+        quitButton = self.mainCamera?.childNode(withName: "QuitButton") as! SKSpriteNode
+        quitButton?.zPosition = buttonsZPositionOff
+        
+        configButton = self.mainCamera?.childNode(withName: "ConfigButton") as! SKSpriteNode
+        configButton?.zPosition = buttonsZPositionOff
+
 
         for bg in (background?.children)! {
             bg.physicsBody?.categoryBitMask = GameElements.ground
             bg.physicsBody?.collisionBitMask = GameElements.mainCharacter | GameElements.enemy
             bg.physicsBody?.contactTestBitMask = GameElements.bullet | GameElements.mainCharacter
         }
+        
+        //Door
+        door = self.childNode(withName: "TempleDoor") as! SKSpriteNode
+        door?.physicsBody?.categoryBitMask = GameElements.bossDoor
+        door?.physicsBody?.collisionBitMask = GameElements.mainCharacter
+        door?.physicsBody?.contactTestBitMask = GameElements.mainCharacter
+        
 
         // Bullet
         let bullet = self.childNode(withName: "bullet")
@@ -243,6 +280,17 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
             contact.bodyA.node?.removeFromParent()
             contact.bodyB.node?.removeFromParent()
         }
+        
+        //Main Character and Door
+        if (contact.bodyA.categoryBitMask == GameElements.mainCharacter && contact.bodyB.categoryBitMask == GameElements.bossDoor) {
+            print("cheguei")
+            
+        }
+        if (contact.bodyA.categoryBitMask == GameElements.bossDoor && contact.bodyB.categoryBitMask == GameElements.mainCharacter) {
+            print("cheguei")
+            
+        }
+        
     }
    
 }

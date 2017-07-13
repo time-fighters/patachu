@@ -19,6 +19,9 @@
 		C820FCA51F01361500D52F8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C820FCA31F01361500D52F8A /* Main.storyboard */; };
 		C820FCA71F01361500D52F8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C820FCA61F01361500D52F8A /* Assets.xcassets */; };
 		C820FCAA1F01361500D52F8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C820FCA81F01361500D52F8A /* LaunchScreen.storyboard */; };
+		C84F391F1F17AB660017DCA2 /* AztecBossScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C84F391C1F17AB660017DCA2 /* AztecBossScene.sks */; };
+		C84F39211F17AB660017DCA2 /* LevelSelectionScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C84F391E1F17AB660017DCA2 /* LevelSelectionScene.sks */; };
+		C84F39231F17ACDE0017DCA2 /* EnemyPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84F39221F17ACDE0017DCA2 /* EnemyPosition.swift */; };
 		C86BFDA31F13CB4500345606 /* GameElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86BFDA21F13CB4500345606 /* GameElements.swift */; };
 		C8B501961F02849E003F9E18 /* JoyStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B501951F02849E003F9E18 /* JoyStick.swift */; };
 		C8C9D9131F127BF20015F03F /* Shooting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C9D9121F127BF20015F03F /* Shooting.swift */; };
@@ -34,7 +37,7 @@
 		3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		3ACB6C901F0F1EFC00A89154 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		3ACE70D01F13AF27001D9AA9 /* Ground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
-		C820FC961F01361500D52F8A /* Time Fighter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Fighter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C820FC961F01361500D52F8A /* Timenator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timenator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C820FC991F01361500D52F8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C820FC9B1F01361500D52F8A /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		C820FC9F1F01361500D52F8A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -43,6 +46,9 @@
 		C820FCA61F01361500D52F8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C820FCA91F01361500D52F8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C820FCAB1F01361500D52F8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C84F391C1F17AB660017DCA2 /* AztecBossScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AztecBossScene.sks; sourceTree = "<group>"; };
+		C84F391E1F17AB660017DCA2 /* LevelSelectionScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LevelSelectionScene.sks; sourceTree = "<group>"; };
+		C84F39221F17ACDE0017DCA2 /* EnemyPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyPosition.swift; sourceTree = "<group>"; };
 		C86BFDA21F13CB4500345606 /* GameElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameElements.swift; sourceTree = "<group>"; };
 		C8B501951F02849E003F9E18 /* JoyStick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoyStick.swift; sourceTree = "<group>"; };
 		C8C9D9121F127BF20015F03F /* Shooting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shooting.swift; sourceTree = "<group>"; };
@@ -66,7 +72,7 @@
 		C820FC8D1F01361500D52F8A = {
 			isa = PBXGroup;
 			children = (
-				C820FC981F01361500D52F8A /* Time Fighter */,
+				C820FC981F01361500D52F8A /* Timenator */,
 				C820FC971F01361500D52F8A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -74,27 +80,39 @@
 		C820FC971F01361500D52F8A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C820FC961F01361500D52F8A /* Time Fighter.app */,
+				C820FC961F01361500D52F8A /* Timenator.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C820FC981F01361500D52F8A /* Time Fighter */ = {
+		C820FC981F01361500D52F8A /* Timenator */ = {
 			isa = PBXGroup;
 			children = (
+				C84F391B1F17AB540017DCA2 /* Scene */,
 				C8E786E11F0BDD0D00027984 /* Components */,
 				C8E786DC1F03E43300027984 /* Game Elements */,
 				C820FC991F01361500D52F8A /* AppDelegate.swift */,
 				C820FC9F1F01361500D52F8A /* GameScene.swift */,
 				C820FC9B1F01361500D52F8A /* GameScene.sks */,
 				C820FCA11F01361500D52F8A /* GameViewController.swift */,
+				C84F39221F17ACDE0017DCA2 /* EnemyPosition.swift */,
 				C8E786DD1F05331500027984 /* ControllableScene.swift */,
 				C820FCA31F01361500D52F8A /* Main.storyboard */,
 				C820FCA61F01361500D52F8A /* Assets.xcassets */,
 				C820FCA81F01361500D52F8A /* LaunchScreen.storyboard */,
 				C820FCAB1F01361500D52F8A /* Info.plist */,
 			);
+			name = Timenator;
 			path = "Time Fighter";
+			sourceTree = "<group>";
+		};
+		C84F391B1F17AB540017DCA2 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				C84F391C1F17AB660017DCA2 /* AztecBossScene.sks */,
+				C84F391E1F17AB660017DCA2 /* LevelSelectionScene.sks */,
+			);
+			name = Scene;
 			sourceTree = "<group>";
 		};
 		C8E786DC1F03E43300027984 /* Game Elements */ = {
@@ -125,9 +143,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C820FC951F01361500D52F8A /* Time Fighter */ = {
+		C820FC951F01361500D52F8A /* Timenator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C820FCAE1F01361500D52F8A /* Build configuration list for PBXNativeTarget "Time Fighter" */;
+			buildConfigurationList = C820FCAE1F01361500D52F8A /* Build configuration list for PBXNativeTarget "Timenator" */;
 			buildPhases = (
 				C820FC921F01361500D52F8A /* Sources */,
 				C820FC931F01361500D52F8A /* Frameworks */,
@@ -137,9 +155,9 @@
 			);
 			dependencies = (
 			);
-			name = "Time Fighter";
+			name = Timenator;
 			productName = "Time Fighter";
-			productReference = C820FC961F01361500D52F8A /* Time Fighter.app */;
+			productReference = C820FC961F01361500D52F8A /* Timenator.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -154,12 +172,12 @@
 				TargetAttributes = {
 					C820FC951F01361500D52F8A = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 6HCFLY24V4;
+						DevelopmentTeam = 5T5R275US3;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = C820FC911F01361500D52F8A /* Build configuration list for PBXProject "Time Fighter" */;
+			buildConfigurationList = C820FC911F01361500D52F8A /* Build configuration list for PBXProject "Timenator" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -172,7 +190,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C820FC951F01361500D52F8A /* Time Fighter */,
+				C820FC951F01361500D52F8A /* Timenator */,
 			);
 		};
 /* End PBXProject section */
@@ -182,6 +200,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C84F39211F17AB660017DCA2 /* LevelSelectionScene.sks in Resources */,
+				C84F391F1F17AB660017DCA2 /* AztecBossScene.sks in Resources */,
 				C820FCA51F01361500D52F8A /* Main.storyboard in Resources */,
 				C820FC9C1F01361500D52F8A /* GameScene.sks in Resources */,
 				C820FCA71F01361500D52F8A /* Assets.xcassets in Resources */,
@@ -197,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8C9D9131F127BF20015F03F /* Shooting.swift in Sources */,
+				C84F39231F17ACDE0017DCA2 /* EnemyPosition.swift in Sources */,
 				C8E786E71F0D3B4F00027984 /* BackgroundParallax.swift in Sources */,
 				3ACE70D11F13AF27001D9AA9 /* Ground.swift in Sources */,
 				C8B501961F02849E003F9E18 /* JoyStick.swift in Sources */,
@@ -333,7 +354,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6HCFLY24V4;
+				DEVELOPMENT_TEAM = 5T5R275US3;
 				INFOPLIST_FILE = "Time Fighter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.Time-Fighter";
@@ -346,7 +367,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6HCFLY24V4;
+				DEVELOPMENT_TEAM = 5T5R275US3;
 				INFOPLIST_FILE = "Time Fighter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.Time-Fighter";
@@ -358,7 +379,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C820FC911F01361500D52F8A /* Build configuration list for PBXProject "Time Fighter" */ = {
+		C820FC911F01361500D52F8A /* Build configuration list for PBXProject "Timenator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C820FCAC1F01361500D52F8A /* Debug */,
@@ -367,7 +388,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C820FCAE1F01361500D52F8A /* Build configuration list for PBXNativeTarget "Time Fighter" */ = {
+		C820FCAE1F01361500D52F8A /* Build configuration list for PBXNativeTarget "Timenator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C820FCAF1F01361500D52F8A /* Debug */,

@@ -120,7 +120,6 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         shootController = Shooting(mainCharacterArm!, bullet!, CGPoint(x: 0, y: 0), self.mainCharacter!)
         self.updatable?.addToUpdate(node: self.shootController!)
 
-
         /// Shooting JoyStick
         self.shootingJoystick = Joystick(movableObject: shootController!)
         self.shootingJoystick?.position = CGPoint(x: self.MAIN_SCREEN_BOUNDS.width * self.JOYSTICK_WIDTH_POSITION, y: self.MAIN_SCREEN_BOUNDS.height * self.JOYSTICK_HEIGHT_POSITION)
@@ -208,7 +207,6 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
             let mainCharacter = contact.bodyB.node as! MainCharacter
             mainCharacter.isJumping = false
         }
-        print("isJumping: \(mainCharacter!.isJumping)")
     }
    
 }

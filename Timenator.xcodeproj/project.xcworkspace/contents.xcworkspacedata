@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Time Fighter.xcodeproj">
+      location = "self:/Users/wilson/workspace/patachu/Timenator.xcodeproj">
    </FileRef>
 </Workspace>

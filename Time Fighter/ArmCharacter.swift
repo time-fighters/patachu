@@ -22,6 +22,13 @@ class ArmCharacter: SKSpriteNode, Animate {
     
     let atlasNamesArray: [texturesAtlasTypes] = [.ShootArmAtlas, .idleOrWalkArmAtlas]
     
+    //From here you will have a piece of code wrote by Xuranha to make the sound, xoxo
+    let shotSound = SKAction.sequence([
+        SKAction.playSoundFileNamed("Shot.wav", waitForCompletion: false),
+        SKAction.wait(forDuration: 0.25)
+    ])
+    //Xuranha out
+    
     override var texture: SKTexture? {
         didSet {
         }
@@ -85,8 +92,8 @@ class ArmCharacter: SKSpriteNode, Animate {
 
         case StateMachine.walkShoot(), StateMachine.jumpShoot(), StateMachine.shoot:
             self.run(SKAction.repeatForever(SKAction.animate(with: shootTextures, timePerFrame: 0.07)))
+            self.run(SKAction.repeatForever(shotSound))
             
-        
         default:
            self.run(SKAction.animate(with: idleOrWalkTextures, timePerFrame: 0.5))
         }

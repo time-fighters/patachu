@@ -19,6 +19,18 @@
 		3ACB6C8D1F0EFBEF00A89154 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */; };
 		3ACB6C911F0F1EFC00A89154 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACB6C901F0F1EFC00A89154 /* Animation.swift */; };
 		3ACE70D11F13AF27001D9AA9 /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE70D01F13AF27001D9AA9 /* Ground.swift */; };
+		AE906FAA1F18095000D0FA35 /* BossLaugh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AE906F9F1F18095000D0FA35 /* BossLaugh.mp3 */; };
+		AE906FAB1F18095000D0FA35 /* Dying.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FA01F18095000D0FA35 /* Dying.wav */; };
+		AE906FAC1F18095000D0FA35 /* enemy01.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FA11F18095000D0FA35 /* enemy01.wav */; };
+		AE906FAD1F18095000D0FA35 /* enemy02.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FA21F18095000D0FA35 /* enemy02.wav */; };
+		AE906FAE1F18095000D0FA35 /* enemy03.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FA31F18095000D0FA35 /* enemy03.wav */; };
+		AE906FAF1F18095000D0FA35 /* EnemyDeath.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FA41F18095000D0FA35 /* EnemyDeath.wav */; };
+		AE906FB01F18095000D0FA35 /* footstep.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FA51F18095000D0FA35 /* footstep.wav */; };
+		AE906FB11F18095000D0FA35 /* GameOver.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FA61F18095000D0FA35 /* GameOver.wav */; };
+		AE906FB21F18095000D0FA35 /* Hurt.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FA71F18095000D0FA35 /* Hurt.wav */; };
+		AE906FB41F18095000D0FA35 /* Shotcut.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FA91F18095000D0FA35 /* Shotcut.wav */; };
+		AE906FB71F180AF500D0FA35 /* Shot.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FB61F180AF500D0FA35 /* Shot.wav */; };
+		AE906FB91F1811E600D0FA35 /* Reload.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FB81F1811E600D0FA35 /* Reload.wav */; };
 		C820FC9A1F01361500D52F8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C820FC991F01361500D52F8A /* AppDelegate.swift */; };
 		C820FC9C1F01361500D52F8A /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C820FC9B1F01361500D52F8A /* GameScene.sks */; };
 		C820FCA01F01361500D52F8A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C820FC9F1F01361500D52F8A /* GameScene.swift */; };
@@ -48,6 +60,18 @@
 		3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		3ACB6C901F0F1EFC00A89154 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		3ACE70D01F13AF27001D9AA9 /* Ground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
+		AE906F9F1F18095000D0FA35 /* BossLaugh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BossLaugh.mp3; sourceTree = "<group>"; };
+		AE906FA01F18095000D0FA35 /* Dying.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Dying.wav; sourceTree = "<group>"; };
+		AE906FA11F18095000D0FA35 /* enemy01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = enemy01.wav; sourceTree = "<group>"; };
+		AE906FA21F18095000D0FA35 /* enemy02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = enemy02.wav; sourceTree = "<group>"; };
+		AE906FA31F18095000D0FA35 /* enemy03.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = enemy03.wav; sourceTree = "<group>"; };
+		AE906FA41F18095000D0FA35 /* EnemyDeath.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = EnemyDeath.wav; sourceTree = "<group>"; };
+		AE906FA51F18095000D0FA35 /* footstep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = footstep.wav; sourceTree = "<group>"; };
+		AE906FA61F18095000D0FA35 /* GameOver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GameOver.wav; sourceTree = "<group>"; };
+		AE906FA71F18095000D0FA35 /* Hurt.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Hurt.wav; sourceTree = "<group>"; };
+		AE906FA91F18095000D0FA35 /* Shotcut.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Shotcut.wav; sourceTree = "<group>"; };
+		AE906FB61F180AF500D0FA35 /* Shot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Shot.wav; sourceTree = "<group>"; };
+		AE906FB81F1811E600D0FA35 /* Reload.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Reload.wav; sourceTree = "<group>"; };
 		C820FC961F01361500D52F8A /* Time Fighter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Fighter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C820FC991F01361500D52F8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C820FC9B1F01361500D52F8A /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -117,6 +141,25 @@
 			name = Aztec;
 			sourceTree = "<group>";
 		};
+		AE906FB51F18095A00D0FA35 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				AE906F9F1F18095000D0FA35 /* BossLaugh.mp3 */,
+				AE906FA01F18095000D0FA35 /* Dying.wav */,
+				AE906FA11F18095000D0FA35 /* enemy01.wav */,
+				AE906FB81F1811E600D0FA35 /* Reload.wav */,
+				AE906FA21F18095000D0FA35 /* enemy02.wav */,
+				AE906FA31F18095000D0FA35 /* enemy03.wav */,
+				AE906FA41F18095000D0FA35 /* EnemyDeath.wav */,
+				AE906FB61F180AF500D0FA35 /* Shot.wav */,
+				AE906FA51F18095000D0FA35 /* footstep.wav */,
+				AE906FA61F18095000D0FA35 /* GameOver.wav */,
+				AE906FA71F18095000D0FA35 /* Hurt.wav */,
+				AE906FA91F18095000D0FA35 /* Shotcut.wav */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
 		3A23ADF61F1808A600E6C941 /* BossRoom */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +175,7 @@
 			children = (
 				C820FC981F01361500D52F8A /* Time Fighter */,
 				C820FC971F01361500D52F8A /* Products */,
+				AE906FB51F18095A00D0FA35 /* Sounds */,
 			);
 			sourceTree = "<group>";
 		};
@@ -215,7 +259,7 @@
 				TargetAttributes = {
 					C820FC951F01361500D52F8A = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 6HCFLY24V4;
+						DevelopmentTeam = 3W69VTQXGX;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -243,12 +287,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE906FB01F18095000D0FA35 /* footstep.wav in Resources */,
+				AE906FB41F18095000D0FA35 /* Shotcut.wav in Resources */,
+				AE906FB91F1811E600D0FA35 /* Reload.wav in Resources */,
+				AE906FB71F180AF500D0FA35 /* Shot.wav in Resources */,
 				C820FCA51F01361500D52F8A /* Main.storyboard in Resources */,
+				AE906FB11F18095000D0FA35 /* GameOver.wav in Resources */,
 				C820FC9C1F01361500D52F8A /* GameScene.sks in Resources */,
 				C820FCA71F01361500D52F8A /* Assets.xcassets in Resources */,
+				AE906FB21F18095000D0FA35 /* Hurt.wav in Resources */,
+				AE906FAF1F18095000D0FA35 /* EnemyDeath.wav in Resources */,
 				3A23ADE71F17AC5500E6C941 /* MainMenu.sks in Resources */,
 				C820FCAA1F01361500D52F8A /* LaunchScreen.storyboard in Resources */,
 				3A23ADF51F18089C00E6C941 /* AztecBossScene.sks in Resources */,
+				AE906FAA1F18095000D0FA35 /* BossLaugh.mp3 in Resources */,
+				AE906FAC1F18095000D0FA35 /* enemy01.wav in Resources */,
+				AE906FAB1F18095000D0FA35 /* Dying.wav in Resources */,
+				AE906FAD1F18095000D0FA35 /* enemy02.wav in Resources */,
+				AE906FAE1F18095000D0FA35 /* enemy03.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,7 +457,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6HCFLY24V4;
+				DEVELOPMENT_TEAM = 3W69VTQXGX;
 				INFOPLIST_FILE = "Time Fighter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.Time-Fighter";
@@ -414,7 +470,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6HCFLY24V4;
+				DEVELOPMENT_TEAM = 3W69VTQXGX;
 				INFOPLIST_FILE = "Time Fighter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.Time-Fighter";

@@ -16,27 +16,19 @@ enum DirectionEnum {
 
 protocol NodeInformation {
     func setDirection(_ direction: DirectionEnum)
-    
-    func isShooting(_ isShooting: Bool)
+    func isShooting(_ isShooting: Bool, status: JoystickStatusEnum)
 }
 
-class MainCharacter: SKSpriteNode, JoystickController, Animate, Update, NodeInformation {
+class MainCharacter: SKSpriteNode, JoystickController, Update, NodeInformation {
     
     let VELOCITY: CGFloat = 7
     var xVelocity: Double = 0
     var yVelocity: Double = 0
     var body: BodyCharacter!
     var arm: ArmCharacter!
-    var currentStatus: JoystickStatusEnum = JoystickStatusEnum.started
-    var isShooting: Bool = false{
-        didSet{
-            status(status: currentStatus)
-        }
-    }
-    
     var isJumping: Bool = false
-    let stateMachine:StateMachine = StateMachine()
-    
+    var isShooting: Bool = false
+
     var state: UInt32 = StateMachine.idle  {
         didSet{
             self.runAnimations(scene: scene!, state: state)
@@ -69,44 +61,92 @@ class MainCharacter: SKSpriteNode, JoystickController, Animate, Update, NodeInfo
         arm.animate(scene: scene, state: state)
     }
     
-    func status(status: JoystickStatusEnum) {
-        print("shoting:\(self.isShooting) status:\(status) StateMachine:\(state)")
-        if (!self.isShooting) {
-            if ((status == .started || status == .running) && self.yVelocity >= 3 && !self.isJumping) {
-                self.state = StateMachine.jump
-                self.isJumping = true
-            } else if (status == .started || status == .running) {
-                self.state = StateMachine.walk
-            } else if (status == .finished) {
-                self.state = StateMachine.idle
-            }
-        } else {
-            if ((status == .started || status == .running) && self.yVelocity >= 3 && !self.isJumping) {
-                self.state = StateMachine.jumpShoot()
-                self.isJumping = true
-            } else if (status == .started || status == .running) {
-                self.state = StateMachine.walkShoot()
-            } else if (status == .finished)  {
-                self.state = StateMachine.idleShoot()
-            }
-        }
-        print("jump:\(isJumping)")
-        self.currentStatus = status
-        print("current state\(self.currentStatus)")
+    func configureStateMachine(forStatus status: JoystickStatusEnum) {
         
+        print("Joystick: \(status)\nState: \(state)\nxV: \(xVelocity)\nyVelocity: \(yVelocity)")
+
+        switch status {
+
+        case .running:
+            let shouldWalk = xVelocity != 0
+            let shouldJump = yVelocity >= 4
+
+            //current state of mainCharacter
+            switch state {
+            case StateMachine.idle:
+                if shouldWalk{
+                    state = StateMachine.walk
+                }else if shouldJump{
+                    state = StateMachine.jump
+                }else if isShooting{
+                    state = StateMachine.shoot
+                }
+            case StateMachine.walk:
+                if isShooting {
+                    state = StateMachine.walkShoot()
+                }else if shouldJump {
+                    state = StateMachine.jump
+                }
+            case StateMachine.jump:
+                if isShooting{
+                    state = StateMachine.jumpShoot()
+                }
+            case StateMachine.shoot:
+                if isJumping || shouldJump {
+                    state = StateMachine.jumpShoot()
+                }else if shouldWalk{
+                    state = StateMachine.walkShoot()
+                }
+                
+            default:
+                break
+            }
+        
+        case .finished:
+            switch state {
+            case StateMachine.walk, StateMachine.jump, StateMachine.shoot:
+                  state = StateMachine.idle
+            case StateMachine.jumpShoot():
+                if isShooting{
+                    state = StateMachine.shoot
+                }else {
+                    state = StateMachine.jump
+                }
+            case StateMachine.walkShoot():
+                if isShooting{
+                    state = StateMachine.shoot
+                }else {
+                    state = StateMachine.walk
+                }
+                
+            default:
+                break
+            }
+
+        default:
+            break
+            
+        }
+      
     }
-    
-    func animate(scene: SKScene, state: UInt32 ) {}
-    
+
     func update(_ currentTime: TimeInterval) {
-        if (self.state == StateMachine.walk || self.state == StateMachine.jump || self.state == StateMachine.walkShoot() || self.state == StateMachine.jumpShoot()) {
+        
+        switch state {
+        case StateMachine.walk, StateMachine.walkShoot():
             self.run(SKAction.move(by: CGVector(dx: self.xVelocity, dy: 0), duration: 1))
+        case StateMachine.jump, StateMachine.jumpShoot():
+            if !isJumping{
+                isJumping = true
+                self.physicsBody?.velocity.dy = CGFloat(self.yVelocity*100)
+            }
+        default:
+            break
         }
         
-        if (self.state == StateMachine.jump || self.state == StateMachine.jumpShoot()) {
-            print("Entrei ")
-            self.physicsBody?.velocity.dy = 700
-        }
+        
+//            currentStatus = .finished
+        
         
         self.arm.position = CGPoint(x: self.body.position.x, y: self.body.position.y)
     }
@@ -119,12 +159,11 @@ class MainCharacter: SKSpriteNode, JoystickController, Animate, Update, NodeInfo
         }
     }
     
-    func isShooting(_ isShooting: Bool) {
+    func isShooting(_ isShooting: Bool, status: JoystickStatusEnum) {
         self.isShooting = isShooting
+        configureStateMachine(forStatus: status)
     }
     
-    func configureStateMachine(){
-        
-    }
+
 }
 

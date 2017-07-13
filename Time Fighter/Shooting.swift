@@ -55,7 +55,7 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
     }
 
     func update(_ currentTime: TimeInterval) {
-        self.isShooting(isShooting)
+//       self.isShooting(isShooting)
         let vx: Double = self.BULLET_VELOCITY * cos(self.angle)
         let vy: Double = self.BULLET_VELOCITY * sin(self.angle)
 
@@ -92,20 +92,21 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
         bullet.physicsBody?.linearDamping = 0
         bullet.physicsBody?.affectedByGravity = false
         bullet.zRotation = CGFloat(self.angle)
-        print("shooting2")
+        //print("shooting2")
 
         self.bullets -= 1
-        
-        
     }
 
-    func status(status: JoystickStatusEnum) {
+    func configureStateMachine(forStatus status: JoystickStatusEnum) {
         if (status == .started) {
-            self.isShooting(true)
-        } else if (status == .finished) {
-            self.isShooting(false)
+            self.isShooting(true, status: status)
+        } else if (status == .running) {
+            self.isShooting(true, status: status)
+        }else if (status == .finished) {
+            self.isShooting(false, status: status)
         }
     }
+
 
     func makeBullet() -> SKNode {
         let bullet = self.bullet.copy() as! SKSpriteNode
@@ -114,7 +115,7 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
         bullet.position = self.node.convert(CGPoint(x: self.node.position.x + 100, y: self.node.position.y - 10), to: self.bullet)
         bullet.zPosition = 0
         self.bullet.addChild(bullet)
-        print("shooting1")
+        //print("shooting1")
         return bullet
     }
 
@@ -122,9 +123,9 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
         self.directionNode.setDirection(direction)
     }
 
-    func isShooting(_ isShooting: Bool) {
+    func isShooting(_ isShooting: Bool, status: JoystickStatusEnum) {
         self.isShooting = isShooting
-        self.directionNode.isShooting(isShooting)
+        self.directionNode.isShooting(isShooting, status: status)
     }
 
     func reload() {

@@ -132,6 +132,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.sky.createBackgroundNode(zpostion: zpostionSky, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: skySize, scene: self)
         self.moutains.createBackgroundNode(zpostion: zPositionMountains, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: mountainsSize, scene: self)
         self.city.createBackgroundNode(zpostion: zPositionCity, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: citySize, scene: self)
+        
     }
 
     override func update(_ currentTime: TimeInterval) {
@@ -155,7 +156,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         
         self.mainCamera?.position = CGPoint(x: (self.mainCameraBoundary?.position.x)! + positionDifferencial, y: (self.mainCamera?.position.y)!)
 
-        print(Float(positionDifferencial))
+        //print(Float(positionDifferencial))
 
         // Next, move each of the four pairs of sprites.
         // Objects that should appear move slower than foreground objects.
@@ -207,7 +208,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
             let mainCharacter = contact.bodyB.node as! MainCharacter
             mainCharacter.isJumping = false
         }
-        print("\(mainCharacter?.isJumping)")
+        print("isJumping: \(mainCharacter!.isJumping)")
     }
    
 }

@@ -17,7 +17,7 @@ enum JoystickStatusEnum {
 
 protocol JoystickController {
     func joystickInteraction(velocity: CGVector, angularVelocity: CGFloat)
-    func status(status: JoystickStatusEnum)
+    func configureStateMachine(forStatus status: JoystickStatusEnum)
 }
 
 class Joystick : SKNode {
@@ -49,16 +49,15 @@ class Joystick : SKNode {
 
     /// Movement functions
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.movableNode.status(status: .started)
         for touch in touches {
             let parentTouchPoint: CGPoint = touch.location(in: self.parent!)
             self.position = parentTouchPoint
             self.isTracking = true
         }
+        self.movableNode.configureStateMachine(forStatus: .started)
     }
-
+//FIX ME: resolver quando o touch passa do meio da tela e finalizar a acao
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.movableNode.status(status: .running)
         for touch in touches {
             let touchPoint: CGPoint = touch.location(in: self)
 
@@ -73,16 +72,20 @@ class Joystick : SKNode {
             self.angularVelocity = atan2(yVelocity, xVelocity)
             self.movableNode.joystickInteraction(velocity: velocity, angularVelocity: angularVelocity)
         }
+        self.movableNode.configureStateMachine(forStatus: .running)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.movableNode.status(status: .finished)
         self.resetVelocity()
+        self.movableNode.joystickInteraction(velocity: velocity, angularVelocity: angularVelocity)
+        self.movableNode.configureStateMachine(forStatus: .finished)
+        
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.movableNode.status(status: .finished)
         self.resetVelocity()
+        self.movableNode.joystickInteraction(velocity: velocity, angularVelocity: angularVelocity)
+        self.movableNode.configureStateMachine(forStatus: .finished)
     }
 
     func resetVelocity() {

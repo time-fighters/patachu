@@ -46,9 +46,7 @@ public class BackgroundParallax: SKNode {
                 // of the other sprite.
                 // This means that the two sprites are effectively
                 // leap-frogging each other as they both move.
-                spriteToMove.position =
-                    CGPoint(x: spriteToMove.position.x +
-                        spriteToMove.size.width * 2,
+                spriteToMove.position = CGPoint(x: spriteToMove.position.x + spriteToMove.size.width * 2,
                             y: spriteToMove.position.y)
             }
             

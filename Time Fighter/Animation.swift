@@ -13,6 +13,7 @@ protocol Animate {
     func animate(scene: SKScene, state: UInt32 )
 }
 
+
 class animatioon: SKAction {
     
 }

@@ -23,7 +23,7 @@ class BodyCharacter: SKSpriteNode, Animate {
     var idleTextures = [SKTexture]()
     var walkTextures = [SKTexture]()
     var jumpTextures = [SKTexture]()
-
+    
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         
@@ -57,54 +57,34 @@ class BodyCharacter: SKSpriteNode, Animate {
                     let idleTextureName = "MercIdle\(i)"
                     idleTextures.append(atlas.textureNamed(idleTextureName))
                 }
-            
+                
             case .walkBodyAtlas:
                 
                 for j in 1 ... atlas.textureNames.count{
                     let walkTextureName = "MercWalk\(j)"
                     walkTextures.append(atlas.textureNamed(walkTextureName))
                 }
-     
+                
             default:
                 break
                 
             }
         }
-
+        
     }
     
     func animate(scene: SKScene, state:UInt32) {
         
-        switch  state {
+        self.removeAllActions()
+        switch  state {  
+        case StateMachine.walk, StateMachine.walkShoot():
+            self.run(SKAction.repeatForever(SKAction.animate(with: walkTextures, timePerFrame: 0.1)))
         case StateMachine.idle:
-            
-           self.run(SKAction.repeatForever(SKAction.animate(with: idleTextures, timePerFrame: 0.5)))
-            
-        case StateMachine.walk:
-            
-            self.run(SKAction.repeatForever(SKAction.animate(with: walkTextures, timePerFrame: 0.1)))
-            
-        case StateMachine.jump:
-            
-            self.run(SKAction.animate(with: [idleTextures[0]], timePerFrame: 0.1))
-
-            
-        case StateMachine.idleShoot():
-            
-                self.run(SKAction.animate(with: [idleTextures[0]], timePerFrame: 0.1))
-            
-            
-        case StateMachine.walkShoot():
-            self.run(SKAction.repeatForever(SKAction.animate(with: walkTextures, timePerFrame: 0.1)))
-            
-        case StateMachine.jumpShoot():
-            
-            self.run(SKAction.animate(with: [idleTextures[0]], timePerFrame: 0.1))
-            
+                self.run(SKAction.repeatForever(SKAction.animate(with: idleTextures, timePerFrame: 0.5)))
         default:
+            self.run(SKAction.animate(with: [idleTextures[0]], timePerFrame: 0.1))
             
             
-            break
         }
         
     }

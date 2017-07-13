@@ -136,13 +136,13 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.moutains.createBackgroundNode(zpostion: zPositionMountains, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: mountainsSize, scene: self)
         self.city.createBackgroundNode(zpostion: zPositionCity, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: citySize, scene: self)
 
-        // Enemies
-        self.enemiesParent = self.childNode(withName: "enemy")!
-        self.originalEnemy = self.enemiesParent?.childNode(withName: "enemy")!
-
-        self.originalEnemy?.physicsBody?.categoryBitMask = GameElements.enemy
-        self.originalEnemy?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.mainCharacter
-        self.originalEnemy?.physicsBody?.contactTestBitMask = GameElements.mainCharacter | GameElements.bullet
+//        // Enemies
+//        self.enemiesParent = self.childNode(withName: "enemy")
+//        self.originalEnemy = self.enemiesParent?.childNode(withName: "enemy")
+//
+//        self.originalEnemy?.physicsBody?.categoryBitMask = GameElements.enemy
+//        self.originalEnemy?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.mainCharacter
+//        self.originalEnemy?.physicsBody?.contactTestBitMask = GameElements.mainCharacter | GameElements.bullet
     }
 
     override func update(_ currentTime: TimeInterval) {
@@ -175,14 +175,14 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.lastCameraPosition = self.mainCameraBoundary?.position
 
         let rightBoundary = self.mainCamera?.childNode(withName: "boundaries")?.childNode(withName: "right")
-
-        guard self.enemiesPosition.count > 0 else {
-            return
-        }
-
-        if (Float((self.enemiesPosition.first?.x)!) <= Float((rightBoundary?.parent?.convert((rightBoundary?.position)!, to: self).x)!)) {
-            self.createEnemy(position: self.enemiesPosition.removeFirst())
-        }
+//
+//        guard self.enemiesPosition.count > 0 else {
+//            return
+//        }
+//
+//        if (Float((self.enemiesPosition.first?.x)!) <= Float((rightBoundary?.parent?.convert((rightBoundary?.position)!, to: self).x)!)) {
+//            self.createEnemy(position: self.enemiesPosition.removeFirst())
+//        }
     }
 
     func createEnemy(position: CGPoint) {

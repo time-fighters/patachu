@@ -10,7 +10,6 @@
 		3A23ADE71F17AC5500E6C941 /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3A23ADE61F17AC5500E6C941 /* MainMenu.sks */; };
 		3A23ADE91F17ACA300E6C941 /* MainMenuControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A23ADE81F17ACA300E6C941 /* MainMenuControllerViewController.swift */; };
 		3A23ADEB1F17AD0100E6C941 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A23ADEA1F17AD0100E6C941 /* MainMenu.swift */; };
-		3A23ADF21F17F24C00E6C941 /* AztecBossScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3A23ADF01F17F24C00E6C941 /* AztecBossScene.sks */; };
 		3A23ADF31F17F24C00E6C941 /* EnemyPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A23ADF11F17F24C00E6C941 /* EnemyPosition.swift */; };
 		3A409ADD1F0D55CA0054B1B8 /* BodyCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A409ADC1F0D55CA0054B1B8 /* BodyCharacter.swift */; };
 		3A409ADF1F0D55DE0054B1B8 /* ArmCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A409ADE1F0D55DE0054B1B8 /* ArmCharacter.swift */; };
@@ -37,7 +36,6 @@
 		3A23ADE61F17AC5500E6C941 /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
 		3A23ADE81F17ACA300E6C941 /* MainMenuControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuControllerViewController.swift; sourceTree = "<group>"; };
 		3A23ADEA1F17AD0100E6C941 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
-		3A23ADF01F17F24C00E6C941 /* AztecBossScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = AztecBossScene.sks; path = "Time Fighter/AztecBossScene.sks"; sourceTree = "<group>"; };
 		3A23ADF11F17F24C00E6C941 /* EnemyPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyPosition.swift; sourceTree = "<group>"; };
 		3A409ADC1F0D55CA0054B1B8 /* BodyCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyCharacter.swift; sourceTree = "<group>"; };
 		3A409ADE1F0D55DE0054B1B8 /* ArmCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmCharacter.swift; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 		C820FC8D1F01361500D52F8A = {
 			isa = PBXGroup;
 			children = (
-				3A23ADF01F17F24C00E6C941 /* AztecBossScene.sks */,
 				C820FC981F01361500D52F8A /* Time Fighter */,
 				C820FC971F01361500D52F8A /* Products */,
 			);
@@ -234,7 +231,6 @@
 				C820FCA71F01361500D52F8A /* Assets.xcassets in Resources */,
 				3A23ADE71F17AC5500E6C941 /* MainMenu.sks in Resources */,
 				C820FCAA1F01361500D52F8A /* LaunchScreen.storyboard in Resources */,
-				3A23ADF21F17F24C00E6C941 /* AztecBossScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

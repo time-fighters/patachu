@@ -48,6 +48,10 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
     let mountainsSize:CGSize = CGSize(width: 1500, height: 750)
     let citySize:CGSize = CGSize(width: 2554, height: 750)
 
+    var enemiesParent: SKNode?
+    var originalEnemy: SKNode?
+    var enemiesPosition: [CGPoint] = EnemyPosition.aztec
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -89,7 +93,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
 
         for bg in (background?.children)! {
             bg.physicsBody?.categoryBitMask = GameElements.ground
-            bg.physicsBody?.collisionBitMask = GameElements.mainCharacter
+            bg.physicsBody?.collisionBitMask = GameElements.mainCharacter | GameElements.enemy
             bg.physicsBody?.contactTestBitMask = GameElements.bullet | GameElements.mainCharacter
         }
 
@@ -107,7 +111,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.lastCameraPosition = self.mainCharacter?.position
 
         self.mainCharacter?.physicsBody?.categoryBitMask = GameElements.mainCharacter
-        self.mainCharacter?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.boundaries | GameElements.camera
+        self.mainCharacter?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.boundaries | GameElements.camera | GameElements.enemy
         self.mainCharacter?.physicsBody?.contactTestBitMask = GameElements.enemy | GameElements.ground
 
         // Movement JoyStick
@@ -131,7 +135,14 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.sky.createBackgroundNode(zpostion: zpostionSky, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: skySize, scene: self)
         self.moutains.createBackgroundNode(zpostion: zPositionMountains, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: mountainsSize, scene: self)
         self.city.createBackgroundNode(zpostion: zPositionCity, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: citySize, scene: self)
-        
+
+        // Enemies
+        self.enemiesParent = self.childNode(withName: "enemy")!
+        self.originalEnemy = self.enemiesParent?.childNode(withName: "enemy")!
+
+        self.originalEnemy?.physicsBody?.categoryBitMask = GameElements.enemy
+        self.originalEnemy?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.mainCharacter
+        self.originalEnemy?.physicsBody?.contactTestBitMask = GameElements.mainCharacter | GameElements.bullet
     }
 
     override func update(_ currentTime: TimeInterval) {
@@ -155,8 +166,6 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         
         self.mainCamera?.position = CGPoint(x: (self.mainCameraBoundary?.position.x)! + positionDifferencial, y: (self.mainCamera?.position.y)!)
 
-        //print(Float(positionDifferencial))
-
         // Next, move each of the four pairs of sprites.
         // Objects that should appear move slower than foreground objects.
         self.sky.moveSprite(withSpeed: 5 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
@@ -164,6 +173,23 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.city.moveSprite(withSpeed: 30 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
 
         self.lastCameraPosition = self.mainCameraBoundary?.position
+
+        let rightBoundary = self.mainCamera?.childNode(withName: "boundaries")?.childNode(withName: "right")
+
+        guard self.enemiesPosition.count > 0 else {
+            return
+        }
+
+        if (Float((self.enemiesPosition.first?.x)!) <= Float((rightBoundary?.parent?.convert((rightBoundary?.position)!, to: self).x)!)) {
+            self.createEnemy(position: self.enemiesPosition.removeFirst())
+        }
+    }
+
+    func createEnemy(position: CGPoint) {
+        let newEnemy: SKNode = self.originalEnemy?.copy() as! SKNode
+        newEnemy.physicsBody?.affectedByGravity = true
+        newEnemy.position = position
+        self.enemiesParent?.addChild(newEnemy)
     }
 
 
@@ -206,6 +232,16 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         if (contact.bodyA.categoryBitMask == GameElements.ground && contact.bodyB.categoryBitMask == GameElements.mainCharacter) {
             let mainCharacter = contact.bodyB.node as! MainCharacter
             mainCharacter.isJumping = false
+        }
+
+        // Bullets and Enemies
+        if (contact.bodyA.categoryBitMask == GameElements.bullet && contact.bodyB.categoryBitMask == GameElements.enemy) {
+            contact.bodyA.node?.removeFromParent()
+            contact.bodyB.node?.removeFromParent()
+        }
+        if (contact.bodyA.categoryBitMask == GameElements.enemy && contact.bodyB.categoryBitMask == GameElements.bullet) {
+            contact.bodyA.node?.removeFromParent()
+            contact.bodyB.node?.removeFromParent()
         }
     }
    

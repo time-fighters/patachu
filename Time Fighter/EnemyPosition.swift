@@ -11,6 +11,8 @@ import SpriteKit
 
 class EnemyPosition {
 
-    static let aztec: [CGFloat] = []
-
+    static let aztec: [CGPoint] = [
+        CGPoint(x:1100, y:-100),
+        CGPoint(x:2515, y:-135)
+    ]
 }

@@ -31,6 +31,9 @@
 		AE906FB41F18095000D0FA35 /* Shotcut.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FA91F18095000D0FA35 /* Shotcut.wav */; };
 		AE906FB71F180AF500D0FA35 /* Shot.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FB61F180AF500D0FA35 /* Shot.wav */; };
 		AE906FB91F1811E600D0FA35 /* Reload.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FB81F1811E600D0FA35 /* Reload.wav */; };
+		AE906FC41F183BEB00D0FA35 /* JumpBeginning.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FC21F183BEB00D0FA35 /* JumpBeginning.wav */; };
+		AE906FC51F183BEB00D0FA35 /* JumpEnding.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FC31F183BEB00D0FA35 /* JumpEnding.wav */; };
+		AE906FC71F183BFF00D0FA35 /* Background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AE906FC61F183BFF00D0FA35 /* Background.mp3 */; };
 		C820FC9A1F01361500D52F8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C820FC991F01361500D52F8A /* AppDelegate.swift */; };
 		C820FC9C1F01361500D52F8A /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C820FC9B1F01361500D52F8A /* GameScene.sks */; };
 		C820FCA01F01361500D52F8A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C820FC9F1F01361500D52F8A /* GameScene.swift */; };
@@ -72,6 +75,9 @@
 		AE906FA91F18095000D0FA35 /* Shotcut.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Shotcut.wav; sourceTree = "<group>"; };
 		AE906FB61F180AF500D0FA35 /* Shot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Shot.wav; sourceTree = "<group>"; };
 		AE906FB81F1811E600D0FA35 /* Reload.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Reload.wav; sourceTree = "<group>"; };
+		AE906FC21F183BEB00D0FA35 /* JumpBeginning.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JumpBeginning.wav; sourceTree = "<group>"; };
+		AE906FC31F183BEB00D0FA35 /* JumpEnding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JumpEnding.wav; sourceTree = "<group>"; };
+		AE906FC61F183BFF00D0FA35 /* Background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Background.mp3; sourceTree = "<group>"; };
 		C820FC961F01361500D52F8A /* Time Fighter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Fighter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C820FC991F01361500D52F8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C820FC9B1F01361500D52F8A /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -141,6 +147,16 @@
 			name = Aztec;
 			sourceTree = "<group>";
 		};
+		3A23ADF61F1808A600E6C941 /* BossRoom */ = {
+			isa = PBXGroup;
+			children = (
+				3A23ADF41F18089C00E6C941 /* AztecBossScene.sks */,
+				3A23ADF71F18095300E6C941 /* AztecBossScene.swift */,
+				3A23ADF91F18097A00E6C941 /* AztecBossSceneViewController.swift */,
+			);
+			name = BossRoom;
+			sourceTree = "<group>";
+		};
 		AE906FB51F18095A00D0FA35 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +166,9 @@
 				AE906FB81F1811E600D0FA35 /* Reload.wav */,
 				AE906FA21F18095000D0FA35 /* enemy02.wav */,
 				AE906FA31F18095000D0FA35 /* enemy03.wav */,
+				AE906FC61F183BFF00D0FA35 /* Background.mp3 */,
+				AE906FC21F183BEB00D0FA35 /* JumpBeginning.wav */,
+				AE906FC31F183BEB00D0FA35 /* JumpEnding.wav */,
 				AE906FA41F18095000D0FA35 /* EnemyDeath.wav */,
 				AE906FB61F180AF500D0FA35 /* Shot.wav */,
 				AE906FA51F18095000D0FA35 /* footstep.wav */,
@@ -158,16 +177,6 @@
 				AE906FA91F18095000D0FA35 /* Shotcut.wav */,
 			);
 			name = Sounds;
-			sourceTree = "<group>";
-		};
-		3A23ADF61F1808A600E6C941 /* BossRoom */ = {
-			isa = PBXGroup;
-			children = (
-				3A23ADF41F18089C00E6C941 /* AztecBossScene.sks */,
-				3A23ADF71F18095300E6C941 /* AztecBossScene.swift */,
-				3A23ADF91F18097A00E6C941 /* AztecBossSceneViewController.swift */,
-			);
-			name = BossRoom;
 			sourceTree = "<group>";
 		};
 		C820FC8D1F01361500D52F8A = {
@@ -290,8 +299,10 @@
 				AE906FB01F18095000D0FA35 /* footstep.wav in Resources */,
 				AE906FB41F18095000D0FA35 /* Shotcut.wav in Resources */,
 				AE906FB91F1811E600D0FA35 /* Reload.wav in Resources */,
+				AE906FC51F183BEB00D0FA35 /* JumpEnding.wav in Resources */,
 				AE906FB71F180AF500D0FA35 /* Shot.wav in Resources */,
 				C820FCA51F01361500D52F8A /* Main.storyboard in Resources */,
+				AE906FC71F183BFF00D0FA35 /* Background.mp3 in Resources */,
 				AE906FB11F18095000D0FA35 /* GameOver.wav in Resources */,
 				C820FC9C1F01361500D52F8A /* GameScene.sks in Resources */,
 				C820FCA71F01361500D52F8A /* Assets.xcassets in Resources */,
@@ -303,6 +314,7 @@
 				AE906FAA1F18095000D0FA35 /* BossLaugh.mp3 in Resources */,
 				AE906FAC1F18095000D0FA35 /* enemy01.wav in Resources */,
 				AE906FAB1F18095000D0FA35 /* Dying.wav in Resources */,
+				AE906FC41F183BEB00D0FA35 /* JumpBeginning.wav in Resources */,
 				AE906FAD1F18095000D0FA35 /* enemy02.wav in Resources */,
 				AE906FAE1F18095000D0FA35 /* enemy03.wav in Resources */,
 			);

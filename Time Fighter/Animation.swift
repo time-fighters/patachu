@@ -17,6 +17,10 @@ protocol FireOn{
     func animate(scene: SKScene)
 }
 
+protocol  BossAnimate {
+    func animate(scene: SKScene)
+}
+
 class animatioon: SKAction {
     
 }

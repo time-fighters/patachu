@@ -62,7 +62,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
     var enemiesParent: SKNode?
     var originalEnemy: SKNode?
     var enemiesPosition: [CGPoint] = EnemyPosition.aztec
-    
+    var stairsPath:SKShapeNode?
     var bgMusicPlayer: AVAudioPlayer!
 
     required init?(coder aDecoder: NSCoder) {
@@ -176,6 +176,9 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.moutains.createBackgroundNode(zpostion: zPositionMountains, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: mountainsSize, scene: self)
         self.city.createBackgroundNode(zpostion: zPositionCity, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: citySize, scene: self)
 
+        
+         Ground(scene: self)
+        
 //        // Enemies
 //        self.enemiesParent = self.childNode(withName: "enemy")
 //        self.originalEnemy = self.enemiesParent?.childNode(withName: "enemy")

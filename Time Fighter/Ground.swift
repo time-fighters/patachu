@@ -13,21 +13,23 @@ import SpriteKit
 class Ground: SKShapeNode {
     var groundShape: SKShapeNode
     
-    
-    public init(scene:SKScene, initialPosition:CGPoint) {
+    public init(scene:SKScene) {
         self.groundShape = SKShapeNode()
-        var splinePoints = [CGPoint(x: initialPosition.x, y: initialPosition.y),
-                            CGPoint(x: 22, y: -276),
-                            CGPoint(x: 400, y: 110),
-                            CGPoint(x: 640, y: 20)]
-         self.groundShape = SKShapeNode(splinePoints: &splinePoints,
-                                 count: splinePoints.count)
-        //self.groundShape.path = UIBezierPath(roundedRect: CGRect(x: -128, y: -128, width: 256, height: 256), cornerRadius: 64).cgPath
+        var points = [CGPoint(x: 4253, y: -231),
+                            CGPoint(x: 4896, y: 111),
+                            CGPoint(x: 6130, y: 111),
+                            CGPoint(x: 6829, y: -264)]
+        self.groundShape = SKShapeNode(points: &points,
+                                                             count: points.count)
+   
         self.groundShape.position = CGPoint(x: scene.frame.midX, y: scene.frame.midY)
-        //self.groundShape.fillColor = UIColor.red
-        self.groundShape.strokeColor = UIColor.blue
-        self.groundShape.lineWidth = 10
-        self.groundShape.zPosition = 7
+    
+        self.groundShape.zPosition = 0
+        self.groundShape.physicsBody?.categoryBitMask = GameElements.ground
+        self.groundShape.physicsBody?.collisionBitMask = GameElements.mainCharacter | GameElements.enemy
+        self.groundShape.physicsBody?.contactTestBitMask = GameElements.bullet | GameElements.mainCharacter
+        self.groundShape.alpha = 0
+        
         scene.addChild(self.groundShape)
         
         super.init()

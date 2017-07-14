@@ -290,12 +290,23 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         
         //Main Character and Door
         if (contact.bodyA.categoryBitMask == GameElements.mainCharacter && contact.bodyB.categoryBitMask == GameElements.bossDoor) {
-            print("cheguei")
+            if let scene = SKScene(fileNamed: "AztecBossScene") {
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                
+                // Present the scene
+                view!.presentScene(scene)
+            }
             
         }
         if (contact.bodyA.categoryBitMask == GameElements.bossDoor && contact.bodyB.categoryBitMask == GameElements.mainCharacter) {
-            print("cheguei")
-            
+            if let scene = SKScene(fileNamed: "AztecBossScene") {
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                
+                // Present the scene
+                view!.presentScene(scene)
+            }
         }
         
     }

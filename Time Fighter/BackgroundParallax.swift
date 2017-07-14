@@ -30,6 +30,10 @@ public class BackgroundParallax: SKNode {
     public func moveSprite(withSpeed speed: Float, deltaTime: TimeInterval, scene: SKScene) -> Void {
         var newPosition = CGPoint.zero
         
+        
+        //FIX ME: Passar a camera como parametro 
+        let camera = scene.childNode(withName: "mainCamera")
+    
         // For both the sprite and its duplicate:
         for spriteToMove in [currentSprite, nextSprite] {
             
@@ -38,10 +42,12 @@ public class BackgroundParallax: SKNode {
             newPosition.x -= CGFloat(speed * Float(deltaTime))
             spriteToMove.position = newPosition
             
+            
+
+            
             // If this sprite is now offscreen (i.e., its rightmost edge is
             // farther left than the scene's leftmost edge):
-            if spriteToMove.frame.maxX < scene.frame.minX {
-                
+            if spriteToMove.frame.maxX < camera!.frame.minX + scene.frame.minX {
                 // Shift it over so that it's now to the immediate right
                 // of the other sprite.
                 // This means that the two sprites are effectively

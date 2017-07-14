@@ -63,7 +63,7 @@ class MainCharacter: SKSpriteNode, JoystickController, Update, NodeInformation {
     
     func configureStateMachine(forStatus status: JoystickStatusEnum) {
         
-        print("Joystick: \(status)\nState: \(state)\nxV: \(xVelocity)\nyVelocity: \(yVelocity)")
+     //  print("Joystick: \(status)\nState: \(state)\nxV: \(xVelocity)\nyVelocity: \(yVelocity)")
 
         switch status {
 

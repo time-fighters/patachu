@@ -205,20 +205,21 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         // Set last frame time to current time
         lastFrameTime = currentTime
 
+        // Move Camera
         let positionDifferencial = max((self.mainCameraBoundary?.position.x)! - (self.lastCameraPosition?.x)!, 0)
         
         self.mainCamera?.position = CGPoint(x: (self.mainCameraBoundary?.position.x)! + positionDifferencial, y: (self.mainCamera?.position.y)!)
 
         // Next, move each of the four pairs of sprites.
         // Objects that should appear move slower than foreground objects.
-        self.sky.moveSprite(withSpeed: 5 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
-        self.moutains.moveSprite(withSpeed: 15 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
-        self.city.moveSprite(withSpeed: 30 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
+        self.sky.moveSprite(withSpeed: 0.1 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
+        self.moutains.moveSprite(withSpeed: 0.5 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
+        self.city.moveSprite(withSpeed: 0.9 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
 
         self.lastCameraPosition = self.mainCameraBoundary?.position
 
+        // Spawn enemies
         let rightBoundary = self.mainCamera?.childNode(withName: "boundaries")?.childNode(withName: "right")
-
         guard self.enemiesPosition.count > 0 else {
             return
         }
@@ -228,6 +229,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         }
     }
 
+    // Create a new enemy node
     func createEnemy(position: CGPoint) {
         let newEnemy: SKNode = self.originalEnemy?.copy() as! SKNode
         newEnemy.physicsBody?.affectedByGravity = true

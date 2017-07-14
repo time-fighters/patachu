@@ -14,6 +14,7 @@
 		3A23ADF51F18089C00E6C941 /* AztecBossScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3A23ADF41F18089C00E6C941 /* AztecBossScene.sks */; };
 		3A23ADF81F18095300E6C941 /* AztecBossScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A23ADF71F18095300E6C941 /* AztecBossScene.swift */; };
 		3A23ADFA1F18097A00E6C941 /* AztecBossSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A23ADF91F18097A00E6C941 /* AztecBossSceneViewController.swift */; };
+		3A23ADFC1F182CFC00E6C941 /* 04B_03__.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 3A23ADFB1F182CFC00E6C941 /* 04B_03__.TTF */; };
 		3A409ADD1F0D55CA0054B1B8 /* BodyCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A409ADC1F0D55CA0054B1B8 /* BodyCharacter.swift */; };
 		3A409ADF1F0D55DE0054B1B8 /* ArmCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A409ADE1F0D55DE0054B1B8 /* ArmCharacter.swift */; };
 		3ACB6C8D1F0EFBEF00A89154 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */; };
@@ -58,6 +59,7 @@
 		3A23ADF41F18089C00E6C941 /* AztecBossScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AztecBossScene.sks; sourceTree = "<group>"; };
 		3A23ADF71F18095300E6C941 /* AztecBossScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AztecBossScene.swift; sourceTree = "<group>"; };
 		3A23ADF91F18097A00E6C941 /* AztecBossSceneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AztecBossSceneViewController.swift; sourceTree = "<group>"; };
+		3A23ADFB1F182CFC00E6C941 /* 04B_03__.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = 04B_03__.TTF; sourceTree = "<group>"; };
 		3A409ADC1F0D55CA0054B1B8 /* BodyCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyCharacter.swift; sourceTree = "<group>"; };
 		3A409ADE1F0D55DE0054B1B8 /* ArmCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmCharacter.swift; sourceTree = "<group>"; };
 		3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		C820FC8D1F01361500D52F8A = {
 			isa = PBXGroup;
 			children = (
+				3A23ADFB1F182CFC00E6C941 /* 04B_03__.TTF */,
 				C820FC981F01361500D52F8A /* Time Fighter */,
 				C820FC971F01361500D52F8A /* Products */,
 				AE906FB51F18095A00D0FA35 /* Sounds */,
@@ -317,6 +320,7 @@
 				AE906FC41F183BEB00D0FA35 /* JumpBeginning.wav in Resources */,
 				AE906FAD1F18095000D0FA35 /* enemy02.wav in Resources */,
 				AE906FAE1F18095000D0FA35 /* enemy03.wav in Resources */,
+				3A23ADFC1F182CFC00E6C941 /* 04B_03__.TTF in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

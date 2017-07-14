@@ -184,6 +184,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.originalEnemy?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.mainCharacter
         self.originalEnemy?.physicsBody?.contactTestBitMask = GameElements.mainCharacter | GameElements.bullet
 
+        self.run(SKAction.playSoundFileNamed("BossLaugh.mp3", waitForCompletion: false))
         self.playBackgroundMusic()
     }
 
@@ -269,13 +270,13 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         if (contact.bodyA.categoryBitMask == GameElements.mainCharacter && contact.bodyB.categoryBitMask == GameElements.ground) {
             let mainCharacter = contact.bodyA.node as! MainCharacter
             mainCharacter.isJumping = false
-            //self.run(SKAction.playSoundFileNamed("JumpEnding", waitForCompletion: false))
+            self.run(SKAction.playSoundFileNamed("JumpEnding", waitForCompletion: false))
             
         }
         if (contact.bodyA.categoryBitMask == GameElements.ground && contact.bodyB.categoryBitMask == GameElements.mainCharacter) {
             let mainCharacter = contact.bodyB.node as! MainCharacter
             mainCharacter.isJumping = false
-           // self.run(SKAction.playSoundFileNamed("JumpEnding", waitForCompletion: false))
+           self.run(SKAction.playSoundFileNamed("JumpEnding", waitForCompletion: false))
         }
 
         // Bullets and Enemies

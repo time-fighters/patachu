@@ -67,7 +67,7 @@ class MainMenu: ControllableScene, SKPhysicsContactDelegate  {
         self.playButton = self.childNode(withName: "playAztecWorld") as! SKSpriteNode
         self.playButton?.zPosition = buttonsZPositionOff
         
-        self.portal = self.childNode(withName: "playAztecWorld") as! SKSpriteNode
+        self.portal = self.childNode(withName: "showPlayButton") as! SKSpriteNode
         self.portal?.physicsBody?.categoryBitMask = GameElements.portalAztec
         self.portal?.physicsBody?.collisionBitMask = 0
         self.portal?.physicsBody?.contactTestBitMask = GameElements.mainCharacter
@@ -94,7 +94,7 @@ class MainMenu: ControllableScene, SKPhysicsContactDelegate  {
         self.playBackgroundMusic()
         self.mainCharacter?.physicsBody?.categoryBitMask = GameElements.mainCharacter
         self.mainCharacter?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.boundaries | GameElements.camera | GameElements.enemy
-        self.mainCharacter?.physicsBody?.contactTestBitMask = GameElements.enemy | GameElements.ground
+        self.mainCharacter?.physicsBody?.contactTestBitMask = GameElements.enemy | GameElements.ground | GameElements.portalAztec
         
         
         // Movable Nodes
@@ -212,6 +212,7 @@ class MainMenu: ControllableScene, SKPhysicsContactDelegate  {
         
         // If next button is touched, start transition to second scene
         if (node.name == "playAztecWorld") {
+            self.bgMusicPlayer.pause()
             selectLevel(withName: node.name!)
         }else if node.name == "Config" && !configOpen{
             showSettingButtons()

@@ -23,11 +23,11 @@ class MainMenuControllerViewController: UIViewController {
                 // Present the scene
                 view.presentScene(scene)
             }
-            
-            view.ignoresSiblingOrder = true
-            view.showsFPS = true
-            view.showsNodeCount = true
-            view.showsPhysics = true
+//            
+//            view.ignoresSiblingOrder = true
+//            view.showsFPS = true
+//            view.showsNodeCount = true
+//            view.showsPhysics = true
         }
     }
 

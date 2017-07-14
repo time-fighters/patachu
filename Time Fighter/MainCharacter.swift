@@ -21,7 +21,7 @@ protocol NodeInformation {
 
 class MainCharacter: SKSpriteNode, JoystickController, Update, NodeInformation {
     
-    let VELOCITY: CGFloat = 7
+    let VELOCITY: CGFloat = 10
     var xVelocity: Double = 0
     var yVelocity: Double = 0
     var body: BodyCharacter!
@@ -136,7 +136,7 @@ class MainCharacter: SKSpriteNode, JoystickController, Update, NodeInformation {
         case StateMachine.jump, StateMachine.jumpShoot():
             if !isJumping{
                 isJumping = true
-                self.physicsBody?.velocity.dy = CGFloat(self.yVelocity*100)
+                self.physicsBody?.velocity.dy = CGFloat(self.yVelocity*150)
                 self.run(SKAction.playSoundFileNamed("JumpBeginning.wav", waitForCompletion: false))
             }
         default:

@@ -63,8 +63,6 @@ class MainCharacter: SKSpriteNode, JoystickController, Update, NodeInformation {
     
     func configureStateMachine(forStatus status: JoystickStatusEnum) {
         
-     //  print("Joystick: \(status)\nState: \(state)\nxV: \(xVelocity)\nyVelocity: \(yVelocity)")
-
         switch status {
 
         case .running:
@@ -144,10 +142,6 @@ class MainCharacter: SKSpriteNode, JoystickController, Update, NodeInformation {
         default:
             break
         }
-        
-        
-//            currentStatus = .finished
-        
         
         self.arm.position = CGPoint(x: self.body.position.x, y: self.body.position.y)
     }

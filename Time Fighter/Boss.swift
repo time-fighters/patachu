@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class Boss: SKSpriteNode, FireOn {
+class Boss: SKSpriteNode, BossAnimate {
     
     var bossAtlas = SKTextureAtlas(named: "AztecBoss")
     var bossTextures = [SKTexture]()

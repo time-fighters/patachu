@@ -35,7 +35,8 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
     private var mainCharacter: MainCharacter?
     private var shootController: Shooting?
     private var updatable: Updatable?
-    var boss:Boss?
+    
+    
     var pauseButton: SKSpriteNode?
     var MusicOnButton: SKSpriteNode?
     var MusicOffButton: SKSpriteNode?
@@ -50,6 +51,7 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
     var lamp2:Torch?
     var lamp3:Torch?
     var lamp4:Torch?
+    var boss:Boss?
     var light1: SKLightNode?
     var light2: SKLightNode?
     var light3: SKLightNode?
@@ -205,8 +207,7 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
             let positionDifferencial = max((self.mainCameraBoundary?.position.x)! - (self.lastCameraPosition?.x)!, 0)
             
             self.mainCamera?.position = CGPoint(x: (self.mainCameraBoundary?.position.x)! + positionDifferencial, y: (self.mainCamera?.position.y)!)
-            
-            
+
             self.lastCameraPosition = self.mainCameraBoundary?.position
             
             let rightBoundary = self.mainCamera?.childNode(withName: "boundaries")?.childNode(withName: "right")

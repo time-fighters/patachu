@@ -106,21 +106,21 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         let background = self.movableNodes?.childNode(withName: "background")
         
         //Botoes da settings and config
-        pauseButton = self.mainCamera?.childNode(withName: "PauseButton") as! SKSpriteNode
+        pauseButton = self.mainCamera?.childNode(withName: "PauseButton") as? SKSpriteNode
         pauseButton?.zPosition = buttonsZPositionOn
         
-        resumeButton = self.mainCamera?.childNode(withName: "ResumeButton") as! SKSpriteNode
+        resumeButton = self.mainCamera?.childNode(withName: "ResumeButton") as? SKSpriteNode
         resumeButton?.zPosition = buttonsZPositionOff
         
-        MusicOnButton = self.mainCamera?.childNode(withName: "MusicOnButton") as! SKSpriteNode
+        MusicOnButton = self.mainCamera?.childNode(withName: "MusicOnButton") as? SKSpriteNode
         MusicOnButton?.zPosition  = buttonsZPositionOff
-        MusicOffButton = self.mainCamera?.childNode(withName: "MusicOffButton") as! SKSpriteNode
+        MusicOffButton = self.mainCamera?.childNode(withName: "MusicOffButton") as? SKSpriteNode
         MusicOffButton?.zPosition = buttonsZPositionOff
         
-        quitButton = self.mainCamera?.childNode(withName: "QuitButton") as! SKSpriteNode
+        quitButton = self.mainCamera?.childNode(withName: "QuitButton") as? SKSpriteNode
         quitButton?.zPosition = buttonsZPositionOff
         
-        configButton = self.mainCamera?.childNode(withName: "ConfigButton") as! SKSpriteNode
+        configButton = self.mainCamera?.childNode(withName: "ConfigButton") as? SKSpriteNode
         configButton?.zPosition = buttonsZPositionOff
 
 
@@ -131,7 +131,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         }
         
         //Door
-        door = self.childNode(withName: "TempleDoor") as! SKSpriteNode
+        door = self.childNode(withName: "TempleDoor") as? SKSpriteNode
         door?.physicsBody?.categoryBitMask = GameElements.bossDoor
         door?.physicsBody?.collisionBitMask = GameElements.mainCharacter
         door?.physicsBody?.contactTestBitMask = GameElements.mainCharacter
@@ -176,17 +176,15 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.moutains.createBackgroundNode(zpostion: zPositionMountains, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: mountainsSize, scene: self)
         self.city.createBackgroundNode(zpostion: zPositionCity, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: citySize, scene: self)
 
-        
          Ground(scene: self)
-        
-//        // Enemies
-//        self.enemiesParent = self.childNode(withName: "enemy")
-//        self.originalEnemy = self.enemiesParent?.childNode(withName: "enemy")
-//
-//        self.originalEnemy?.physicsBody?.categoryBitMask = GameElements.enemy
-//        self.originalEnemy?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.mainCharacter
-//        self.originalEnemy?.physicsBody?.contactTestBitMask = GameElements.mainCharacter | GameElements.bullet
-        self.run(SKAction.playSoundFileNamed("BossLaugh", waitForCompletion: true))
+        // Enemies
+        self.enemiesParent = self.childNode(withName: "enemies")
+        self.originalEnemy = self.enemiesParent?.childNode(withName: "enemy")
+
+        self.originalEnemy?.physicsBody?.categoryBitMask = GameElements.enemy
+        self.originalEnemy?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.mainCharacter
+        self.originalEnemy?.physicsBody?.contactTestBitMask = GameElements.mainCharacter | GameElements.bullet
+
         self.playBackgroundMusic()
     }
 
@@ -220,20 +218,20 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.lastCameraPosition = self.mainCameraBoundary?.position
 
         let rightBoundary = self.mainCamera?.childNode(withName: "boundaries")?.childNode(withName: "right")
-//
-//        guard self.enemiesPosition.count > 0 else {
-//            return
-//        }
-//
-//        if (Float((self.enemiesPosition.first?.x)!) <= Float((rightBoundary?.parent?.convert((rightBoundary?.position)!, to: self).x)!)) {
-//            self.createEnemy(position: self.enemiesPosition.removeFirst())
-//        }
+
+        guard self.enemiesPosition.count > 0 else {
+            return
+        }
+
+        if (Float((self.enemiesPosition.first?.x)!) <= Float((rightBoundary?.parent?.convert((rightBoundary?.position)!, to: self).x)!)) {
+            self.createEnemy(position: self.enemiesPosition.removeFirst())
+        }
     }
 
     func createEnemy(position: CGPoint) {
         let newEnemy: SKNode = self.originalEnemy?.copy() as! SKNode
         newEnemy.physicsBody?.affectedByGravity = true
-        newEnemy.position = position
+        newEnemy.position = self.convert(position, to: newEnemy)
         self.enemiesParent?.addChild(newEnemy)
     }
 

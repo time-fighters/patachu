@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import AVFoundation
 
 class MainMenu: ControllableScene, SKPhysicsContactDelegate  {
     
@@ -57,6 +58,8 @@ class MainMenu: ControllableScene, SKPhysicsContactDelegate  {
     }
     
     
+    var bgMusicPlayer: AVAudioPlayer!
+    
     override func didMove(to view: SKView) {
         
         self.physicsWorld.contactDelegate = self
@@ -88,6 +91,7 @@ class MainMenu: ControllableScene, SKPhysicsContactDelegate  {
         self.updatable?.addToUpdate(node: self.mainCharacter!)
         self.lastCameraPosition = self.mainCharacter?.position
         
+        self.playBackgroundMusic()
         self.mainCharacter?.physicsBody?.categoryBitMask = GameElements.mainCharacter
         self.mainCharacter?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.boundaries | GameElements.camera | GameElements.enemy
         self.mainCharacter?.physicsBody?.contactTestBitMask = GameElements.enemy | GameElements.ground
@@ -242,6 +246,24 @@ class MainMenu: ControllableScene, SKPhysicsContactDelegate  {
         self.soundsOffButton?.zPosition = buttonsZPositionOff
     }
     
+    func playBackgroundMusic()
+    {
+        if self.bgMusicPlayer == nil {
+            
+            let musicPath = Bundle.main.path(forResource: "Menu", ofType: "mp3")
+            let musicUrl = URL(fileURLWithPath: musicPath!)
+            
+            self.bgMusicPlayer = try! AVAudioPlayer(contentsOf: musicUrl)
+            
+            self.bgMusicPlayer.numberOfLoops = -1 // tocar para sempre
+            
+            self.bgMusicPlayer.prepareToPlay()
+        }
+        
+        self.bgMusicPlayer.pause()
+        self.bgMusicPlayer.currentTime = 0
+        self.bgMusicPlayer.play()
+    }
     func didBegin(_ contact: SKPhysicsContact) {
         // Bullets and Boundaries
         if (contact.bodyA.categoryBitMask == GameElements.bullet && contact.bodyB.categoryBitMask == GameElements.boundaries) {
@@ -283,6 +305,7 @@ class MainMenu: ControllableScene, SKPhysicsContactDelegate  {
             print("entrei")
         }
     }
+    
     
 }
 

@@ -41,5 +41,5 @@ class Torch: SKSpriteNode, FireOn {
     }
     
     func animate(scene: SKScene) {
-        self.run(SKAction.repeatForever(SKAction.animate(with: fireTextures, timePerFrame: 0.07)))    }
+        self.run(SKAction.repeatForever(SKAction.animate(with: fireTextures, timePerFrame: 0.1)))    }
 }

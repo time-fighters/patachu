@@ -12,9 +12,11 @@ import SpriteKit
 class EnemyPosition {
 
     static let aztec: [CGPoint] = [
-        CGPoint(x:900, y:110),
-        CGPoint(x:1500, y:110),
-        CGPoint(x:1800, y:110),
-        CGPoint(x:2600, y:110)
+        CGPoint(x:250, y:10),
+        CGPoint(x:600, y:10)
+    ]
+
+    static let aztec_boss: [CGPoint] = [
+
     ]
 }

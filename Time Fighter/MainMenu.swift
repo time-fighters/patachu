@@ -9,39 +9,161 @@
 import UIKit
 import SpriteKit
 
-class MainMenu: SKScene {
+class MainMenu: ControllableScene, SKPhysicsContactDelegate  {
+    
+    private var movementJoystick: Joystick?
+    private var shootingJoystick: Joystick?
+    
+    // Time of last frame
+    var lastFrameTime : TimeInterval = 0
+    // Time since last frame
+    var deltaTime : TimeInterval = 0
+    
+    
+    private var mainCamera: SKCameraNode?
+    private var mainCameraBoundary: SKNode?
+    private var lastCameraPosition: CGPoint?
+    
+    private var mainCharacter: MainCharacter?
+    private var shootController: Shooting?
+    private var updatable: Updatable?
+    
+    
     var configOpen:Bool = false
     var soundsOn: Bool = true
     var configButton: SKSpriteNode?
     var soundsOnButton: SKSpriteNode?
     var soundsOffButton: SKSpriteNode?
     var logo: SKSpriteNode?
-    
+    var playButton: SKSpriteNode?
+    var portal:SKSpriteNode?
     let buttonsZPositionOn:CGFloat = 5
     let buttonsZPositionOff:CGFloat = -10
     
+    
+    private var movableNodes: SKNode?
+    
+    private let MAIN_SCREEN_BOUNDS = UIScreen.main.bounds
+    private let JOYSTICK_WIDTH_POSITION: CGFloat = 0.6
+    private let JOYSTICK_HEIGHT_POSITION: CGFloat = -0.4
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func sceneDidLoad() {
+        // Update nodes
+        self.updatable = Updatable()
+    }
+    
+    
     override func didMove(to view: SKView) {
         
-        let button = SKSpriteNode(imageNamed: "playAztecWorld")
-        button.position = CGPoint(x: 0, y: 100)
-        button.name = "playAztecWorld"
-        button.zPosition = 1
+        self.physicsWorld.contactDelegate = self
+        
+        self.playButton = self.childNode(withName: "playAztecWorld") as! SKSpriteNode
+        self.playButton?.zPosition = buttonsZPositionOff
+        
+        self.portal = self.childNode(withName: "playAztecWorld") as! SKSpriteNode
+        self.portal?.physicsBody?.categoryBitMask = GameElements.portalAztec
+        self.portal?.physicsBody?.collisionBitMask = 0
+        self.portal?.physicsBody?.contactTestBitMask = GameElements.mainCharacter
+
+        // Camera
+        self.mainCamera = self.childNode(withName: "mainCamera") as? SKCameraNode
+        self.mainCamera?.physicsBody?.categoryBitMask = 0
+        self.mainCamera?.physicsBody?.collisionBitMask = 0
+        self.mainCamera?.physicsBody?.contactTestBitMask = 0
+        
+        // Camera Boundary
+        self.mainCameraBoundary = self.childNode(withName: "cameraBoundary")
+        self.mainCameraBoundary?.physicsBody?.categoryBitMask = GameElements.camera
+        self.mainCameraBoundary?.physicsBody?.collisionBitMask = GameElements.mainCharacter
+        self.mainCameraBoundary?.physicsBody?.contactTestBitMask = 0
+        
+        // Main Character
+        self.mainCharacter = self.childNode(withName: "mainCharacter")! as? MainCharacter
+        let mainCharacterArm = mainCharacter?.childNode(withName: "arm")
+        self.mainCharacter?.state = StateMachine.idle
+        self.updatable?.addToUpdate(node: self.mainCharacter!)
+        self.lastCameraPosition = self.mainCharacter?.position
+        
+        self.mainCharacter?.physicsBody?.categoryBitMask = GameElements.mainCharacter
+        self.mainCharacter?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.boundaries | GameElements.camera | GameElements.enemy
+        self.mainCharacter?.physicsBody?.contactTestBitMask = GameElements.enemy | GameElements.ground
         
         
-        logo = self.childNode(withName: "Logo") as! SKSpriteNode
-        logo?.zPosition = buttonsZPositionOn
+        // Movable Nodes
+        self.movableNodes = self.childNode(withName: "movable")
         
-        configButton = self.childNode(withName: "Config") as! SKSpriteNode
-        configButton?.zPosition = buttonsZPositionOn
+        // Boundaries
+        let boundaries = self.mainCamera?.childNode(withName: "boundaries")
         
-        soundsOnButton = self.childNode(withName: "SoundsOn") as! SKSpriteNode
-        soundsOnButton?.zPosition  = buttonsZPositionOff
-        soundsOffButton = self.childNode(withName: "SoundsOff") as! SKSpriteNode
-        soundsOffButton?.zPosition = buttonsZPositionOff
+        for boundary in (boundaries?.children)! {
+            boundary.physicsBody?.categoryBitMask = GameElements.boundaries
+            boundary.physicsBody?.collisionBitMask = GameElements.mainCharacter
+            boundary.physicsBody?.contactTestBitMask = GameElements.bullet
+        }
         
-        let levelSelectionBackgroung = self.childNode(withName: "FullLevelSelection")
-        levelSelectionBackgroung?.addChild(button)
+        // Ground
+        let background = self.movableNodes?.childNode(withName: "background")
+        
+        for bg in (background?.children)! {
+            bg.physicsBody?.categoryBitMask = GameElements.ground
+            bg.physicsBody?.collisionBitMask = GameElements.mainCharacter | GameElements.enemy
+            bg.physicsBody?.contactTestBitMask = GameElements.bullet | GameElements.mainCharacter
+        }
+        
+        // Bullet
+        let bullet = self.childNode(withName: "bullet")
+        bullet?.physicsBody?.categoryBitMask = GameElements.bullet
+        bullet?.physicsBody?.collisionBitMask = GameElements.enemy | GameElements.ground
+        bullet?.physicsBody?.contactTestBitMask = GameElements.boundaries | GameElements.enemy | GameElements.ground
+        
+        // Movement JoyStick
+        self.movementJoystick = Joystick(movableObject: mainCharacter!)
+        self.movementJoystick?.position = CGPoint(x: -self.MAIN_SCREEN_BOUNDS.width * self.JOYSTICK_WIDTH_POSITION, y: self.MAIN_SCREEN_BOUNDS.height * self.JOYSTICK_HEIGHT_POSITION)
+        self.addChild(self.movementJoystick!)
+        
+        /** Shooting */
+        // Shooting Controller
+        shootController = Shooting(mainCharacterArm!, bullet!, CGPoint(x: 0, y: 0), self.mainCharacter!)
+        self.updatable?.addToUpdate(node: self.shootController!)
+        
+        /// Shooting JoyStick
+        self.shootingJoystick = Joystick(movableObject: shootController!)
+        self.shootingJoystick?.position = CGPoint(x: self.MAIN_SCREEN_BOUNDS.width * self.JOYSTICK_WIDTH_POSITION, y: self.MAIN_SCREEN_BOUNDS.height * self.JOYSTICK_HEIGHT_POSITION)
+        self.addChild(self.shootingJoystick!)
+        
+        self.logo = self.childNode(withName: "Logo") as? SKSpriteNode
+        self.configButton = self.mainCamera?.childNode(withName: "Config") as? SKSpriteNode
+        self.configButton?.zPosition = buttonsZPositionOn
+        self.soundsOnButton = self.mainCamera?.childNode(withName: "SoundsOn") as? SKSpriteNode
+        self.soundsOnButton?.zPosition  = buttonsZPositionOff
+        self.soundsOffButton = self.mainCamera?.childNode(withName: "SoundsOff") as? SKSpriteNode
+        self.soundsOffButton?.zPosition = buttonsZPositionOff
+        
     }
+    
+    override func update(_ currentTime: TimeInterval) {
+        super.update(currentTime)
+        // Called before each frame is rendered
+        self.updatable?.updateNodes(currentTime)
+        
+        // First, update the delta time values:
+        // If we don't have a last frame time value, this is the first frame,
+        // so delta time will be zero.
+        if lastFrameTime <= 0 {
+            lastFrameTime = currentTime
+        }
+        
+        // Update delta time
+        deltaTime = currentTime - lastFrameTime
+        
+        // Set last frame time to current time
+        lastFrameTime = currentTime
+    }
+    
     
     func createLevelSceneWithLevel(level: String) -> SKScene? {
         var levelScene: SKScene?
@@ -51,7 +173,6 @@ class MainMenu: SKScene {
             print("Gamescene")
         case "MainMenu":
             print("Menu")
-        //levelScene = level
         default: levelScene = nil
         }
         
@@ -73,7 +194,14 @@ class MainMenu: SKScene {
     // rarely nil, if it does, it must be the developer mistake.
     
     
-    
+    override func controllerFor(touch: UITouch) -> UIResponder? {
+        let touchPoint: CGPoint = touch.location(in: self)
+        if (touchPoint.x < (self.mainCamera?.position.x)!) {
+            return self.movementJoystick
+        } else {
+            return self.shootingJoystick
+        }
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let location = touches.first!.location(in: self)
         let node =  self.atPoint(location)
@@ -102,7 +230,7 @@ class MainMenu: SKScene {
         configOpen = true
         self.configButton?.zPosition = buttonsZPositionOn
         if soundsOn {
-        self.soundsOnButton?.zPosition = buttonsZPositionOn
+            self.soundsOnButton?.zPosition = buttonsZPositionOn
         }else{
             self.soundsOffButton?.zPosition = buttonsZPositionOn
         }
@@ -114,6 +242,47 @@ class MainMenu: SKScene {
         self.soundsOffButton?.zPosition = buttonsZPositionOff
     }
     
+    func didBegin(_ contact: SKPhysicsContact) {
+        // Bullets and Boundaries
+        if (contact.bodyA.categoryBitMask == GameElements.bullet && contact.bodyB.categoryBitMask == GameElements.boundaries) {
+            contact.bodyA.node?.removeFromParent()
+        }
+        if (contact.bodyA.categoryBitMask == GameElements.boundaries && contact.bodyB.categoryBitMask == GameElements.bullet) {
+            contact.bodyB.node?.removeFromParent()
+        }
+        
+        // Bullets and Ground
+        if (contact.bodyA.categoryBitMask == GameElements.bullet && contact.bodyB.categoryBitMask == GameElements.ground) {
+            contact.bodyA.node?.removeFromParent()
+        }
+        if (contact.bodyA.categoryBitMask == GameElements.ground && contact.bodyB.categoryBitMask == GameElements.bullet) {
+            contact.bodyB.node?.removeFromParent()
+        }
+        
+        // Main Character and Ground
+        if (contact.bodyA.categoryBitMask == GameElements.mainCharacter && contact.bodyB.categoryBitMask == GameElements.ground) {
+            let mainCharacter = contact.bodyA.node as! MainCharacter
+            mainCharacter.isJumping = false
+            //self.run(SKAction.playSoundFileNamed("JumpEnding", waitForCompletion: false))
+            
+        }
+        if (contact.bodyA.categoryBitMask == GameElements.ground && contact.bodyB.categoryBitMask == GameElements.mainCharacter) {
+            let mainCharacter = contact.bodyB.node as! MainCharacter
+            mainCharacter.isJumping = false
+            // self.run(SKAction.playSoundFileNamed("JumpEnding", waitForCompletion: false))
+        }
+        
+        // Main Character and Portal
+        if (contact.bodyA.categoryBitMask == GameElements.mainCharacter && contact.bodyB.categoryBitMask == GameElements.portalAztec) {
+            self.playButton?.zPosition = 0
+            print("entrei")
+            
+        }
+        if (contact.bodyA.categoryBitMask == GameElements.portalAztec && contact.bodyB.categoryBitMask == GameElements.mainCharacter) {
+            self.playButton?.zPosition = 0
+            print("entrei")
+        }
+    }
     
 }
 

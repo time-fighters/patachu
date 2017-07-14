@@ -8,6 +8,8 @@
 
 import Foundation
 import SpriteKit
+import UIKit
+import SpriteKit
 
 protocol Shoot {
     func shoot()
@@ -23,8 +25,14 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
     let parentRelativePosition: CGPoint
     let rateOfFire: Double = 0.3
     var lastShot: TimeInterval
+    var parentScene: SKScene
 
-    var bullets: Double = 6
+    var bullets: Double = 6 {
+        didSet {
+//            let bulletCounter:SKLabelNode = (self.parentScene.childNode(withName: "bulletsCounter") as? SKLabelNode)!
+//            bulletCounter.text = String(bullets)
+        }
+    }
     var isReloading: Bool = false
 
     var directionNode: NodeInformation
@@ -32,7 +40,7 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
     let TIME_INTERVAL:Double = 1
     let BULLET_VELOCITY: Double = 600
 
-    init(_ node: SKNode, _ bullet: SKNode, _ parentRelativePosition: CGPoint, _ directionNode: NodeInformation) {
+    init(_ node: SKNode, _ bullet: SKNode, _ parentRelativePosition: CGPoint, _ directionNode: NodeInformation, _ scene: SKScene) {
         self.node = node
         self.parentRelativePosition = parentRelativePosition
         self.directionNode = directionNode
@@ -41,6 +49,8 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
         self.direction = CGVector()
         self.lastShot = TimeInterval()
         self.angle = 0
+
+        self.parentScene = scene
 
         super.init()
     }

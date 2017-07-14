@@ -58,7 +58,6 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
     var light3: SKLightNode?
     var light4: SKLightNode?
     
-    
     private var movableNodes: SKNode?
     
     var enemiesParent: SKNode?
@@ -97,10 +96,10 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
         self.lamp3?.animate(scene: self)
         self.lamp4?.animate(scene: self)
         
-        self.light1 = self.childNode(withName: "Light1") as! SKLightNode
-        self.light2 = self.childNode(withName: "Light2") as! SKLightNode
-        self.light3 = self.childNode(withName: "Light3") as! SKLightNode
-        self.light4 = self.childNode(withName: "Light4") as! SKLightNode
+        self.light1 = self.childNode(withName: "Light1") as? SKLightNode
+        self.light2 = self.childNode(withName: "Light2") as? SKLightNode
+        self.light3 = self.childNode(withName: "Light3") as? SKLightNode
+        self.light4 = self.childNode(withName: "Light4") as? SKLightNode
         
         
         self.boss = self.childNode(withName: "AztecBoss") as? Boss
@@ -181,13 +180,21 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
         
         /** Shooting */
         // Shooting Controller
-        shootController = Shooting(mainCharacterArm!, bullet!, CGPoint(x: 0, y: 0), self.mainCharacter!)
+        shootController = Shooting(mainCharacterArm!, bullet!, CGPoint(x: 0, y: 0), self.mainCharacter!, self)
         self.updatable?.addToUpdate(node: self.shootController!)
         
         /// Shooting JoyStick
         self.shootingJoystick = Joystick(movableObject: shootController!)
         self.shootingJoystick?.position = CGPoint(x: self.MAIN_SCREEN_BOUNDS.width * self.JOYSTICK_WIDTH_POSITION, y: self.MAIN_SCREEN_BOUNDS.height * self.JOYSTICK_HEIGHT_POSITION)
         self.addChild(self.shootingJoystick!)
+
+        // Enemies
+        self.enemiesParent = self.childNode(withName: "enemies")
+        self.originalEnemy = self.enemiesParent?.childNode(withName: "enemy")
+
+        self.originalEnemy?.physicsBody?.categoryBitMask = GameElements.enemy
+        self.originalEnemy?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.mainCharacter
+        self.originalEnemy?.physicsBody?.contactTestBitMask = GameElements.mainCharacter | GameElements.bullet
         
         self.playBackgroundMusic()
         
@@ -217,14 +224,14 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
             self.lastCameraPosition = self.mainCameraBoundary?.position
             
             let rightBoundary = self.mainCamera?.childNode(withName: "boundaries")?.childNode(withName: "right")
-            //
-            //        guard self.enemiesPosition.count > 0 else {
-            //            return
-            //        }
-            //
-            //        if (Float((self.enemiesPosition.first?.x)!) <= Float((rightBoundary?.parent?.convert((rightBoundary?.position)!, to: self).x)!)) {
-            //            self.createEnemy(position: self.enemiesPosition.removeFirst())
-            //        }
+            
+            guard self.enemiesPosition.count > 0 else {
+                return
+            }
+            
+            if (Float((self.enemiesPosition.first?.x)!) <= Float((rightBoundary?.parent?.convert((rightBoundary?.position)!, to: self).x)!)) {
+                        self.createEnemy(position: self.enemiesPosition.removeFirst())
+            }
         }
         
         func createEnemy(position: CGPoint) {

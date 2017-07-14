@@ -131,7 +131,7 @@ class MainMenu: ControllableScene, SKPhysicsContactDelegate  {
         
         /** Shooting */
         // Shooting Controller
-        shootController = Shooting(mainCharacterArm!, bullet!, CGPoint(x: 0, y: 0), self.mainCharacter!)
+        shootController = Shooting(mainCharacterArm!, bullet!, CGPoint(x: 0, y: 0), self.mainCharacter!, self)
         self.updatable?.addToUpdate(node: self.shootController!)
         
         /// Shooting JoyStick

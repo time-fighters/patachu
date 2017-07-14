@@ -161,7 +161,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
 
         /** Shooting */
         // Shooting Controller
-        shootController = Shooting(mainCharacterArm!, bullet!, CGPoint(x: 0, y: 0), self.mainCharacter!)
+        shootController = Shooting(mainCharacterArm!, bullet!, CGPoint(x: 0, y: 0), self.mainCharacter!, self)
         self.updatable?.addToUpdate(node: self.shootController!)
 
         /// Shooting JoyStick
@@ -176,7 +176,6 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.moutains.createBackgroundNode(zpostion: zPositionMountains, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: mountainsSize, scene: self)
         self.city.createBackgroundNode(zpostion: zPositionCity, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: citySize, scene: self)
 
-         Ground(scene: self)
         // Enemies
         self.enemiesParent = self.childNode(withName: "enemies")
         self.originalEnemy = self.enemiesParent?.childNode(withName: "enemy")

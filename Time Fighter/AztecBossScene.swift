@@ -129,21 +129,21 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
         let background = self.movableNodes?.childNode(withName: "background")
         
         //Botoes da settings and config
-        pauseButton = self.mainCamera?.childNode(withName: "PauseButton") as! SKSpriteNode
+        pauseButton = self.mainCamera?.childNode(withName: "PauseButton") as? SKSpriteNode
         pauseButton?.zPosition = buttonsZPositionOn
         
-        resumeButton = self.mainCamera?.childNode(withName: "ResumeButton") as! SKSpriteNode
+        resumeButton = self.mainCamera?.childNode(withName: "ResumeButton") as? SKSpriteNode
         resumeButton?.zPosition = buttonsZPositionOff
         
-        MusicOnButton = self.mainCamera?.childNode(withName: "MusicOnButton") as! SKSpriteNode
+        MusicOnButton = self.mainCamera?.childNode(withName: "MusicOnButton") as? SKSpriteNode
         MusicOnButton?.zPosition  = buttonsZPositionOff
-        MusicOffButton = self.mainCamera?.childNode(withName: "MusicOffButton") as! SKSpriteNode
+        MusicOffButton = self.mainCamera?.childNode(withName: "MusicOffButton") as? SKSpriteNode
         MusicOffButton?.zPosition = buttonsZPositionOff
         
-        quitButton = self.mainCamera?.childNode(withName: "QuitButton") as! SKSpriteNode
+        quitButton = self.mainCamera?.childNode(withName: "QuitButton") as? SKSpriteNode
         quitButton?.zPosition = buttonsZPositionOff
         
-        configButton = self.mainCamera?.childNode(withName: "ConfigButton") as! SKSpriteNode
+        configButton = self.mainCamera?.childNode(withName: "ConfigButton") as? SKSpriteNode
         configButton?.zPosition = buttonsZPositionOff
         
         for bg in (background?.children)! {

@@ -29,11 +29,11 @@ class Shooting: SKNode, JoystickController, Update, NodeInformation {
 
     var bullets: Double = 6 {
         didSet {
-//            let bulletCounter:SKLabelNode = (self.parentScene.childNode(withName: "bulletsCounter") as? SKLabelNode)!
-//            bulletCounter.text = String(bullets)
+            let bulletCounter:SKLabelNode = (self.parentScene.camera!.childNode(withName: "bulletsCounter") as? SKLabelNode)!
+            bulletCounter.text = String(Int(bullets))
         }
     }
-    var isReloading: Bool = false
+    var isReloading: Bool = false    
 
     var directionNode: NodeInformation
 

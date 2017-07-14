@@ -9,6 +9,7 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
 class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
     
@@ -61,6 +62,8 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
     var enemiesParent: SKNode?
     var originalEnemy: SKNode?
     var enemiesPosition: [CGPoint] = EnemyPosition.aztec
+    
+    var bgMusicPlayer: AVAudioPlayer!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -183,6 +186,9 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
         self.shootingJoystick = Joystick(movableObject: shootController!)
         self.shootingJoystick?.position = CGPoint(x: self.MAIN_SCREEN_BOUNDS.width * self.JOYSTICK_WIDTH_POSITION, y: self.MAIN_SCREEN_BOUNDS.height * self.JOYSTICK_HEIGHT_POSITION)
         self.addChild(self.shootingJoystick!)
+        
+        self.playBackgroundMusic()
+        
     }
         override func update(_ currentTime: TimeInterval) {
             super.update(currentTime)
@@ -279,6 +285,26 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
             }
             
         }
+    
+        func playBackgroundMusic()
+        {
+            if self.bgMusicPlayer == nil {
+                
+                let musicPath = Bundle.main.path(forResource: "aztec", ofType: "mp3")
+                let musicUrl = URL(fileURLWithPath: musicPath!)
+                
+                self.bgMusicPlayer = try! AVAudioPlayer(contentsOf: musicUrl)
+                
+                self.bgMusicPlayer.numberOfLoops = -1 // tocar para sempre
+                
+                self.bgMusicPlayer.prepareToPlay()
+            }
+            
+            self.bgMusicPlayer.pause()
+            self.bgMusicPlayer.currentTime = 0
+            self.bgMusicPlayer.play()
+        }
+
 
         
     }

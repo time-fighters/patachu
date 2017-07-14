@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import AVFoundation
 
 class MainMenu: SKScene {
     var configOpen:Bool = false
@@ -19,6 +20,8 @@ class MainMenu: SKScene {
     
     let buttonsZPositionOn:CGFloat = 5
     let buttonsZPositionOff:CGFloat = -10
+    
+    var bgMusicPlayer: AVAudioPlayer!
     
     override func didMove(to view: SKView) {
         
@@ -41,6 +44,8 @@ class MainMenu: SKScene {
         
         let levelSelectionBackgroung = self.childNode(withName: "FullLevelSelection")
         levelSelectionBackgroung?.addChild(button)
+        
+        self.playBackgroundMusic()
     }
     
     func createLevelSceneWithLevel(level: String) -> SKScene? {
@@ -112,6 +117,25 @@ class MainMenu: SKScene {
         self.configButton?.zPosition = buttonsZPositionOn
         self.soundsOnButton?.zPosition = buttonsZPositionOff
         self.soundsOffButton?.zPosition = buttonsZPositionOff
+    }
+    
+    func playBackgroundMusic()
+    {
+        if self.bgMusicPlayer == nil {
+            
+            let musicPath = Bundle.main.path(forResource: "Menu", ofType: "mp3")
+            let musicUrl = URL(fileURLWithPath: musicPath!)
+            
+            self.bgMusicPlayer = try! AVAudioPlayer(contentsOf: musicUrl)
+            
+            self.bgMusicPlayer.numberOfLoops = -1 // tocar para sempre
+            
+            self.bgMusicPlayer.prepareToPlay()
+        }
+        
+        self.bgMusicPlayer.pause()
+        self.bgMusicPlayer.currentTime = 0
+        self.bgMusicPlayer.play()
     }
     
     

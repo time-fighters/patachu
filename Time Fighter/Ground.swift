@@ -28,7 +28,9 @@ class Ground: SKShapeNode {
         self.groundShape.physicsBody?.categoryBitMask = GameElements.ground
         self.groundShape.physicsBody?.collisionBitMask = GameElements.mainCharacter | GameElements.enemy
         self.groundShape.physicsBody?.contactTestBitMask = GameElements.bullet | GameElements.mainCharacter
-        self.groundShape.alpha = 0
+        //self.groundShape.alpha = 0
+        self.groundShape.strokeColor = .blue
+        self.groundShape.lineWidth = 7
         
         scene.addChild(self.groundShape)
         

@@ -13,6 +13,9 @@ protocol Animate {
     func animate(scene: SKScene, state: UInt32 )
 }
 
+protocol FireOn{
+    func animate(scene: SKScene)
+}
 
 class animatioon: SKAction {
     

@@ -35,7 +35,7 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
     private var mainCharacter: MainCharacter?
     private var shootController: Shooting?
     private var updatable: Updatable?
-    
+    var boss:Boss?
     var pauseButton: SKSpriteNode?
     var MusicOnButton: SKSpriteNode?
     var MusicOffButton: SKSpriteNode?
@@ -44,6 +44,17 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
     var configButton: SKSpriteNode?
     let buttonsZPositionOn:CGFloat = -1
     let buttonsZPositionOff:CGFloat = -10
+    
+    var fireOn = [SKSpriteNode]()
+    var lamp1:Torch?
+    var lamp2:Torch?
+    var lamp3:Torch?
+    var lamp4:Torch?
+    var light1: SKLightNode?
+    var light2: SKLightNode?
+    var light3: SKLightNode?
+    var light4: SKLightNode?
+    
     
     private var movableNodes: SKNode?
     
@@ -65,6 +76,30 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
 
         self.physicsWorld.contactDelegate = self
+        
+        self.lamp1 = self.childNode(withName: "Lamp1")  as? Torch
+        self.lamp1?.lightingBitMask = 1
+        self.lamp2 = self.childNode(withName: "Lamp2")  as? Torch
+        self.lamp2?.lightingBitMask = 1
+        self.lamp3 = self.childNode(withName: "Lamp3")  as? Torch
+        self.lamp3?.lightingBitMask = 1
+        self.lamp4 = self.childNode(withName: "Lamp4")  as? Torch
+        self.lamp4?.lightingBitMask = 1
+        
+        
+        self.lamp1?.animate(scene: self)
+        self.lamp2?.animate(scene: self)
+        self.lamp3?.animate(scene: self)
+        self.lamp4?.animate(scene: self)
+        
+        self.light1 = self.childNode(withName: "Light1") as! SKLightNode
+        self.light2 = self.childNode(withName: "Light2") as! SKLightNode
+        self.light3 = self.childNode(withName: "Light3") as! SKLightNode
+        self.light4 = self.childNode(withName: "Light4") as! SKLightNode
+        
+        
+        self.boss = self.childNode(withName: "AztecBoss") as? Boss
+        self.boss?.animate(scene: self)
         
         // Camera
         self.mainCamera = self.childNode(withName: "mainCamera") as? SKCameraNode

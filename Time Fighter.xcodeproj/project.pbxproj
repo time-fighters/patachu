@@ -34,7 +34,7 @@
 		AE906FB91F1811E600D0FA35 /* Reload.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FB81F1811E600D0FA35 /* Reload.wav */; };
 		AE906FC41F183BEB00D0FA35 /* JumpBeginning.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FC21F183BEB00D0FA35 /* JumpBeginning.wav */; };
 		AE906FC51F183BEB00D0FA35 /* JumpEnding.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE906FC31F183BEB00D0FA35 /* JumpEnding.wav */; };
-		AE906FC71F183BFF00D0FA35 /* Background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AE906FC61F183BFF00D0FA35 /* Background.mp3 */; };
+		AE906FCF1F184EC700D0FA35 /* aztec.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AE906FCE1F184EC700D0FA35 /* aztec.mp3 */; };
 		C820FC9A1F01361500D52F8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C820FC991F01361500D52F8A /* AppDelegate.swift */; };
 		C820FC9C1F01361500D52F8A /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C820FC9B1F01361500D52F8A /* GameScene.sks */; };
 		C820FCA01F01361500D52F8A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C820FC9F1F01361500D52F8A /* GameScene.swift */; };
@@ -79,7 +79,7 @@
 		AE906FB81F1811E600D0FA35 /* Reload.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Reload.wav; sourceTree = "<group>"; };
 		AE906FC21F183BEB00D0FA35 /* JumpBeginning.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JumpBeginning.wav; sourceTree = "<group>"; };
 		AE906FC31F183BEB00D0FA35 /* JumpEnding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JumpEnding.wav; sourceTree = "<group>"; };
-		AE906FC61F183BFF00D0FA35 /* Background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Background.mp3; sourceTree = "<group>"; };
+		AE906FCE1F184EC700D0FA35 /* aztec.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = aztec.mp3; sourceTree = "<group>"; };
 		C820FC961F01361500D52F8A /* Time Fighter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Fighter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C820FC991F01361500D52F8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C820FC9B1F01361500D52F8A /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -165,10 +165,10 @@
 				AE906F9F1F18095000D0FA35 /* BossLaugh.mp3 */,
 				AE906FA01F18095000D0FA35 /* Dying.wav */,
 				AE906FA11F18095000D0FA35 /* enemy01.wav */,
+				AE906FCE1F184EC700D0FA35 /* aztec.mp3 */,
 				AE906FB81F1811E600D0FA35 /* Reload.wav */,
 				AE906FA21F18095000D0FA35 /* enemy02.wav */,
 				AE906FA31F18095000D0FA35 /* enemy03.wav */,
-				AE906FC61F183BFF00D0FA35 /* Background.mp3 */,
 				AE906FC21F183BEB00D0FA35 /* JumpBeginning.wav */,
 				AE906FC31F183BEB00D0FA35 /* JumpEnding.wav */,
 				AE906FA41F18095000D0FA35 /* EnemyDeath.wav */,
@@ -305,9 +305,9 @@
 				AE906FC51F183BEB00D0FA35 /* JumpEnding.wav in Resources */,
 				AE906FB71F180AF500D0FA35 /* Shot.wav in Resources */,
 				C820FCA51F01361500D52F8A /* Main.storyboard in Resources */,
-				AE906FC71F183BFF00D0FA35 /* Background.mp3 in Resources */,
 				AE906FB11F18095000D0FA35 /* GameOver.wav in Resources */,
 				C820FC9C1F01361500D52F8A /* GameScene.sks in Resources */,
+				AE906FCF1F184EC700D0FA35 /* aztec.mp3 in Resources */,
 				C820FCA71F01361500D52F8A /* Assets.xcassets in Resources */,
 				AE906FB21F18095000D0FA35 /* Hurt.wav in Resources */,
 				AE906FAF1F18095000D0FA35 /* EnemyDeath.wav in Resources */,

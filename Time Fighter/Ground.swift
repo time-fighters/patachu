@@ -11,28 +11,36 @@ import SpriteKit
 
 
 class Ground: SKShapeNode {
-    var groundShape: SKShapeNode
+    let stairs = SKTexture(imageNamed: "Stairs")
+    var points = [CGPoint(x: 4187, y: -264),
+                  CGPoint(x: 4275, y: -264),
+                  CGPoint(x: 4896, y: 111),
+                  CGPoint(x: 6130, y: 111),
+                  CGPoint(x: 6829, y: -264),
+                  CGPoint(x: 4187, y: -264)]
     
     public init(scene:SKScene) {
-        self.groundShape = SKShapeNode()
-        var points = [CGPoint(x: 4253, y: -231),
-                            CGPoint(x: 4896, y: 111),
-                            CGPoint(x: 6130, y: 111),
-                            CGPoint(x: 6829, y: -264)]
-        self.groundShape = SKShapeNode(points: &points,
-                                                             count: points.count)
-   
-        self.groundShape.position = CGPoint(x: scene.frame.midX, y: scene.frame.midY)
-    
-        self.groundShape.zPosition = 0
-        self.groundShape.physicsBody?.categoryBitMask = GameElements.ground
-        self.groundShape.physicsBody?.collisionBitMask = GameElements.mainCharacter | GameElements.enemy
-        self.groundShape.physicsBody?.contactTestBitMask = GameElements.bullet | GameElements.mainCharacter
-        //self.groundShape.alpha = 0
-        self.groundShape.strokeColor = .blue
-        self.groundShape.lineWidth = 7
+        var groundShape = SKSpriteNode(texture: stairs)
         
-        scene.addChild(self.groundShape)
+        let path = CGMutablePath()
+        path.addLines(between: [self.points[0], self.points[1], self.points[2],self.points[3], self.points[4],self.points[5]])
+            
+        path.closeSubpath()
+
+        groundShape.zPosition = 0
+        groundShape.physicsBody = SKPhysicsBody(polygonFrom: path)
+        groundShape.physicsBody?.affectedByGravity = false
+        groundShape.physicsBody?.allowsRotation = false
+        groundShape.physicsBody?.angularDamping = 0
+        groundShape.physicsBody?.friction = 0.8
+        groundShape.physicsBody?.angularVelocity = 0
+        groundShape.physicsBody?.isDynamic = false
+        groundShape.physicsBody?.categoryBitMask = GameElements.ground
+        groundShape.physicsBody?.collisionBitMask = GameElements.mainCharacter | GameElements.enemy
+        groundShape.physicsBody?.contactTestBitMask = GameElements.bullet | GameElements.mainCharacter
+        groundShape.alpha = 0
+        groundShape.position = CGPoint.zero
+        scene.addChild(groundShape)
         
         super.init()
     }
@@ -40,6 +48,4 @@ class Ground: SKShapeNode {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-
 }

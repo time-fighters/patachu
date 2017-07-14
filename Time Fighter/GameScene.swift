@@ -76,6 +76,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
 
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
+        
         Ground(scene: self)
 
         // Camera
@@ -212,9 +213,9 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
 
         // Next, move each of the four pairs of sprites.
         // Objects that should appear move slower than foreground objects.
-        self.sky.moveSprite(withSpeed: 0.001 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
-        self.moutains.moveSprite(withSpeed: 0.05 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
-        self.city.moveSprite(withSpeed: 0.9 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
+        self.sky.moveSprite(withSpeed: -50 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
+        self.moutains.moveSprite(withSpeed: -30 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
+        self.city.moveSprite(withSpeed: -1 * Float(positionDifferencial), deltaTime: deltaTime, scene: self)
 
         self.lastCameraPosition = self.mainCameraBoundary?.position
 

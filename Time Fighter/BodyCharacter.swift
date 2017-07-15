@@ -78,7 +78,7 @@ class BodyCharacter: SKSpriteNode, Animate {
         self.removeAllActions()
         switch  state {  
         case StateMachine.walk, StateMachine.walkShoot():
-            self.run(SKAction.repeatForever(SKAction.animate(with: walkTextures, timePerFrame: 0.1)))
+            self.run(SKAction.repeatForever(SKAction.animate(with: walkTextures, timePerFrame: 0.2)))
         case StateMachine.idle:
                 self.run(SKAction.repeatForever(SKAction.animate(with: idleTextures, timePerFrame: 0.5)))
         default:

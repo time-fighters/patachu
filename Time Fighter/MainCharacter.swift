@@ -132,11 +132,11 @@ class MainCharacter: SKSpriteNode, JoystickController, Update, NodeInformation {
         
         switch state {
         case StateMachine.walk, StateMachine.walkShoot():
-            self.run(SKAction.move(by: CGVector(dx: self.xVelocity, dy: 0), duration: 1))
+            self.run(SKAction.move(by: CGVector(dx: self.xVelocity/1.5, dy: 0), duration: 1))
         case StateMachine.jump, StateMachine.jumpShoot():
             if !isJumping{
                 isJumping = true
-                self.physicsBody?.velocity.dy = CGFloat(self.yVelocity*150)
+                self.physicsBody?.velocity.dy = CGFloat(self.yVelocity*75)
                 self.run(SKAction.playSoundFileNamed("JumpBeginning.wav", waitForCompletion: false))
             }
         default:

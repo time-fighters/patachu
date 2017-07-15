@@ -64,10 +64,10 @@ class MainMenu: ControllableScene, SKPhysicsContactDelegate  {
         
         self.physicsWorld.contactDelegate = self
         
-        self.playButton = self.childNode(withName: "playAztecWorld") as! SKSpriteNode
+        self.playButton = self.childNode(withName: "playAztecWorld") as? SKSpriteNode
         self.playButton?.zPosition = buttonsZPositionOff
         
-        self.portal = self.childNode(withName: "showPlayButton") as! SKSpriteNode
+        self.portal = self.childNode(withName: "showPlayButton") as? SKSpriteNode
         self.portal?.physicsBody?.categoryBitMask = GameElements.portalAztec
         self.portal?.physicsBody?.collisionBitMask = 0
         self.portal?.physicsBody?.contactTestBitMask = GameElements.mainCharacter

@@ -59,8 +59,8 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
     let buttonsZPositionOn:CGFloat = -1
     let buttonsZPositionOff:CGFloat = -10
 
-    var enemiesParent: SKNode?
-    var originalEnemy: SKNode?
+    var enemiesParent: AztecEnemy?
+    var originalEnemy: AztecEnemy?
     var enemiesPosition: [CGPoint] = EnemyPosition.aztec
     var stairsPath:SKShapeNode?
     var bgMusicPlayer: AVAudioPlayer!
@@ -178,8 +178,8 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.city.createBackgroundNode(zpostion: zPositionCity, anchorPoint: CGPoint.zero, screenPosition: leftCornerPosition, spriteSize: citySize, scene: self)
 
         // Enemies
-        self.enemiesParent = self.childNode(withName: "enemies")
-        self.originalEnemy = self.enemiesParent?.childNode(withName: "enemy")
+        self.enemiesParent = self.childNode(withName: "enemies") as? AztecEnemy
+        self.originalEnemy = self.enemiesParent?.childNode(withName: "enemy") as? AztecEnemy
 
         self.originalEnemy?.physicsBody?.categoryBitMask = GameElements.enemy
         self.originalEnemy?.physicsBody?.collisionBitMask = GameElements.ground | GameElements.mainCharacter
@@ -227,14 +227,16 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
 
         if (Float((self.enemiesPosition.first?.x)!) <= Float((rightBoundary?.parent?.convert((rightBoundary?.position)!, to: self).x)!)) {
             self.createEnemy(position: self.enemiesPosition.removeFirst())
+            
         }
     }
 
     // Create a new enemy node
     func createEnemy(position: CGPoint) {
-        let newEnemy: SKNode = self.originalEnemy?.copy() as! SKNode
+        let newEnemy: AztecEnemy = self.originalEnemy?.copy() as! AztecEnemy
         newEnemy.physicsBody?.affectedByGravity = true
         newEnemy.position = self.convert(position, to: newEnemy)
+        newEnemy.animateIdle(scene: self)
         self.enemiesParent?.addChild(newEnemy)
     }
 
@@ -284,10 +286,12 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
 
         // Bullets and Enemies
         if (contact.bodyA.categoryBitMask == GameElements.bullet && contact.bodyB.categoryBitMask == GameElements.enemy) {
+            self.run(SKAction.playSoundFileNamed("EnemyDeath", waitForCompletion: false))
             contact.bodyA.node?.removeFromParent()
             contact.bodyB.node?.removeFromParent()
         }
         if (contact.bodyA.categoryBitMask == GameElements.enemy && contact.bodyB.categoryBitMask == GameElements.bullet) {
+            self.run(SKAction.playSoundFileNamed("EnemyDeath", waitForCompletion: false))
             contact.bodyA.node?.removeFromParent()
             contact.bodyB.node?.removeFromParent()
         }

@@ -19,6 +19,7 @@
 		3A23AE001F1846F600E6C941 /* Boss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A23ADFF1F1846F600E6C941 /* Boss.swift */; };
 		3A409ADD1F0D55CA0054B1B8 /* BodyCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A409ADC1F0D55CA0054B1B8 /* BodyCharacter.swift */; };
 		3A409ADF1F0D55DE0054B1B8 /* ArmCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A409ADE1F0D55DE0054B1B8 /* ArmCharacter.swift */; };
+		3A617CB11F1AD070000C259A /* AztecEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A617CB01F1AD070000C259A /* AztecEnemy.swift */; };
 		3ACB6C8D1F0EFBEF00A89154 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */; };
 		3ACB6C911F0F1EFC00A89154 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACB6C901F0F1EFC00A89154 /* Animation.swift */; };
 		3ACE70D11F13AF27001D9AA9 /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE70D01F13AF27001D9AA9 /* Ground.swift */; };
@@ -67,6 +68,7 @@
 		3A23ADFF1F1846F600E6C941 /* Boss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boss.swift; sourceTree = "<group>"; };
 		3A409ADC1F0D55CA0054B1B8 /* BodyCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyCharacter.swift; sourceTree = "<group>"; };
 		3A409ADE1F0D55DE0054B1B8 /* ArmCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmCharacter.swift; sourceTree = "<group>"; };
+		3A617CB01F1AD070000C259A /* AztecEnemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AztecEnemy.swift; sourceTree = "<group>"; };
 		3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		3ACB6C901F0F1EFC00A89154 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		3ACE70D01F13AF27001D9AA9 /* Ground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 		3A23ADEF1F17B50E00E6C941 /* Aztec */ = {
 			isa = PBXGroup;
 			children = (
+				3A617CAF1F1AD042000C259A /* Enemys */,
 				C820FC9F1F01361500D52F8A /* GameScene.swift */,
 				C820FC9B1F01361500D52F8A /* GameScene.sks */,
 				C820FCA11F01361500D52F8A /* GameViewController.swift */,
@@ -162,9 +165,17 @@
 				3A23ADF71F18095300E6C941 /* AztecBossScene.swift */,
 				3A23ADF91F18097A00E6C941 /* AztecBossSceneViewController.swift */,
 				3A23ADFD1F1846E600E6C941 /* Torch.swift */,
-				3A23ADFF1F1846F600E6C941 /* Boss.swift */,
 			);
 			name = BossRoom;
+			sourceTree = "<group>";
+		};
+		3A617CAF1F1AD042000C259A /* Enemys */ = {
+			isa = PBXGroup;
+			children = (
+				3A617CB01F1AD070000C259A /* AztecEnemy.swift */,
+				3A23ADFF1F1846F600E6C941 /* Boss.swift */,
+			);
+			name = Enemys;
 			sourceTree = "<group>";
 		};
 		AE906FB51F18095A00D0FA35 /* Sounds */ = {
@@ -239,8 +250,8 @@
 			children = (
 				3A23ADF11F17F24C00E6C941 /* EnemyPosition.swift */,
 				C8E786E41F0D01E600027984 /* Updatable.swift */,
-				3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */,
 				3ACB6C901F0F1EFC00A89154 /* Animation.swift */,
+				3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */,
 				C8E786E61F0D3B4F00027984 /* BackgroundParallax.swift */,
 				C86BFDA21F13CB4500345606 /* GameElements.swift */,
 				3ACE70D01F13AF27001D9AA9 /* Ground.swift */,
@@ -359,6 +370,7 @@
 				C8E786DB1F03E42600027984 /* MainCharacter.swift in Sources */,
 				3A23AE001F1846F600E6C941 /* Boss.swift in Sources */,
 				C820FCA21F01361500D52F8A /* GameViewController.swift in Sources */,
+				3A617CB11F1AD070000C259A /* AztecEnemy.swift in Sources */,
 				3ACB6C911F0F1EFC00A89154 /* Animation.swift in Sources */,
 				C86BFDA31F13CB4500345606 /* GameElements.swift in Sources */,
 				3A23ADE91F17ACA300E6C941 /* MainMenuControllerViewController.swift in Sources */,

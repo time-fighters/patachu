@@ -219,12 +219,13 @@ class MainMenu: ControllableScene, SKPhysicsContactDelegate  {
         }else if node.name == "Config" && configOpen{
             hideSettingButtons()
         }else if node.name == "SoundsOn"{
-            print("Sounds Off")
+            self.bgMusicPlayer.pause()
             soundsOn = false
             self.soundsOnButton?.zPosition = buttonsZPositionOff
             self.soundsOffButton?.zPosition = buttonsZPositionOn
         }else if node.name == "SoundsOff"{
             soundsOn = true
+            playBackgroundMusic()
             self.soundsOnButton?.zPosition = buttonsZPositionOn
             self.soundsOffButton?.zPosition = buttonsZPositionOff
             
@@ -306,7 +307,19 @@ class MainMenu: ControllableScene, SKPhysicsContactDelegate  {
             print("entrei")
         }
     }
-    
+    func didEnd(_ contact: SKPhysicsContact) {
+        // Main Character and Portal
+        if (contact.bodyA.categoryBitMask == GameElements.mainCharacter && contact.bodyB.categoryBitMask == GameElements.portalAztec) {
+            self.playButton?.zPosition = buttonsZPositionOff
+            print("end")
+            
+        }
+        if (contact.bodyA.categoryBitMask == GameElements.portalAztec && contact.bodyB.categoryBitMask == GameElements.mainCharacter) {
+            self.playButton?.zPosition = buttonsZPositionOff
+            print("end")
+        }
+
+    }
     
 }
 

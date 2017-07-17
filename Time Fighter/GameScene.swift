@@ -79,71 +79,11 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         
         Ground(scene: self)
 
-        // Camera
-        self.mainCamera = self.childNode(withName: "mainCamera") as? SKCameraNode
-        self.mainCamera?.physicsBody?.categoryBitMask = 0
-        self.mainCamera?.physicsBody?.collisionBitMask = 0
-        self.mainCamera?.physicsBody?.contactTestBitMask = 0
+        cameraSetup()
+        buttonsSetup()
+        sceneBackgroundSetup()
+        bulletSetup()
 
-        // Camera Boundary
-        self.mainCameraBoundary = self.childNode(withName: "cameraBoundary")
-        self.mainCameraBoundary?.physicsBody?.categoryBitMask = GameElements.camera
-        self.mainCameraBoundary?.physicsBody?.collisionBitMask = GameElements.mainCharacter
-        self.mainCameraBoundary?.physicsBody?.contactTestBitMask = 0
-
-        // Movable Nodes
-        self.movableNodes = self.childNode(withName: "movable")
-
-        // Boundaries
-        let boundaries = self.mainCamera?.childNode(withName: "boundaries")
-
-        for boundary in (boundaries?.children)! {
-            boundary.physicsBody?.categoryBitMask = GameElements.boundaries
-            boundary.physicsBody?.collisionBitMask = GameElements.mainCharacter
-            boundary.physicsBody?.contactTestBitMask = GameElements.bullet
-        }
-
-        // Ground
-        let background = self.movableNodes?.childNode(withName: "background")
-        
-        //Botoes da settings and config
-        pauseButton = self.mainCamera?.childNode(withName: "PauseButton") as? SKSpriteNode
-        pauseButton?.zPosition = buttonsZPositionOn
-        
-        resumeButton = self.mainCamera?.childNode(withName: "ResumeButton") as? SKSpriteNode
-        resumeButton?.zPosition = buttonsZPositionOff
-        
-        MusicOnButton = self.mainCamera?.childNode(withName: "MusicOnButton") as? SKSpriteNode
-        MusicOnButton?.zPosition  = buttonsZPositionOff
-        MusicOffButton = self.mainCamera?.childNode(withName: "MusicOffButton") as? SKSpriteNode
-        MusicOffButton?.zPosition = buttonsZPositionOff
-        
-        quitButton = self.mainCamera?.childNode(withName: "QuitButton") as? SKSpriteNode
-        quitButton?.zPosition = buttonsZPositionOff
-        
-        configButton = self.mainCamera?.childNode(withName: "ConfigButton") as? SKSpriteNode
-        configButton?.zPosition = buttonsZPositionOff
-
-
-        for bg in (background?.children)! {
-            bg.physicsBody?.categoryBitMask = GameElements.ground
-            bg.physicsBody?.collisionBitMask = GameElements.mainCharacter | GameElements.enemy
-            bg.physicsBody?.contactTestBitMask = GameElements.bullet | GameElements.mainCharacter
-        }
-        
-        //Door
-        door = self.childNode(withName: "TempleDoor") as? SKSpriteNode
-        door?.physicsBody?.categoryBitMask = GameElements.bossDoor
-        door?.physicsBody?.collisionBitMask = GameElements.mainCharacter
-        door?.physicsBody?.contactTestBitMask = GameElements.mainCharacter
-        
-
-        // Bullet
-        let bullet = self.childNode(withName: "bullet")
-        bullet?.physicsBody?.categoryBitMask = GameElements.bullet
-        bullet?.physicsBody?.collisionBitMask = GameElements.enemy | GameElements.ground
-        bullet?.physicsBody?.contactTestBitMask = GameElements.boundaries | GameElements.enemy | GameElements.ground
-        
         // Main Character
         self.mainCharacter = self.childNode(withName: "mainCharacter")! as? MainCharacter
         let mainCharacterArm = mainCharacter?.childNode(withName: "arm")
@@ -162,7 +102,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
 
         /** Shooting */
         // Shooting Controller
-        shootController = Shooting(mainCharacterArm!, bullet!, CGPoint(x: 0, y: 0), self.mainCharacter!, self)
+        shootController = Shooting(mainCharacterArm!, bulletSetup(), CGPoint(x: 0, y: 0), self.mainCharacter!, self)
         self.updatable?.addToUpdate(node: self.shootController!)
 
         /// Shooting JoyStick
@@ -237,6 +177,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         newEnemy.physicsBody?.affectedByGravity = true
         newEnemy.position = self.convert(position, to: newEnemy)
         newEnemy.animateIdle(scene: self)
+        newEnemy.physicsBody?.restitution = 0
         self.enemiesParent?.addChild(newEnemy)
     }
 
@@ -336,6 +277,82 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         self.bgMusicPlayer.pause()
         self.bgMusicPlayer.currentTime = 0
         self.bgMusicPlayer.play()
+    }
+    
+    func cameraSetup(){
+        // Camera
+        self.mainCamera = self.childNode(withName: "mainCamera") as? SKCameraNode
+        self.mainCamera?.physicsBody?.categoryBitMask = 0
+        self.mainCamera?.physicsBody?.collisionBitMask = 0
+        self.mainCamera?.physicsBody?.contactTestBitMask = 0
+        
+        // Camera Boundary
+        self.mainCameraBoundary = self.childNode(withName: "cameraBoundary")
+        self.mainCameraBoundary?.physicsBody?.categoryBitMask = GameElements.camera
+        self.mainCameraBoundary?.physicsBody?.collisionBitMask = GameElements.mainCharacter
+        self.mainCameraBoundary?.physicsBody?.contactTestBitMask = 0
+
+    }
+    
+    func buttonsSetup(){
+        //Botoes da settings and config
+        pauseButton = self.mainCamera?.childNode(withName: "PauseButton") as? SKSpriteNode
+        pauseButton?.zPosition = buttonsZPositionOn
+        
+        resumeButton = self.mainCamera?.childNode(withName: "ResumeButton") as? SKSpriteNode
+        resumeButton?.zPosition = buttonsZPositionOff
+        
+        MusicOnButton = self.mainCamera?.childNode(withName: "MusicOnButton") as? SKSpriteNode
+        MusicOnButton?.zPosition  = buttonsZPositionOff
+        MusicOffButton = self.mainCamera?.childNode(withName: "MusicOffButton") as? SKSpriteNode
+        MusicOffButton?.zPosition = buttonsZPositionOff
+        
+        quitButton = self.mainCamera?.childNode(withName: "QuitButton") as? SKSpriteNode
+        quitButton?.zPosition = buttonsZPositionOff
+        
+        configButton = self.mainCamera?.childNode(withName: "ConfigButton") as? SKSpriteNode
+        configButton?.zPosition = buttonsZPositionOff
+    }
+    
+    func sceneBackgroundSetup()
+    {
+        // Movable Nodes
+        self.movableNodes = self.childNode(withName: "movable")
+        
+        // Boundaries
+        let boundaries = self.mainCamera?.childNode(withName: "boundaries")
+        
+        for boundary in (boundaries?.children)! {
+            boundary.physicsBody?.categoryBitMask = GameElements.boundaries
+            boundary.physicsBody?.collisionBitMask = GameElements.mainCharacter
+            boundary.physicsBody?.contactTestBitMask = GameElements.bullet
+        }
+        
+        // Ground
+        let background = self.movableNodes?.childNode(withName: "background")
+        
+        
+        
+        for bg in (background?.children)! {
+            bg.physicsBody?.categoryBitMask = GameElements.ground
+            bg.physicsBody?.collisionBitMask = GameElements.mainCharacter | GameElements.enemy
+            bg.physicsBody?.contactTestBitMask = GameElements.bullet | GameElements.mainCharacter
+        }
+        
+        //Door
+        door = self.childNode(withName: "TempleDoor") as? SKSpriteNode
+        door?.physicsBody?.categoryBitMask = GameElements.bossDoor
+        door?.physicsBody?.collisionBitMask = GameElements.mainCharacter
+        door?.physicsBody?.contactTestBitMask = GameElements.mainCharacter
+    }
+    func bulletSetup() -> SKNode{
+        // Bullet
+        let bullet = self.childNode(withName: "bullet")
+        bullet?.physicsBody?.categoryBitMask = GameElements.bullet
+        bullet?.physicsBody?.collisionBitMask = GameElements.enemy | GameElements.ground
+        bullet?.physicsBody?.contactTestBitMask = GameElements.boundaries | GameElements.enemy | GameElements.ground
+        
+        return bullet!
     }
    
 }

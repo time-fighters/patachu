@@ -65,6 +65,8 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
     var stairsPath:SKShapeNode?
     var bgMusicPlayer: AVAudioPlayer!
 
+    var sceneLimit: SKNode?
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -127,6 +129,8 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
 
         self.run(SKAction.playSoundFileNamed("BossLaugh.mp3", waitForCompletion: false))
         self.playBackgroundMusic()
+
+        self.sceneLimit = self.childNode(withName: "sceneLimit")
     }
 
     override func update(_ currentTime: TimeInterval) {
@@ -148,8 +152,8 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
 
         // Move Camera
         let positionDifferencial = max((self.mainCameraBoundary?.position.x)! - (self.lastCameraPosition?.x)!, 0)
-        
-        self.mainCamera?.position = CGPoint(x: (self.mainCameraBoundary?.position.x)! + positionDifferencial, y: (self.mainCamera?.position.y)!)
+
+        self.moveCamera(by: positionDifferencial)
 
         // Next, move each of the four pairs of sprites.
         // Objects that should appear move slower than foreground objects.
@@ -169,6 +173,13 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
             self.createEnemy(position: self.enemiesPosition.removeFirst())
             
         }
+    }
+
+    func moveCamera(by positionDifferencial: CGFloat) {
+        guard (self.mainCamera?.position.x)! + self.size.width/2 < (self.sceneLimit?.position.x)! else {
+            return
+        }
+        self.mainCamera?.position = CGPoint(x: (self.mainCameraBoundary?.position.x)! + positionDifferencial, y: (self.mainCamera?.position.y)!)
     }
 
     // Create a new enemy node

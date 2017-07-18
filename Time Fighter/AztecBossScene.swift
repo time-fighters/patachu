@@ -65,6 +65,8 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
     var enemiesPosition: [CGPoint] = EnemyPosition.aztec
     
     var bgMusicPlayer: AVAudioPlayer!
+
+    var sceneLimit: SKNode?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -197,50 +199,63 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
         self.originalEnemy?.physicsBody?.contactTestBitMask = GameElements.mainCharacter | GameElements.bullet
         
         self.playBackgroundMusic()
+
+        self.sceneLimit = self.childNode(withName: "sceneLimit")
+        self.sceneLimit?.physicsBody?.categoryBitMask = GameElements.camera
+        self.sceneLimit?.physicsBody?.collisionBitMask = GameElements.mainCharacter
+        self.sceneLimit?.physicsBody?.contactTestBitMask = 0
         
     }
-        override func update(_ currentTime: TimeInterval) {
-            super.update(currentTime)
-            // Called before each frame is rendered
-            self.updatable?.updateNodes(currentTime)
-            
-            // First, update the delta time values:
-            // If we don't have a last frame time value, this is the first frame,
-            // so delta time will be zero.
-            if lastFrameTime <= 0 {
-                lastFrameTime = currentTime
-            }
-            
-            // Update delta time
-            deltaTime = currentTime - lastFrameTime
-            
-            // Set last frame time to current time
-            lastFrameTime = currentTime
-            
-            let positionDifferencial = max((self.mainCameraBoundary?.position.x)! - (self.lastCameraPosition?.x)!, 0)
-            
-            self.mainCamera?.position = CGPoint(x: (self.mainCameraBoundary?.position.x)! + positionDifferencial, y: (self.mainCamera?.position.y)!)
 
-            self.lastCameraPosition = self.mainCameraBoundary?.position
+    override func update(_ currentTime: TimeInterval) {
+        super.update(currentTime)
+        // Called before each frame is rendered
+        self.updatable?.updateNodes(currentTime)
+
+        // First, update the delta time values:
+        // If we don't have a last frame time value, this is the first frame,
+        // so delta time will be zero.
+        if lastFrameTime <= 0 {
+            lastFrameTime = currentTime
+        }
+
+        // Update delta time
+        deltaTime = currentTime - lastFrameTime
             
-            let rightBoundary = self.mainCamera?.childNode(withName: "boundaries")?.childNode(withName: "right")
+        // Set last frame time to current time
+        lastFrameTime = currentTime
+
+        let positionDifferencial = max((self.mainCameraBoundary?.position.x)! - (self.lastCameraPosition?.x)!, 0)
             
-            guard self.enemiesPosition.count > 0 else {
-                return
-            }
+        self.moveCamera(by: positionDifferencial)
+
+        self.lastCameraPosition = self.mainCameraBoundary?.position
             
-            if (Float((self.enemiesPosition.first?.x)!) <= Float((rightBoundary?.parent?.convert((rightBoundary?.position)!, to: self).x)!)) {
+        let rightBoundary = self.mainCamera?.childNode(withName: "boundaries")?.childNode(withName: "right")
+            
+        guard self.enemiesPosition.count > 0 else {
+            return
+        }
+            
+        if (Float((self.enemiesPosition.first?.x)!) <= Float((rightBoundary?.parent?.convert((rightBoundary?.position)!, to: self).x)!)) {
                         self.createEnemy(position: self.enemiesPosition.removeFirst())
-            }
         }
-        
-        func createEnemy(position: CGPoint) {
-            let newEnemy: SKNode = self.originalEnemy?.copy() as! SKNode
-            newEnemy.physicsBody?.affectedByGravity = true
-            newEnemy.position = position
-            self.enemiesParent?.addChild(newEnemy)
+    }
+
+    func moveCamera(by positionDifferencial: CGFloat) {
+        guard (self.mainCamera?.position.x)! + self.size.width/2 < (self.sceneLimit?.position.x)! else {
+            return
         }
+        self.mainCamera?.position = CGPoint(x: (self.mainCameraBoundary?.position.x)! + positionDifferencial, y: (self.mainCamera?.position.y)!)
+    }
         
+    func createEnemy(position: CGPoint) {
+        let newEnemy: SKNode = self.originalEnemy?.copy() as! SKNode
+        newEnemy.physicsBody?.affectedByGravity = true
+        newEnemy.position = position
+        self.enemiesParent?.addChild(newEnemy)
+    }
+
         /// Identifies the side of screen touched by the user and choose what joystick use
         ///
         /// - Parameter touch: touch type

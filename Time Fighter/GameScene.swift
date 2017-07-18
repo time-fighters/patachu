@@ -239,12 +239,18 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
         // Bullets and Enemies
         if (contact.bodyA.categoryBitMask == GameElements.bullet && contact.bodyB.categoryBitMask == GameElements.enemy) {
             self.run(SKAction.playSoundFileNamed("EnemyDeath", waitForCompletion: false))
+
+            let enemy: AztecEnemy = contact.bodyB.node as! AztecEnemy
+            enemy.animateDie(scene: self)
+
             contact.bodyA.node?.removeFromParent()
-            contact.bodyB.node?.removeFromParent()
         }
         if (contact.bodyA.categoryBitMask == GameElements.enemy && contact.bodyB.categoryBitMask == GameElements.bullet) {
             self.run(SKAction.playSoundFileNamed("EnemyDeath", waitForCompletion: false))
-            contact.bodyA.node?.removeFromParent()
+
+            let enemy: AztecEnemy = contact.bodyA.node as! AztecEnemy
+            enemy.animateDie(scene: self)
+
             contact.bodyB.node?.removeFromParent()
         }
         

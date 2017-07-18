@@ -61,24 +61,21 @@ class AztecEnemy: SKSpriteNode {
                     let dieTextureName = "EnemyDeado\(j)"
                     dieTextures.append(atlas.textureNamed(dieTextureName))
                 }
-                
-            default:
-                break
-                
             }
         }
         
     }
     
     func animateIdle(scene: SKScene) {
-        
         self.removeAllActions()
         
         self.run(SKAction.repeatForever(SKAction.animate(with: idleTextures, timePerFrame: 0.1)))
     }
+
     func animateDie(scene: SKScene)  {
-        
-        self.run(SKAction.repeatForever(SKAction.animate(with: dieTextures, timePerFrame: 0.2)))
+        self.run(SKAction.animate(with: dieTextures, timePerFrame: 0.2), completion: {
+            self.removeFromParent()
+        })
     }
     
 }

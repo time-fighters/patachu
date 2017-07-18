@@ -11,12 +11,12 @@ import SpriteKit
 
 class EnemyPosition {
 
+    // Elements must be order by x
     static let aztec: [CGPoint] = [
         CGPoint(x:250, y:10),
         CGPoint(x:600, y:10),
-        CGPoint(x:1000, y:10),
         CGPoint(x:700, y:10),
-        CGPoint(x:1800, y:10),
+        CGPoint(x:1000, y:10),
         CGPoint(x:1220, y:10),
         CGPoint(x:1500, y:10),
         CGPoint(x:1900, y:10),

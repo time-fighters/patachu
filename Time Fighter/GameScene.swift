@@ -261,6 +261,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
                 scene.scaleMode = .aspectFill
                 
                 // Present the scene
+                self.bgMusicPlayer.pause()
                 view!.presentScene(scene)
             }
             
@@ -271,6 +272,7 @@ class GameScene: ControllableScene, SKPhysicsContactDelegate {
                 scene.scaleMode = .aspectFill
                 
                 // Present the scene
+                self.bgMusicPlayer.pause()
                 view!.presentScene(scene)
             }
         }

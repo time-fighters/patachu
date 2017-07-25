@@ -309,6 +309,7 @@ class AztecBossScene: ControllableScene, SKPhysicsContactDelegate {
             
         }
     
+    
         func playBackgroundMusic()
         {
             if self.bgMusicPlayer == nil {

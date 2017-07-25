@@ -11,9 +11,12 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self,selector: #selector(showAuthenticationViewController), name: NSNotification.Name(GameKitHelper.PresentAuthenticationViewController), object: nil)
+        GameKitHelper.sharedInstance.authenticateLocalPlayer()
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -25,18 +28,18 @@ class GameViewController: UIViewController {
                 view.presentScene(scene)
             }
             
-//            view.ignoresSiblingOrder = true
-//            
-//            view.showsFPS = true
-//            view.showsNodeCount = true
-//            view.showsPhysics = true
+            //            view.ignoresSiblingOrder = true
+            //
+            //            view.showsFPS = true
+            //            view.showsNodeCount = true
+            //            view.showsPhysics = true
         }
     }
-
+    
     override var shouldAutorotate: Bool {
         return true
     }
-
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .phone {
             return .allButUpsideDown
@@ -44,13 +47,29 @@ class GameViewController: UIViewController {
             return .all
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
-
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+   func showAuthenticationViewController() {
+        
+        let gameKitHelper = GameKitHelper.sharedInstance
+        
+        if let authenticationViewController =
+            gameKitHelper.authenticationViewController {
+            presentingViewController?.present(
+                authenticationViewController,
+                animated: true, completion: nil)
+        }
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
+

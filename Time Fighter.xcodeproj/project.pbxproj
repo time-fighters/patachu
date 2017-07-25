@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A1EF0241F26276800EE92D5 /* GameKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1EF0231F26276800EE92D5 /* GameKitHelper.swift */; };
 		3A23ADE71F17AC5500E6C941 /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3A23ADE61F17AC5500E6C941 /* MainMenu.sks */; };
 		3A23ADE91F17ACA300E6C941 /* MainMenuControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A23ADE81F17ACA300E6C941 /* MainMenuControllerViewController.swift */; };
 		3A23ADEB1F17AD0100E6C941 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A23ADEA1F17AD0100E6C941 /* MainMenu.swift */; };
@@ -20,6 +21,8 @@
 		3A409ADD1F0D55CA0054B1B8 /* BodyCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A409ADC1F0D55CA0054B1B8 /* BodyCharacter.swift */; };
 		3A409ADF1F0D55DE0054B1B8 /* ArmCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A409ADE1F0D55DE0054B1B8 /* ArmCharacter.swift */; };
 		3A617CB11F1AD070000C259A /* AztecEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A617CB01F1AD070000C259A /* AztecEnemy.swift */; };
+		3A9BFB1A1F2640EC00F02D0F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9BFB191F2640EC00F02D0F /* GameKit.framework */; };
+		3AC3DD2A1F26312C0078AB80 /* AchievementsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3DD291F26312C0078AB80 /* AchievementsHelper.swift */; };
 		3ACB6C8D1F0EFBEF00A89154 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */; };
 		3ACB6C911F0F1EFC00A89154 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACB6C901F0F1EFC00A89154 /* Animation.swift */; };
 		3ACE70D11F13AF27001D9AA9 /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE70D01F13AF27001D9AA9 /* Ground.swift */; };
@@ -56,6 +59,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A1EF0231F26276800EE92D5 /* GameKitHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameKitHelper.swift; sourceTree = "<group>"; };
 		3A23ADE61F17AC5500E6C941 /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
 		3A23ADE81F17ACA300E6C941 /* MainMenuControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuControllerViewController.swift; sourceTree = "<group>"; };
 		3A23ADEA1F17AD0100E6C941 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
@@ -69,6 +73,9 @@
 		3A409ADC1F0D55CA0054B1B8 /* BodyCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyCharacter.swift; sourceTree = "<group>"; };
 		3A409ADE1F0D55DE0054B1B8 /* ArmCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmCharacter.swift; sourceTree = "<group>"; };
 		3A617CB01F1AD070000C259A /* AztecEnemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AztecEnemy.swift; sourceTree = "<group>"; };
+		3A9BFB191F2640EC00F02D0F /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		3A9BFB1B1F2641E100F02D0F /* Time Fighter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "Time Fighter.entitlements"; path = "Time Fighter/Time Fighter.entitlements"; sourceTree = "<group>"; };
+		3AC3DD291F26312C0078AB80 /* AchievementsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsHelper.swift; sourceTree = "<group>"; };
 		3ACB6C8C1F0EFBEF00A89154 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		3ACB6C901F0F1EFC00A89154 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		3ACE70D01F13AF27001D9AA9 /* Ground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
@@ -111,12 +118,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A9BFB1A1F2640EC00F02D0F /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A1EF0221F26273800EE92D5 /* GameKit */ = {
+			isa = PBXGroup;
+			children = (
+				3A1EF0231F26276800EE92D5 /* GameKitHelper.swift */,
+				3AC3DD291F26312C0078AB80 /* AchievementsHelper.swift */,
+			);
+			name = GameKit;
+			sourceTree = "<group>";
+		};
 		3A23ADEC1F17B4A700E6C941 /* MainMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +195,14 @@
 			name = Enemys;
 			sourceTree = "<group>";
 		};
+		3A9C086A1F261B9C0056A372 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3A9BFB191F2640EC00F02D0F /* GameKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AE906FB51F18095A00D0FA35 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,10 +229,13 @@
 		C820FC8D1F01361500D52F8A = {
 			isa = PBXGroup;
 			children = (
+				3A9BFB1B1F2641E100F02D0F /* Time Fighter.entitlements */,
+				3A1EF0221F26273800EE92D5 /* GameKit */,
 				3A23ADFB1F182CFC00E6C941 /* 04B_03__.TTF */,
 				C820FC981F01361500D52F8A /* Time Fighter */,
 				C820FC971F01361500D52F8A /* Products */,
 				AE906FB51F18095A00D0FA35 /* Sounds */,
+				3A9C086A1F261B9C0056A372 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -291,8 +319,16 @@
 				TargetAttributes = {
 					C820FC951F01361500D52F8A = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 5T5R275US3;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 6HCFLY24V4;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -360,6 +396,7 @@
 				3A409ADF1F0D55DE0054B1B8 /* ArmCharacter.swift in Sources */,
 				C8E786DE1F05331500027984 /* ControllableScene.swift in Sources */,
 				C8E786E51F0D01E600027984 /* Updatable.swift in Sources */,
+				3AC3DD2A1F26312C0078AB80 /* AchievementsHelper.swift in Sources */,
 				C820FCA01F01361500D52F8A /* GameScene.swift in Sources */,
 				3ACB6C8D1F0EFBEF00A89154 /* StateMachine.swift in Sources */,
 				3A23ADF31F17F24C00E6C941 /* EnemyPosition.swift in Sources */,
@@ -368,6 +405,7 @@
 				3A23ADF81F18095300E6C941 /* AztecBossScene.swift in Sources */,
 				3A409ADD1F0D55CA0054B1B8 /* BodyCharacter.swift in Sources */,
 				C8E786DB1F03E42600027984 /* MainCharacter.swift in Sources */,
+				3A1EF0241F26276800EE92D5 /* GameKitHelper.swift in Sources */,
 				3A23AE001F1846F600E6C941 /* Boss.swift in Sources */,
 				C820FCA21F01361500D52F8A /* GameViewController.swift in Sources */,
 				3A617CB11F1AD070000C259A /* AztecEnemy.swift in Sources */,
@@ -497,11 +535,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5T5R275US3;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6HCFLY24V4;
 				INFOPLIST_FILE = "Time Fighter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.Time-Fighter";
+				PRODUCT_BUNDLE_IDENTIFIER = com.patachu.TimeNator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "def38e80-63de-4923-8f53-f28b3d5a76d6";
+				PROVISIONING_PROFILE_SPECIFIER = "TimeNator Development Provisioning";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -510,11 +551,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5T5R275US3;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6HCFLY24V4;
 				INFOPLIST_FILE = "Time Fighter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.Time-Fighter";
+				PRODUCT_BUNDLE_IDENTIFIER = com.patachu.TimeNator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "def38e80-63de-4923-8f53-f28b3d5a76d6";
+				PROVISIONING_PROFILE_SPECIFIER = "TimeNator Development Provisioning";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
